@@ -35,7 +35,7 @@ echo ""
 FEMALE=""
 while read line
 do
-FEMALE+="$line.dedup.bam "
+FEMALE+="$line.dedup.bam ";
 done < female_list.txt
 
 echo "Liste des femmes:"
@@ -44,8 +44,8 @@ echo ""
 
 # Define the resolution of the analysis with a genomic intervals list
 gatk PreprocessIntervals \
-    -R  $REF \
-    -L  $TARGETS_XY \
+    -R $REF \
+    -L $TARGET_XY \
     -XL $CENTROMETIC_XY \
     --bin-length 0 \
     --padding 50 \
@@ -71,11 +71,11 @@ done
 
 # AnnotateIntervals with GC content
 gatk AnnotateIntervals \
-    -L gatkcnv_output/all/targets.preprocessed.interval_list \
+    -L gatkcnv_output/female/targets.preprocessed.interval_list \
     -XL $CENTROMETIC_XY \
     -R $REF \
     -imr OVERLAPPING_ONLY \
-    -O gatkcnv_output/all/targets.annotated.tsv \
+    -O gatkcnv_output/female/targets.annotated.tsv \
     --verbosity ERROR
 
 
@@ -105,7 +105,7 @@ gatk DetermineGermlineContigPloidy \
         -L targets.cohort.gc.filtered.interval_list \
         --interval-merging-rule OVERLAPPING_ONLY \
         $COUNTS_LIST \
-        --contig-ploidy-priors $PLOIDY_PRIORS_TABLE \
+        --contig-ploidy-priors $PLOIDY_XY \
         --output . \
         --output-prefix ploidy \
         --verbosity ERROR
@@ -123,6 +123,7 @@ gatk GermlineCNVCaller \
         --output-prefix cohort \
         --verbosity ERROR
 
+cd ..
 cd ..
 
 index=0
@@ -147,7 +148,7 @@ let "index+=1";
 
 done
 
-########################################################################################
+#######################################################################################
 echo ""
 echo "Working on male..."
 echo ""
@@ -159,13 +160,13 @@ MALE+="$line.dedup.bam "
 done < male_list.txt
 
 echo "Liste des hommes:"
-echo $FEMALE
+echo $MALE
 echo ""
 
 # Define the resolution of the analysis with a genomic intervals list
 gatk PreprocessIntervals \
     -R  $REF \
-    -L  $TARGETS_XY \
+    -L  $TARGET_XY \
     -XL $CENTROMETIC_XY \
     --bin-length 0 \
     --padding 50 \
@@ -225,7 +226,7 @@ gatk DetermineGermlineContigPloidy \
         -L targets.cohort.gc.filtered.interval_list \
         --interval-merging-rule OVERLAPPING_ONLY \
         $COUNTS_LIST \
-        --contig-ploidy-priors $PLOIDY_PRIORS_TABLE \
+        --contig-ploidy-priors $PLOIDY_XY \
         --output . \
         --output-prefix ploidy \
         --verbosity ERROR
@@ -243,6 +244,7 @@ gatk GermlineCNVCaller \
         --output-prefix cohort \
         --verbosity ERROR
 
+cd ..
 cd ..
 
 index=0
@@ -272,10 +274,10 @@ echo ""
 echo "Working on all..."
 echo ""
 
-# Define the resolution of the analysis with a genomic intervals list
+Define the resolution of the analysis with a genomic intervals list
 gatk PreprocessIntervals \
     -R  $REF \
-    -L  $TARGETS_AUTO \
+    -L  $TARGET_AUTO \
     -XL $CENTROMETIC_AUTO \
     --bin-length 0 \
     --padding 50 \
@@ -335,7 +337,7 @@ gatk DetermineGermlineContigPloidy \
         -L targets.cohort.gc.filtered.interval_list \
         --interval-merging-rule OVERLAPPING_ONLY \
         $COUNTS_LIST \
-        --contig-ploidy-priors $PLOIDY_PRIORS_TABLE \
+        --contig-ploidy-priors $PLOIDY_AUTO \
         --output . \
         --output-prefix ploidy \
         --verbosity ERROR
@@ -353,6 +355,7 @@ gatk GermlineCNVCaller \
         --output-prefix cohort \
         --verbosity ERROR
 
+cd ..
 cd ..
 
 index=0

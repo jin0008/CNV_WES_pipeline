@@ -22,6 +22,7 @@ mkdir female
 mkdir male
 cd ..
 
+####################################################################################
 echo ""
 echo "Working on female..."
 echo ""
@@ -57,6 +58,8 @@ echo ""
 
 rm $DATA/cnvkit_output/female/*.target.bed;
 
+
+####################################################################################
 echo ""
 echo "Working on male..."
 echo ""
@@ -92,6 +95,8 @@ echo ""
 
 rm $DATA/cnvkit_output/male/*.target.bed;
 
+
+####################################################################################
 echo ""
 echo "Working on all..."
 echo ""

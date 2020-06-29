@@ -3,29 +3,29 @@
 library(cn.mops)
 
 segments_auto <- read.table(file="/media/jbogoin/Data1/jbogoin/ref/gencode/v34_hg38/autosomes/gencode.v34.basic.annotation.autosome.bed",
-                    header=FALSE, sep="\t", as.is=TRUE)
+                    header=FALSE, sep=" ", as.is=TRUE)
 
 segments_XY <- read.table(file="/media/jbogoin/Data1/jbogoin/ref/gencode/v34_hg38/XY/gencode.v34.basic.annotation.XY.bed",
-                    header=FALSE, sep="\t", as.is=TRUE)
+                    header=FALSE, sep=" ", as.is=TRUE)
 
 all <- list.files(path=".", pattern=".dedup.bam$")
 
 female <- read.table(file="female_list.txt", header=FALSE, sep=" ", as.is=TRUE)
-for (i in length(female)){
-    female[i]=paste(female[i],'.dedup.bam')
+for (i in (1:length(female[,1]))){
+    female[,1][i] = paste(female[,1][i],'.dedup.bam',sep='')
 }
 
 male <- read.table(file="male_list.txt", header=FALSE, sep=" ", as.is=TRUE)
-for (i in length(male)){
-    male[i]=paste(female[i],'.dedup.bam')
+for (i in (1:length(male[,1]))){
+    male[,1][i] = paste(male[,1][i],'.dedup.bam',sep='')
 }
 
-########################################################################################
+#######################################################################################
 print('Working on female...')
 
 gr <- GRanges(segments_XY[,1], IRanges(segments_XY[,2],segments_XY[,3]))
 
-X <- getSegmentReadCountsFromBAM(female, GR=gr)
+X <- getSegmentReadCountsFromBAM(female[,1], GR=gr)
 
 resCNMOPS <- exomecn.mops(X)
 resCNMOPS <- calcIntegerCopyNumbers(resCNMOPS)
@@ -43,12 +43,12 @@ write.csv(CNVs, file="cnvs_female.csv")
 CNVRegions <- as.data.frame(cnvr(resCNMOPS))
 write.csv(CNVRegions, file="cnvr_female.csv")
 
-########################################################################################
+# ########################################################################################
 print('Working on male...')
 
 gr <- GRanges(segments_XY[,1], IRanges(segments_XY[,2],segments_XY[,3]))
 
-X <- getSegmentReadCountsFromBAM(male, GR=gr)
+X <- getSegmentReadCountsFromBAM(male[,1], GR=gr)
 
 resCNMOPS <- exomecn.mops(X)
 resCNMOPS <- calcIntegerCopyNumbers(resCNMOPS)

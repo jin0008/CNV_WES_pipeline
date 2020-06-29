@@ -10,26 +10,33 @@ if os.path.isfile('exomedepth_results.csv'):
     os.remove('exomedepth_results.csv')
     print('Previous results file removed.')
 
-path = '.'
-files = os.listdir(path)
 li = []
 
-for name in files:
+path = '.'
+folders = os.listdir(path)
+
+for folder in folders:
     
-    if ".csv" in name:
-        df = pandas.read_csv(name, sep=',',index_col=None, header=[0])
-        df.dropna(how='all')
-        sample_name = name.split('.')
-        df['sample'] = sample_name[0]
-        li.append(df)
+    files = os.listdir(folder)
+
+    for name in files:
+    
+        if ".csv" in name:
+            df = pandas.read_csv((folder + '/' + name), sep=',',index_col=None, header=[0])
+            df.dropna(how='all')
+            sample_name = name.split('.')
+            df['sample'] = sample_name[0]
+            li.append(df)
+
 
 concat  = pandas.concat(li, axis=0, ignore_index=True)
 
 df_sex = pandas.read_csv('../samples.txt', header = [0], sep="\t", index_col=None)
 
 frame = pandas.merge(concat, df_sex, left_on='sample', right_on='sample')
+print(frame)
 
-frame['contig'] = 'chr' + frame['chromosome']
+frame['contig'] = 'chr' + frame['chromosome'].astype('str')
 
 del frame['chromosome']
 del frame['reads.expected']

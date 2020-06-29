@@ -9,11 +9,13 @@ echo ""
 
 rm -Rf exomedepth_output
 mkdir exomedepth_output
-mkdir exomedepth_output/all
-mkdir exomedepth_output/female
-mkdir exomedepth_output/male
+cd exomedepth_output
+mkdir all
+mkdir female
+mkdir male
+cd ..
 
-R -q --vanilla < ~/WCC/exomedepth_cnv.r
+R -q --vanilla < ~/CNV_WES_pipeline/exomedepth_cnv.r
 
 echo ""
 echo "ExomeDepth CNV DETECTION job done!"

@@ -56,18 +56,23 @@ def dataframe(filename, large=True):
 
 print("\nGATK CNV results program openning.\n")
 
-path = '.'
-files = os.listdir(path)
 li = []
 
-for name in files:
+path = '.'
+folders = os.listdir(path)
 
-    if "genotyped-segments" in name and ".vcf.gz.tbi" not in name:
-        df = dataframe(name, large=True)
-        df.dropna(how='all')
-        sample_name = name.split('.')
-        df['sample'] = sample_name[1]
-        li.append(df)
+for folder in folders:
+    
+    files = os.listdir(folder)
+
+    for name in files:
+
+        if "genotyped-segments" in name and ".vcf.gz.tbi" not in name:
+            df = dataframe((folder + '/' + name), large=True)
+            df.dropna(how='all')
+            sample_name = name.split('.')
+            df['sample'] = sample_name[1]
+            li.append(df)
 
 concat = pd.concat(li, axis=0, ignore_index=True)
 
@@ -95,8 +100,6 @@ frame.query('CN>2 or CN<1', inplace=True)
 
 cols = ['sample', 'sex', 'contig', 'start', 'end', 'CN', 'effect']
 frame = frame[cols]
-
-print(frame)
 
 print('{0} CNV lines filtred among {1} lines found by gatk.'.format(frame.shape[0], total))
 

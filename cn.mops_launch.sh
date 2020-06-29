@@ -10,7 +10,7 @@ echo ""
 rm -Rf cn.mops_output
 mkdir cn.mops_output
 
-R -q --vanilla < ~/WCC/cn.mops_cnv.r
+R -q --vanilla < ~/CNV_WES_pipeline/cn.mops_cnv.r
 
 echo ""
 echo "cn.mops CNV DETECTION job done!"

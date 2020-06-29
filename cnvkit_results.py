@@ -5,18 +5,23 @@ import pandas
 
 print('\ncnvkit CNV results program openning.\n')
 
-path = '.'
-files = os.listdir(path)
 li = []
 
-for name in files:
+path = '.'
+folders = os.listdir(path)
+
+for folder in folders:
     
-    if ".dedup.call.cns" in name:
-        df = pandas.read_csv(name, sep='\t',index_col=None, header=[0])
-        df.dropna(how='all')
-        sample_name = name.split('.')
-        df['sample'] = sample_name[0]
-        li.append(df)
+    files = os.listdir(folder)
+
+    for name in files:
+        
+        if ".dedup.call.cns" in name:
+            df = pandas.read_csv((folder + '/' + name), sep='\t',index_col=None, header=[0])
+            df.dropna(how='all')
+            sample_name = name.split('.')
+            df['sample'] = sample_name[0]
+            li.append(df)
 
 concat = pandas.concat(li, axis=0, ignore_index=True)
 
