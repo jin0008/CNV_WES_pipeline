@@ -8,19 +8,18 @@ print("\ncn.mops CNV results program openning.\n")
 li = []
 
 path = '.'
-folders = os.listdir(path)
+files = os.listdir(path)
 
-for folder in folders:
-    
-    files = os.listdir(folder)
+for name in files:
 
-    for name in files:
-    
-        if "cnvs.csv" in name:
+    if "cnvs" in name:
+        
+        taille = os.path.getsize(name)
 
-            df = pandas.read_csv('cnvs.csv', sep=',',index_col=None, header=[0])
+        if taille != 0:
+
+            df = pandas.read_csv(name, sep=',', index_col=None, header=[0])
             df.dropna(how='all')
-
             sn = df['sampleName'].str.split(pat='.', n=0, expand=True)
             df['sample'] = sn[0]
             li.append(df)
@@ -29,7 +28,6 @@ concat  = pandas.concat(li, axis=0, ignore_index=True)
 
 cnv =  concat['CN'].str.split(pat='CN', n=0, expand=True)
 concat['CN'] = cnv[1]
-concat['CN'] = df['CN'].astype('str').astype('int')
 
 del concat['sampleName']
 del concat['Unnamed: 0']
@@ -42,13 +40,14 @@ concat.rename(columns={'mean': 'log2copy_ratio'}, inplace=True)
 
 total = concat.shape[0]
 
+concat['log2copy_ratio'] = concat['log2copy_ratio'].astype('str').astype('float')
 concat.query('log2copy_ratio>1 or log2copy_ratio<-1', inplace=True)
-concat['cnv_ratio'] = df['log2copy_ratio']**2
+concat['cnv_ratio'] = concat['log2copy_ratio']**2
 
 concat['effect'] = 'i'
 
-concat.loc[df.log2copy_ratio>1, 'effect'] = "duplication"
-concat.loc[df.log2copy_ratio<-1, 'effect'] = "deletion"
+concat.loc[concat.log2copy_ratio>1, 'effect'] = "duplication"
+concat.loc[concat.log2copy_ratio<-1, 'effect'] = "deletion"
 
 df_sex = pandas.read_csv('../samples.txt', header = [0], sep="\t", index_col=None)
 
