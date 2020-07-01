@@ -21,10 +21,15 @@ sed '1d' interval_run_results.txt > ex1.avinput
 sed -i -e "s/XF/X/g" ex1.avinput
 sed -i -e "s/XM/X/g" ex1.avinput
 
-sudo perl ~/annovar/annotate_variation.pl \
-    -out annovar_output/annotation \
-    -build hg38 ex1.avinput\
-    ~/annovar/humandb/
+sudo perl ~/annovar/table_annovar.pl \
+ex1.avinput \
+~/annovar/humandb \
+--buildver hg38 \
+--out annovar_output/annotation \
+--remove \
+--otherinfo \
+--protocol refGene \
+--operation g
 
  sudo mv ex1.avinput annovar_output/    
 
