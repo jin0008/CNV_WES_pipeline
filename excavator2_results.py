@@ -5,26 +5,35 @@ import pandas
 
 print('\nEXCAVATOR2 CNV results program openning.\n')
 
-path = '.'
-folders = os.listdir(path)
 li = []
 
-for fold in folders:
+path = '.'
+folders = os.listdir(path)
 
-    if "w10K_results." in fold:
-        fold_name = fold.split('.')
-        sample_name = fold_name[1]
-        result_path = fold + '/' + 'Results/' + sample_name 
+for folder in folders:
+    
+    subfolders = os.listdir(folder)
 
-        files =  os.listdir(result_path)
-        
-        for name in files:
-            if "FastCallResults_" in name:
-                txt_file = result_path + '/' + name
-                df = pandas.read_csv(txt_file, sep='\t',index_col=None, header=[0])
-                df.dropna(how='all')
-                df['sample'] = fold_name[1]
-                li.append(df)
+    for subfolder in subfolders:
+
+        folds = os.listdir(subfolder)
+
+            for fold in folds:
+
+                if "w10K_results." in fold:
+                    fold_name = fold.split('.')
+                    sample_name = fold_name[1]
+                    result_path = fold + '/' + 'Results/' + sample_name 
+
+                    files =  os.listdir(result_path)
+                    
+                    for name in files:
+                        if "FastCallResults_" in name:
+                            txt_file = result_path + '/' + name
+                            df = pandas.read_csv(txt_file, sep='\t',index_col=None, header=[0])
+                            df.dropna(how='all')
+                            df['sample'] = fold_name[1]
+                            li.append(df)
 
 concat = pandas.concat(li, axis=0, ignore_index=True)
 
