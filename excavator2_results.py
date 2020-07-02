@@ -5,6 +5,10 @@ import pandas
 
 print('\nEXCAVATOR2 CNV results program openning.\n')
 
+if os.path.isfile('excavator2_results.csv'):
+    os.remove('excavator2_results.csv')
+    print('Previous results file removed.')
+
 li = []
 
 path = '.'
@@ -16,24 +20,21 @@ for folder in folders:
 
     for subfolder in subfolders:
 
-        folds = os.listdir(subfolder)
-
-            for fold in folds:
-
-                if "w10K_results." in fold:
-                    fold_name = fold.split('.')
-                    sample_name = fold_name[1]
-                    result_path = fold + '/' + 'Results/' + sample_name 
-
-                    files =  os.listdir(result_path)
+        if "w10K_results." in subfolder:
+            subfolder_name = subfolder.split('.')
+            sample_name = subfolder_name[1]
+            result_path = folder + '/' + subfolder + '/' + 'Results/' + sample_name 
+                
+            files =  os.listdir(result_path)
                     
-                    for name in files:
-                        if "FastCallResults_" in name:
-                            txt_file = result_path + '/' + name
-                            df = pandas.read_csv(txt_file, sep='\t',index_col=None, header=[0])
-                            df.dropna(how='all')
-                            df['sample'] = fold_name[1]
-                            li.append(df)
+            for name in files:
+                if "FastCallResults_" in name:
+                    txt_file = result_path + '/' + name
+                        
+                    df = pandas.read_csv(txt_file, sep='\t',index_col=None, header=[0])
+                    df.dropna(how='all')
+                    df['sample'] = subfolder_name[1]
+                    li.append(df)
 
 concat = pandas.concat(li, axis=0, ignore_index=True)
 
@@ -62,10 +63,6 @@ cols = ['sample', 'sex', 'contig', 'start', 'end', 'cnv_ratio','log2copy_ratio',
 frame = frame[cols]
 
 print('{0} CNV lines filtred among {1} lines found by excavator2.'.format(frame.shape[0], total))
-
-if os.path.isfile('excavator2_results.csv'):
-    os.remove('excavator2_results.csv')
-    print('Previous results file removed.')
 
 frame.to_csv('excavator2_results.csv', index=False)                                                                                           
 print("excavator2_results.csv generated.\n")
