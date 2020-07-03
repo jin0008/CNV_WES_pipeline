@@ -1,8 +1,12 @@
+lsblk
+
 ### DD physique Data1 ###
 
 cd /media/jbogoin/
 sudo mkdir -p Data1
 sudo mount /dev/sdb1 Data1
+
+sudo mount /dev/sdd1 Data3
 
 # Pour démonter
 #sudo umount Data1
