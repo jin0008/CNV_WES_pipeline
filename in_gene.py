@@ -28,8 +28,10 @@ for index_d, row_d in dgv.iterrows():
         for index_u, row_u in uniq.iterrows():
 
             if row_d['contig'] == row_d['contig'] \
-                row_d['contig'] > gene_start and int(end) < gene_end:
-# 			    inGene = 1
-# 			    break
+                row_d['start'] > row_u['start'] and row_d['end'] < row_u['end']:
+                inGene = 1
+                break
+
+
 
 
