@@ -11,46 +11,59 @@ source ~/miniconda3/etc/profile.d/conda.sh
 # sex determination
 conda activate sex_env
 
-python3 ~/WCC/sex_determination.py
+python3 ~/CNV_WES_pipeline/sex_determination.py
 
 conda deactivate
 
 # generation des listes hommes et femmes
-python ~/WCC/female_male_lists.py
+conda activate results_cnv
+
+python ~/CNV_WES_pipeline/female_male_lists.py
+
+conda deactivate
 
 # tools cnv detection
-bash ~/WCC/cn.mops_launch.sh
-bash ~/WCC/cnvkit_detection.sh
-bash ~/WCC/excavator2_detection.sh
-bash ~/WCC/exomedepth_launch.sh
-bash ~/WCC/gatk_detection.sh
+bash ~/CNV_WES_pipeline/cn.mops_launch.sh
+bash ~/CNV_WES_pipeline/cnvkit_detection.sh
+bash ~/CNV_WES_pipeline/excavator2_detection.sh
+bash ~/CNV_WES_pipeline/exomedepth_launch.sh
+bash ~/CNV_WES_pipeline/gatk_detection.sh
 
 # tools results generation
 conda activate results_cnv
 
 cd cn.mops_output
-python ~/WCC/cn.mops_results.py
-cd cnvkit_output
-python ~/WCC/cnvkit_results.py
-cd excavator2_output
-python ~/WCC/excavator2_results.py
-cd exomedepth_output
-python ~/WCC/exomedepth_results.py
-cd gatk_output
-python ~/WCC/gatk_results.py
+python ~/CNV_WES_pipeline/cn.mops_results.py
+cd ../cnvkit_output
+python ~/CNV_WES_pipeline/cnvkit_results.py
+cd ../excavator2_output
+python ~/CNV_WES_pipeline/excavator2_results.py
+cd ../exomedepth_output
+python ~/CNV_WES_pipeline/exomedepth_results.py
+cd ../gatk_output
+python ~/CNV_WES_pipeline/gatk_results.py
 cd ..
 
 # results summary
-python ~/WCC/cnv_results.py
-python ~/WCC/cnv_interval_object_sample.py
-python ~/WCC/cnv_interval_object_run.py
+python ~/CNV_WES_pipeline/cnv_results.py
+python ~/CNV_WES_pipeline/cnv_interval_object_sample.py
+python ~/CNV_WES_pipeline/cnv_interval_object_run.py
 
 conda deactivate
 
-# annotation
+# annotations
+
 conda activate annot_env
 
-bash ~/WCC/annotation.sh
+bash ~/CNV_WES_pipeline/annotation.sh
+
+conda deactivate
+
+conda activate results_cnv
+
+python ~/CNV_WES_pipeline/clinvar.py
+python ~/CNV_WES_pipeline/dvg.py
+python ~/CNV_WES_pipeline/in_gene.py
 
 conda deactivate
 
