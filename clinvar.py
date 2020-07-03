@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Author: Julie BOGOIN
 
 import pandas
@@ -44,7 +45,7 @@ for gene_list in annot['genes']:
         match_line.append(".")
     match_all.append(match_line)
 
-annot['ClinVar_match'] = pandas.Series(match_all) 
+annot['ClinVar_match'] = pandas.Series(match_all)
 
 annot['ClinVar_match'] = annot['ClinVar_match'].str.join('/')
 annot['genes'] = annot['genes'].str.join('/')
@@ -52,8 +53,8 @@ annot['genes'] = annot['genes'].str.join('/')
 if os.path.isfile('clinavar_results.csv'):
     os.remove('clinavar_results.csv')
     print('Previous results file removed.')
-
-annot.to_csv('clinavar_results.csv', index=False)                                                                                           
+ 
+annot.to_csv('clinavar_results.csv', index=False)                                                                                          
 print("clinavar_results.csv generated.\n")
 
 print("ClinVar program job done!\n")

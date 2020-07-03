@@ -99,7 +99,7 @@ def chevauchement_run(sorted_sample_cnv):
             overlap_on_prev_cnv = (float(common_part) / float(prev_cnv.size))
             overlap_on_curr_cnv = (float(common_part) / float(curr_cnv.size))
 			
-            if (overlap_on_prev_cnv > 0.8 and overlap_on_curr_cnv) > 0.8:
+            if (overlap_on_prev_cnv > 0.8) and (overlap_on_curr_cnv > 0.8):
                     
                 contig = prev_cnv.contig
                 start = max_start
