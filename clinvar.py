@@ -35,14 +35,22 @@ del clinvar['AssociatedGenes']
 
 # Recherche des genes annotes dans ClinVar
 match_all = []
+
 for gene_list in annot['genes']:
+    
     match_line = []
+    
     for gene in gene_list:
+        
         for index, row in clinvar.iterrows():
+            
             if gene == row['clinvar_gene']:
+                
                 match_line.append(row['DiseaseName'])
                 continue
+        
         match_line.append(".")
+    
     match_all.append(match_line)
 
 annot['ClinVar_match'] = pandas.Series(match_all)
@@ -54,7 +62,7 @@ if os.path.isfile('clinavar_results.csv'):
     os.remove('clinavar_results.csv')
     print('Previous results file removed.')
  
-annot.to_csv('clinavar_results.csv', index=False)                                                                                          
-print("clinavar_results.csv generated.\n")
+annot.to_csv('clinvar_results.csv', index=False)                                                                                          
+print("clinvar_results.csv generated.\n")
 
 print("ClinVar program job done!\n")

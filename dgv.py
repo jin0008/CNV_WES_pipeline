@@ -8,7 +8,7 @@ print("\nDVG program openning.\n")
 
 clinvar = pandas.read_csv('clinavar_results.csv',index_col=None, header=[0])
 
-dgv = pandas.read_csv('/media/jbogoin/Data1/jbogoin/ref/dgv/DGV_hg38_variants_2020-02-25_light.bed.gz', \
+dgv = pandas.read_csv('/media/Data1/jbogoin/ref/dgv/DGV_hg38_variants_2020-02-25_light.bed.gz', \
     index_col=None, header=[0], compression='gzip', sep='\t')
 
 # Supprimer le 'chr' de la colonne contig
