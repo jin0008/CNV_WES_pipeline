@@ -34,14 +34,19 @@ conda activate results_cnv
 
 cd cn.mops_output
 python ~/CNV_WES_pipeline/cn.mops_results.py
+
 cd ../cnvkit_output
 python ~/CNV_WES_pipeline/cnvkit_results.py
+
 cd ../excavator2_output
 python ~/CNV_WES_pipeline/excavator2_results.py
+
 cd ../exomedepth_output
 python ~/CNV_WES_pipeline/exomedepth_results.py
+
 cd ../gatk_output
 python ~/CNV_WES_pipeline/gatk_results.py
+
 cd ..
 
 # results summary
@@ -55,11 +60,15 @@ conda deactivate
 
 conda activate annot_env
 
-bash ~/CNV_WES_pipeline/annotation.sh
+bash ~/CNV_WES_pipeline/annovar.sh
 
 conda deactivate
 
 conda activate results_cnv
+
+cd annotations/annovar_output
+python ~/CNV_WES_pipeline/annovar_results.py
+cd ..
 
 python ~/CNV_WES_pipeline/clinvar.py
 python ~/CNV_WES_pipeline/dvg.py
