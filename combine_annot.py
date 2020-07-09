@@ -96,7 +96,7 @@ for index, row in annovar.iterrows():
 			for index_dfc, row_dfc in dfc.iterrows():
 				disease_list.append(row_dfc['DiseaseName'])
 
-			clinvar_line.append(disease_list)
+			clinvar_line.append(" + ".join(disease_list))
 
 #Ingene
 ###############################################################
@@ -162,7 +162,7 @@ for index, row in annovar.iterrows():
 
 	count_all.append(count_r)
 
-	clinvar_all.append(clinvar_line)
+	clinvar_all.append("/".join(clinvar_line))
 
 
 annovar['DiseaseName'] = pandas.Series(clinvar_all)
@@ -170,9 +170,8 @@ annovar['in_gene'] = pandas.Series(ingene_list, dtype=str)
 annovar['DGV_details'] = pandas.Series(dgv_details_s, dtype=str)
 annovar['DGV_count'] = pandas.Series(count_all, dtype=str)
 
-annovar['annovar_genes'] = annovar['annovar_genes'].str.join('/')
+annovar['annovar_genes'] = annovar['annovar_genes'].str.join(' / ')
 
-print(annovar)
 
 if os.path.isfile('final_cnv_tab.csv'):
     os.remove('final_cnv_tab.csv')
