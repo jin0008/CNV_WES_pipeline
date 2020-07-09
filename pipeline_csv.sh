@@ -58,6 +58,7 @@ conda deactivate
 
 # annotations
 
+# annovar
 conda activate annot_env
 
 bash ~/CNV_WES_pipeline/annovar.sh
@@ -66,17 +67,19 @@ conda deactivate
 
 conda activate results_cnv
 
-cd annotations/annovar_output
+cd annovar_output
 python ~/CNV_WES_pipeline/annovar_results.py
+
 cd ..
 
-python ~/CNV_WES_pipeline/clinvar.py
-python ~/CNV_WES_pipeline/dvg.py
-python ~/CNV_WES_pipeline/in_gene.py
+# ClinVar
+# In_gene
+# DGV_count
+
+python ~/CNV_WES_pipeline/combined_annot.py
 
 conda deactivate
 
 echo ""
 echo "pipeline_csv.sh job done!"
 echo ""
-
