@@ -74,7 +74,8 @@ annovar.rename(columns={'genes': 'annovar_genes'}, inplace=True)
 # Parcourir le df annovar
 clinvar_all = []
 ingene_list = []
-dgv_details_all = []
+dgv_details_s = []
+count_all = []
 
 for index, row in annovar.iterrows():
 
@@ -148,21 +149,26 @@ for index, row in annovar.iterrows():
 				pct = (overlap_size) / row['size'] * 100.0
 
 			if pct >= 80.0 and obsG_r != '' and obsL_r != '':
+
 				if (row['effect'] == "deletion" and int(obsL_r) > 0) or \
 					 (row['effect'] == "duplication" and int(obsG_r) > 0):
+
 					count_r += 1
+
 					dgv_details_l.append(chrom_r + ":" + str(start_r) + ":" + str(end_r) + ":" + str(obsG_r) + ":" + str(obsL_r))
 
-			else:
-				dgv_details_l.append('-')
 
-		dgv_details_s = "|".join(dgv_details_l)
-		dgv_details_all.append(dgv_details_s)
-		clinvar_all.append(clinvar_line)
+	dgv_details_s.append("/".join(dgv_details_l))
+
+	count_all.append(count_r)
+
+	clinvar_all.append(clinvar_line)
+
 
 annovar['DiseaseName'] = pandas.Series(clinvar_all)
-annovar['in_gene'] = pandas.Series(ingene_list)
-annovar['DGV_details'] = pandas.Series(dgv_details_all)
+annovar['in_gene'] = pandas.Series(ingene_list, dtype=str)
+annovar['DGV_details'] = pandas.Series(dgv_details_s, dtype=str)
+annovar['DGV_count'] = pandas.Series(count_all, dtype=str)
 
 annovar['annovar_genes'] = annovar['annovar_genes'].str.join('/')
 
@@ -172,7 +178,7 @@ if os.path.isfile('final_cnv_tab.csv'):
     os.remove('final_cnv_tab.csv')
     print('Previous results file removed.')
 
-annovar.to_csv('final_cnv_tab.csv', index=False)
+annovar.to_csv('final_cnv_tab.csv', sep='\t', index=False)
 print("final_cnv_tab.csv generated.\n")
 
 print("Annots program job done!\n")
