@@ -28,24 +28,20 @@ sudo perl ~/annovar/table_annovar.pl \
 ex1.avinput \
 ~/annovar/humandb \
 --buildver hg38 \
---out annotations/annovar_output \
+--out annovar_output \
 --remove \
 --otherinfo \
 --protocol refGene \
 --operation g
 
- sudo mv ex1.avinput annotations/annovar_output/    
+ sudo mv ex1.avinput annovar_output/
 
 #first output file: .variant_function
 #contains annotation for all variants, by adding two columns to the beginning of each input line
 
 #second output file: .exonic_variant_function
-#contains the amino acid changes as a result of the exonic variant. 
+#contains the amino acid changes as a result of the exonic variant.
 
 echo ""
 echo "annotation.sh job done!"
 echo ""
-
-
-
-

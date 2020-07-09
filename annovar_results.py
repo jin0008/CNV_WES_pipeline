@@ -21,6 +21,6 @@ del df['alt']
 del df['aa_change']
 del df['empty']
 
-df.to_csv('annotation_results.csv', index=False)                                                                                           
+df.to_csv('annotation_results.csv', index=False)
 print("annotation_results.csv generated.\n")
 print("Annotation CNV results job done!\n")
