@@ -3,10 +3,10 @@
 library(ExomeDepth)
 library(seqinr)
 
-targets_auto <- read.table(file="/media/jbogoin/Data1/jbogoin/ref/gencode/v34_hg38/autosomes/gencode.v34.basic.annotation.autosome.bed",
+targets_auto <- read.table(file="/media/Data1/jbogoin/ref/gencode/v34_hg38/autosomes/gencode.v34.basic.annotation.autosome.bed",
                     header=FALSE, sep=" ", as.is=TRUE)
 
-targets_XY <- read.table(file="/media/jbogoin/Data1/jbogoin/ref/gencode/v34_hg38/XY/gencode.v34.basic.annotation.XY.bed",
+targets_XY <- read.table(file="/media//Data1/jbogoin/ref/gencode/v34_hg38/XY/gencode.v34.basic.annotation.XY.bed",
                     header=FALSE, sep=" ", as.is=TRUE)
 
 female <- read.table(file="female_list.txt", header=FALSE, sep=" ", as.is=TRUE)
@@ -47,11 +47,11 @@ names(ExomeCount.dafr) <- sub("X", "", names(ExomeCount.dafr), fixed=TRUE)
 
 ## Remove the annoying chr letters
 ExomeCount.dafr$chromosome <- gsub(as.character(ExomeCount.dafr$chromosome), pattern = 'chr', replacement = '')
-ExomeCount.dafr$names <- rep('CDS', length(ExomeCount.dafr$chromosome)) 
+ExomeCount.dafr$names <- rep('CDS', length(ExomeCount.dafr$chromosome))
 
 ### Prepare the main matrix of read count data
-sample_names = grep(names(ExomeCount.dafr), pattern = '*.dedup.bam')      
-ExomeCount.mat <- as.matrix(ExomeCount.dafr[, sample_names]) 
+sample_names = grep(names(ExomeCount.dafr), pattern = '*.dedup.bam')
+ExomeCount.mat <- as.matrix(ExomeCount.dafr[, sample_names])
 
 nsamples <- ncol(ExomeCount.mat)
 
@@ -68,9 +68,9 @@ for (i in 1:nsamples) {
 
 	my.reference.selected <- apply(X = ExomeCount.mat[, my.choice$reference.choice, drop = FALSE], MAR = 1, FUN = sum)
 
-	message('Now creating the ExomeDepth object') 
+	message('Now creating the ExomeDepth object')
 	all.exons <- new('ExomeDepth', test = ExomeCount.mat[,i], reference = my.reference.selected, formula = 'cbind(test, reference) ~ 1')
-		
+
 	################ Now call the CNVs
 	all.exons <- CallCNVs(x = all.exons, transition.probability = 10^-4,
 			      chromosome = ExomeCount.dafr$chromosome,
@@ -112,11 +112,11 @@ names(ExomeCount.dafr) <- sub("X", "", names(ExomeCount.dafr), fixed=TRUE)
 
 ## Remove the annoying chr letters
 ExomeCount.dafr$chromosome <- gsub(as.character(ExomeCount.dafr$chromosome), pattern = 'chr', replacement = '')
-ExomeCount.dafr$names <- rep('CDS', length(ExomeCount.dafr$chromosome)) 
+ExomeCount.dafr$names <- rep('CDS', length(ExomeCount.dafr$chromosome))
 
 ### Prepare the main matrix of read count data
-sample_names = grep(names(ExomeCount.dafr), pattern = '*.dedup.bam')      
-ExomeCount.mat <- as.matrix(ExomeCount.dafr[, sample_names]) 
+sample_names = grep(names(ExomeCount.dafr), pattern = '*.dedup.bam')
+ExomeCount.mat <- as.matrix(ExomeCount.dafr[, sample_names])
 
 ### start looping over each sample
 nsamples <- ncol(ExomeCount.mat)
@@ -134,9 +134,9 @@ for (i in 1:nsamples) {
 
 	my.reference.selected <- apply(X = ExomeCount.mat[, my.choice$reference.choice, drop = FALSE], MAR = 1, FUN = sum)
 
-	message('Now creating the ExomeDepth object') 
+	message('Now creating the ExomeDepth object')
 	all.exons <- new('ExomeDepth', test = ExomeCount.mat[,i], reference = my.reference.selected, formula = 'cbind(test, reference) ~ 1')
-		
+
 	################ Now call the CNVs
 	all.exons <- CallCNVs(x = all.exons, transition.probability = 10^-4,
 			      chromosome = ExomeCount.dafr$chromosome,
@@ -178,11 +178,11 @@ names(ExomeCount.dafr) <- sub("X", "", names(ExomeCount.dafr), fixed=TRUE)
 
 ## Remove the annoying chr letters
 ExomeCount.dafr$chromosome <- gsub(as.character(ExomeCount.dafr$chromosome), pattern = 'chr', replacement = '')
-ExomeCount.dafr$names <- rep('CDS', length(ExomeCount.dafr$chromosome)) 
+ExomeCount.dafr$names <- rep('CDS', length(ExomeCount.dafr$chromosome))
 
 ### Prepare the main matrix of read count data
-sample_names = grep(names(ExomeCount.dafr), pattern = '*.dedup.bam')      
-ExomeCount.mat <- as.matrix(ExomeCount.dafr[, sample_names]) 
+sample_names = grep(names(ExomeCount.dafr), pattern = '*.dedup.bam')
+ExomeCount.mat <- as.matrix(ExomeCount.dafr[, sample_names])
 
 nsamples <- ncol(ExomeCount.mat)
 
@@ -199,9 +199,9 @@ for (i in 1:nsamples) {
 
 	my.reference.selected <- apply(X = ExomeCount.mat[, my.choice$reference.choice, drop = FALSE], MAR = 1, FUN = sum)
 
-	message('Now creating the ExomeDepth object') 
+	message('Now creating the ExomeDepth object')
 	all.exons <- new('ExomeDepth', test = ExomeCount.mat[,i], reference = my.reference.selected, formula = 'cbind(test, reference) ~ 1')
-		
+
 	################ Now call the CNVs
 	all.exons <- CallCNVs(x = all.exons, transition.probability = 10^-4,
 			      chromosome = ExomeCount.dafr$chromosome,
@@ -225,9 +225,9 @@ for (i in 1:nsamples) {
 
 	my.reference.selected <- apply(X = ExomeCount.mat[, my.choice$reference.choice, drop = FALSE], MAR = 1, FUN = sum)
 
-	message('Now creating the ExomeDepth object') 
+	message('Now creating the ExomeDepth object')
 	all.exons <- new('ExomeDepth', test = ExomeCount.mat[,i], reference = my.reference.selected, formula = 'cbind(test, reference) ~ 1')
-		
+
 	################ Now call the CNVs
 	all.exons <- CallCNVs(x = all.exons, transition.probability = 10^-4,
 			      chromosome = ExomeCount.dafr$chromosome,
@@ -269,13 +269,13 @@ names(ExomeCount.dafr) <- sub("X", "", names(ExomeCount.dafr), fixed=TRUE)
 
 ## Remove the annoying chr letters
 ExomeCount.dafr$chromosome <- gsub(as.character(ExomeCount.dafr$chromosome), pattern = 'chr', replacement = '')
-ExomeCount.dafr$names <- rep('CDS', length(ExomeCount.dafr$chromosome)) 
+ExomeCount.dafr$names <- rep('CDS', length(ExomeCount.dafr$chromosome))
 
 print(head(ExomeCount.dafr))
 
 ### Prepare the main matrix of read count data
-sample_names = grep(names(ExomeCount.dafr), pattern = '*.dedup.bam')      
-ExomeCount.mat <- as.matrix(ExomeCount.dafr[, sample_names]) 
+sample_names = grep(names(ExomeCount.dafr), pattern = '*.dedup.bam')
+ExomeCount.mat <- as.matrix(ExomeCount.dafr[, sample_names])
 
 nsamples <- ncol(ExomeCount.mat)
 
@@ -292,9 +292,9 @@ for (i in 1:nsamples) {
 
 	my.reference.selected <- apply(X = ExomeCount.mat[, my.choice$reference.choice, drop = FALSE], MAR = 1, FUN = sum)
 
-	message('Now creating the ExomeDepth object') 
+	message('Now creating the ExomeDepth object')
 	all.exons <- new('ExomeDepth', test = ExomeCount.mat[,i], reference = my.reference.selected, formula = 'cbind(test, reference) ~ 1')
-		
+
 	################ Now call the CNVs
 	all.exons <- CallCNVs(x = all.exons, transition.probability = 10^-4,
 			      chromosome = ExomeCount.dafr$chromosome,

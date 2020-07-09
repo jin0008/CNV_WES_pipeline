@@ -3,14 +3,14 @@
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate gatk_env
 
-REF="/media/jbogoin/Data1/jbogoin/ref/fa_hg38/hg38_GenDev/hg38_GenDev.fa"
-DIC="/media/jbogoin/Data1/jbogoin/ref/fa_hg38/hg38_GenDev/hg38_GenDev.dict"
+REF="/media/Data1/jbogoin/ref/fa_hg38/hg38_GenDev/hg38_GenDev.fa"
+DIC="/media/Data1/jbogoin/ref/fa_hg38/hg38_GenDev/hg38_GenDev.dict"
 
-CENTROMETIC_AUTO="/media/jbogoin/Data1/jbogoin/ref/fa_hg38/hg38_centromeric/centromeric_regions_autosomes.bed"
-CENTROMETIC_XY="/media/jbogoin/Data1/jbogoin/ref/fa_hg38/hg38_centromeric/centromeric_regions_XY.bed"
+CENTROMETIC_AUTO="/media/Data1/jbogoin/ref/fa_hg38/hg38_centromeric/centromeric_regions_autosomes.bed"
+CENTROMETIC_XY="/media/Data1/jbogoin/ref/fa_hg38/hg38_centromeric/centromeric_regions_XY.bed"
 
-TARGET_AUTO="/media/jbogoin/Data1/jbogoin/ref/gencode/v34_hg38/autosomes/gencode.v34.basic.annotation.autosome.interval_list"
-TARGET_XY="/media/jbogoin/Data1/jbogoin/ref/gencode/v34_hg38/XY/gencode.v34.basic.annotation.XY.interval_list"
+TARGET_AUTO="/media/Data1/jbogoin/ref/gencode/v34_hg38/autosomes/gencode.v34.basic.annotation.autosome.interval_list"
+TARGET_XY="/media/Data1/jbogoin/ref/gencode/v34_hg38/XY/gencode.v34.basic.annotation.XY.interval_list"
 
 PLOIDY_AUTO="/media/Data1/jbogoin/ref/contig_ploidy_priors/ploidy_priors_table_autosome.tsv"
 PLOIDY_XY="/media/Data1/jbogoin/ref/contig_ploidy_priors/ploidy_priors_table_XY.tsv"
@@ -53,7 +53,7 @@ gatk PreprocessIntervals \
     -O gatkcnv_output/female/targets.preprocessed.interval_list \
     --verbosity ERROR
 
-for sample_id in $FEMALE; 
+for sample_id in $FEMALE;
 do SAMPLE=${sample_id%%.dedup.bam}; \
 
 # Collect raw integer counts data
@@ -82,11 +82,11 @@ gatk AnnotateIntervals \
 cd gatkcnv_output/female
 
 COUNTS_LIST=""
-for counts_file in *.tsv; do 
+for counts_file in *.tsv; do
         if [ $(grep -v targets.annotated.tsv <<<$counts_file) ]; then
         FILE=${counts_file%%.tsv};
         COUNTS_LIST+="-I $FILE.tsv ";
-        fi 
+        fi
 done
 
 # FilterIntervals based on GC-content and cohort extreme counts
@@ -128,7 +128,7 @@ cd ..
 
 index=0
 
-for sample_id in $FEMALE; 
+for sample_id in $FEMALE;
 do SAMPLE=${sample_id%%.dedup.bam};
 
 # PostprocessGermlineCNVCalls COHORT MODE
@@ -174,7 +174,7 @@ gatk PreprocessIntervals \
     -O gatkcnv_output/male/targets.preprocessed.interval_list \
     --verbosity ERROR
 
-for sample_id in $MALE; 
+for sample_id in $MALE;
 do SAMPLE=${sample_id%%.dedup.bam}; \
 
 # Collect raw integer counts data
@@ -203,11 +203,11 @@ gatk AnnotateIntervals \
 cd gatkcnv_output/male
 
 COUNTS_LIST=""
-for counts_file in *.tsv; do 
+for counts_file in *.tsv; do
         if [ $(grep -v targets.annotated.tsv <<<$counts_file) ]; then
         FILE=${counts_file%%.tsv};
         COUNTS_LIST+="-I $FILE.tsv ";
-        fi 
+        fi
 done
 
 # FilterIntervals based on GC-content and cohort extreme counts
@@ -249,7 +249,7 @@ cd ..
 
 index=0
 
-for sample_id in $MALE; 
+for sample_id in $MALE;
 do SAMPLE=${sample_id%%.dedup.bam};
 
 # PostprocessGermlineCNVCalls COHORT MODE
@@ -285,7 +285,7 @@ gatk PreprocessIntervals \
     -O gatkcnv_output/all/targets.preprocessed.interval_list \
     --verbosity ERROR
 
-for sample_id in *.dedup.bam; 
+for sample_id in *.dedup.bam;
 do SAMPLE=${sample_id%%.dedup.bam}; \
 
 # Collect raw integer counts data
@@ -314,11 +314,11 @@ gatk AnnotateIntervals \
 cd gatkcnv_output/all
 
 COUNTS_LIST=""
-for counts_file in *.tsv; do 
+for counts_file in *.tsv; do
         if [ $(grep -v targets.annotated.tsv <<<$counts_file) ]; then
         FILE=${counts_file%%.tsv};
         COUNTS_LIST+="-I $FILE.tsv ";
-        fi 
+        fi
 done
 
 # FilterIntervals based on GC-content and cohort extreme counts
@@ -360,7 +360,7 @@ cd ..
 
 index=0
 
-for sample_id in *.dedup.bam; 
+for sample_id in *.dedup.bam;
 do SAMPLE=${sample_id%%.dedup.bam};
 
 # PostprocessGermlineCNVCalls COHORT MODE

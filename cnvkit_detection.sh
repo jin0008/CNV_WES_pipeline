@@ -3,10 +3,10 @@
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate cnvkit_env
 
-REF="/media/jbogoin/Data1/jbogoin/ref/fa_hg38/hg38_GenDev/hg38_GenDev.fa"
+REF="/media/Data1/jbogoin/ref/fa_hg38/hg38_GenDev/hg38_GenDev.fa"
 
-TARGET_AUTO="/media/jbogoin/Data1/jbogoin/ref/gencode/v34_hg38/autosomes/gencode.v34.basic.annotation.autosome.interval_list"
-TARGET_XY="/media/jbogoin/Data1/jbogoin/ref/gencode/v34_hg38/XY/gencode.v34.basic.annotation.XY.interval_list"
+TARGET_AUTO="/media/Data1/jbogoin/ref/gencode/v34_hg38/autosomes/gencode.v34.basic.annotation.autosome.interval_list"
+TARGET_XY="/media/Data1/jbogoin/ref/gencode/v34_hg38/XY/gencode.v34.basic.annotation.XY.interval_list"
 
 DATA=$PWD
 
@@ -69,7 +69,7 @@ while read line
 do
 MALE+="$line.dedup.bam "
 done < male_list.txt
-	
+
 echo "Liste des hommes:"
 echo $MALE
 echo ""
@@ -127,4 +127,3 @@ rm $DATA/cnvkit_output/all/*.target.bed;
 echo ""
 echo "CNVKIT DETECTION job done!"
 echo ""
-
