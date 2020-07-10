@@ -15,15 +15,11 @@ for (i in (1:length(female[,1]))){
 }
 female_vec <-  unlist(female, recursive = TRUE, use.names = TRUE)
 
-print(female_vec)
-
 male <- read.table(file="male_list.txt", header=FALSE, sep=" ", as.is=TRUE)
 for (i in (1:length(male[,1]))){
     male[,1][i] = paste(male[,1][i],'.dedup.bam',sep='')
 }
 male_vec <-  unlist(male, recursive = TRUE, use.names = TRUE)
-
-print(male_vec)
 
 bams_list <- list.files(path=".", pattern=".dedup.bam$")
 bams_vec <-  unlist(bams_list, recursive = TRUE, use.names = TRUE)
