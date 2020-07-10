@@ -7,9 +7,7 @@ echo ""
 echo "annotation.sh start"
 echo ""
 
-rm -Rf annotations
-mkdir -p annotations
-cd annotations
+rm -Rf annovar_output
 mkdir -p annovar_output
 cd ..
 
