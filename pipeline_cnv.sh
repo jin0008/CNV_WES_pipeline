@@ -2,9 +2,13 @@
 
 # Author: Julie BOGOIN
 
+exec &> cnv_sortie.log
+
 echo ""
-echo "pipeline_csv.sh start"
+echo "pipeline_cnv.sh start"
 echo ""
+
+DATA=$PWD
 
 source ~/miniconda3/etc/profile.d/conda.sh
 
@@ -44,15 +48,15 @@ python ~/CNV_WES_pipeline/excavator2_results.py
 cd ../exomedepth_output
 python ~/CNV_WES_pipeline/exomedepth_results.py
 
-cd ../gatk_output
+cd ../gatkcnv_output
 python ~/CNV_WES_pipeline/gatk_results.py
 
-cd ..
+cd $DATA
 
 # results summary
 python ~/CNV_WES_pipeline/cnv_results.py
-python ~/CNV_WES_pipeline/cnv_interval_object_sample.py
-python ~/CNV_WES_pipeline/cnv_interval_object_run.py
+python ~/CNV_WES_pipeline/cnv_interval_objet_sample.py
+python ~/CNV_WES_pipeline/cnv_interval_objet_run.py
 
 conda deactivate
 
@@ -70,16 +74,15 @@ conda activate results_cnv
 cd annovar_output
 python ~/CNV_WES_pipeline/annovar_results.py
 
-cd ..
-
 # ClinVar
 # In_gene
 # DGV_count
 
-python ~/CNV_WES_pipeline/combined_annot.py
+cd $DATA
+python ~/CNV_WES_pipeline/combine_annot.py
 
 conda deactivate
 
 echo ""
-echo "pipeline_csv.sh job done!"
+echo "pipeline_cnv.sh job done!"
 echo ""
