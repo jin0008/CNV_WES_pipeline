@@ -15,7 +15,7 @@ samtools bam2fq $bam_name -@12 > $SAMPLE.fastq;
 
 # split a single .fastq file of paired-end reads into two separated files
 # extracting reads ending with '/1' or '/2'
-cat $SAMPLE.fastq | grep '^@.*/1$' -A 3 --no-group-separator > ${SAMPLE}_R1_001.fastq;
+cat $SAMPLE.fastq | grep '^@.*/1$' -A 3 --no-group-separator > ${SAMPLE}.R1_001.fastq;
 gzip ${SAMPLE}_R1_001.fastq;
 cat $SAMPLE.fastq | grep '^@.*/2$' -A 3 --no-group-separator > ${SAMPLE}_R2_001.fastq;
 gzip  ${SAMPLE}_R2_001.fastq;
