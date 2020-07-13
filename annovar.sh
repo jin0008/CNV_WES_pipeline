@@ -9,7 +9,6 @@ echo ""
 
 rm -Rf annovar_output
 mkdir -p annovar_output
-cd ..
 
 ## Download annotation databases from ANNOVAR or UCSC and save to humandb/ directory
 #perl ./annotate_variation.pl -downdb avdblist
@@ -26,13 +25,14 @@ sudo perl ~/annovar/table_annovar.pl \
 ex1.avinput \
 ~/annovar/humandb \
 --buildver hg38 \
---out annovar_output \
+--out annotation \
 --remove \
 --otherinfo \
 --protocol refGene \
 --operation g
 
- sudo mv ex1.avinput annovar_output/
+mv ex1.avinput annovar_output/
+mv annotation.hg38_multianno.txt annovar_output/
 
 #first output file: .variant_function
 #contains annotation for all variants, by adding two columns to the beginning of each input line
