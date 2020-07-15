@@ -105,7 +105,7 @@ del frame['ALT']
 frame.to_csv('gatk_transitional.csv', index=False)
 print("gatk_transitional.csv generated.\n")
 
-frame.loc[frame.CN<1, 'effect'] = "deletion"
+frame.loc[frame.CN<=1, 'effect'] = "deletion"
 frame.loc[frame.CN>2, 'effect'] = "duplication"
 frame.query('CN>2 or CN<1', inplace=True)
 
