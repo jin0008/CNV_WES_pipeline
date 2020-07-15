@@ -56,6 +56,14 @@ def dataframe(filename, large=True):
 
 print("\nGATK CNV results program openning.\n")
 
+if os.path.isfile('gatk_results.csv'):
+    os.remove('gatk_results.csv')
+    print('Previous results file removed.')
+
+if os.path.isfile('gatk_transitional.csv'):
+    os.remove('gatk_transitional.csv')
+    print('Previous transitional file removed.')
+
 li = []
 
 path = '.'
@@ -94,6 +102,9 @@ del frame['QUAL']
 del frame['FORMAT']
 del frame['ALT']
 
+frame.to_csv('gatk_transitional.csv', index=False)
+print("gatk_transitional.csv generated.\n")
+
 frame.loc[frame.CN<1, 'effect'] = "deletion"
 frame.loc[frame.CN>2, 'effect'] = "duplication"
 frame.query('CN>2 or CN<1', inplace=True)
@@ -102,10 +113,6 @@ cols = ['sample', 'sex', 'contig', 'start', 'end', 'CN', 'effect']
 frame = frame[cols]
 
 print('{0} CNV lines filtred among {1} lines found by gatk.'.format(frame.shape[0], total))
-
-if os.path.isfile('gatk_results.csv'):
-    os.remove('gatk_results.csv')
-    print('Previous results file removed.')
 
 frame.to_csv('gatk_results.csv', index=False)
 print("gatk_results.csv generated.\n")
