@@ -56,6 +56,9 @@ frame = pandas.merge(concat, df_sex, left_on='sample', right_on='sample')
 cols = ['sample', 'sex', 'contig', 'start', 'end', 'cnv_ratio','log2copy_ratio', 'CN', 'effect']
 frame = frame[cols]
 
+#trier par samples puis contigs
+frame.sort_values(by=['sample','contig'])
+
 print('{0} CNV lines filtred among {1} lines found by cn.mops.'.format(frame.shape[0], total))
 
 if os.path.isfile('cn.mops_results.csv'):
