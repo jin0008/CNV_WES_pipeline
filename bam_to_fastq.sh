@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Author: Julie BOGOIN
 
 source ~/miniconda3/etc/profile.d/conda.sh
