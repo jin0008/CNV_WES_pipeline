@@ -9,7 +9,7 @@ echo ""
 
 #### Préparation fichiers bed
 
-DIC="/media/Data1/jbogoin/ref/hg38_Mlast/hg38_GenDev.dict"
+DIC="/media/hanjinu/SS200/db/refs/hg38/resources_broad_hg38_v0_Homo_sapiens_assembly38.dict"
 
 # Télécharger le fichier gencode.v34.basic.annotation.gff3 sur le site de GENECODE
 #wget ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_34/gencode.v34.basic.annotation.gff3.gz
@@ -34,8 +34,9 @@ gatk BedToIntervalList \
     -SD /media/hanjinu/SS200/db/refs/hg38/resources_broad_hg38_v0_Homo_sapiens_assembly38.dict
 
 # Faire un fichier cible par chromosome
-#for i in {1..22} X Y; do grep "^chr${i}" gencode.v34.basic.annotation.CDS.merged.bed \
-#   > gencode.v34.basic.annotation.CDS.chr${i}.bed; done
+for i in {1..22} X Y; do ;
+grep "^chr${i}" gencode.v34.basic.annotation.CDS.merged.bed > gencode.v34.basic.annotation.CDS.chr${i}.bed; 
+done
 
 echo ""
 echo "targets_preparation job done!"
