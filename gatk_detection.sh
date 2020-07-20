@@ -3,8 +3,8 @@
 source ~/miniconda2/etc/profile.d/conda.sh
 conda activate gatk
 
-REF="/media/Data1/jbogoin/ref/fa_hg38/hg38_GenDev/hg38_GenDev.fa"
-DIC="/media/Data1/jbogoin/ref/fa_hg38/hg38_GenDev/hg38_GenDev.dict"
+REF="/media/hanjinu/SS200/db/refs/hg38/resources_broad_hg38_v0_Homo_sapiens_assembly38.fasta"
+DIC="/media/hanjinu/SS200/db/refs/hg38/resources_broad_hg38_v0_Homo_sapiens_assembly38.dict"
 
 CENTROMETIC_AUTO="/media/Data1/jbogoin/ref/fa_hg38/hg38_centromeric/centromeric_regions_autosomes.bed"
 CENTROMETIC_XY="/media/Data1/jbogoin/ref/fa_hg38/hg38_centromeric/centromeric_regions_XY.bed"
