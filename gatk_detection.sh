@@ -1,7 +1,7 @@
 # Author: Julie BOGOIN
 
-source ~/miniconda3/etc/profile.d/conda.sh
-conda activate gatk_env
+source ~/miniconda2/etc/profile.d/conda.sh
+conda activate gatk
 
 REF="/media/Data1/jbogoin/ref/fa_hg38/hg38_GenDev/hg38_GenDev.fa"
 DIC="/media/Data1/jbogoin/ref/fa_hg38/hg38_GenDev/hg38_GenDev.dict"
