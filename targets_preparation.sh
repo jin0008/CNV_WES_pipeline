@@ -31,7 +31,7 @@ awk -F "\t" '{print $1, $2, $3, "CDS"}' gencode.v34.basic.annotation.CDS.merged.
 gatk BedToIntervalList \
     -I gencode.v34.basic.annotation.CDS.merged.4fields.bed \
     -O gencode.v34.basic.annotation.CDS.merged.4fields.interval_list \
-    -SD $DIC
+    -SD /media/hanjinu/SS200/db/refs/hg38/resources_broad_hg38_v0_Homo_sapiens_assembly38.dict
 
 # Faire un fichier cible par chromosome
 #for i in {1..22} X Y; do grep "^chr${i}" gencode.v34.basic.annotation.CDS.merged.bed \
