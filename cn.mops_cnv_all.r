@@ -5,7 +5,7 @@ library(cn.mops)
 segments_auto <- read.table(file="/media/Data1/jbogoin/ref/gencode/v34_hg38/autosomes/gencode.v34.basic.annotation.autosome.bed",
                     header=FALSE, sep=" ", as.is=TRUE)
 
-all <- list.files(path=".", pattern=".dedup.bam$")
+all <- list.files(path=".", pattern=".CNV.bam$")
 
 
 #######################################################################################
