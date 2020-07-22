@@ -8,7 +8,7 @@ segments_XY <- read.table(file="/media/hanjinu/SS200/db/refs/gencode/gencode.v34
 
 male <- read.table(file="male_list.txt", header=FALSE, sep=" ", as.is=TRUE)
 for (i in (1:length(male[,1]))){
-    male[,1][i] = paste(male[,1][i],'.CNV.bam',sep='')
+    male[,1][i] = paste(male[,1][i],'.CNV.bam$',sep='')
 }
 
 
