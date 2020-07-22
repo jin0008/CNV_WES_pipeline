@@ -1,4 +1,5 @@
 # Author: Julie BOGOIN
+# Modified: Jinu Han
 
 library(cn.mops)
 
