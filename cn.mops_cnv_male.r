@@ -2,13 +2,13 @@
 
 library(cn.mops)
 
-segments_XY <- read.table(file="/media/Data1/jbogoin/ref/gencode/v34_hg38/XY/gencode.v34.basic.annotation.XY.scratch.bed",
+segments_XY <- read.table(file="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.XY.scratch.bed",
                     header=FALSE, sep="\t", as.is=TRUE)
 
 
 male <- read.table(file="male_list.txt", header=FALSE, sep=" ", as.is=TRUE)
 for (i in (1:length(male[,1]))){
-    male[,1][i] = paste(male[,1][i],'.dedup.bam',sep='')
+    male[,1][i] = paste(male[,1][i],'.CNV.bam',sep='')
 }
 
 
