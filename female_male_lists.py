@@ -30,6 +30,4 @@ else:
         print("\nATTENTION! The samples.txt file is not present.\n \
         Launch sex_determination.py and start over!\n")
     print("female_male_lists.py job done!\n")
-    
-
-
+   
