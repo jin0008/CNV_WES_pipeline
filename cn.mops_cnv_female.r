@@ -2,7 +2,7 @@
 
 library(cn.mops)
 
-segments_XY <- read.table(file="/media/Data1/jbogoin/ref/gencode/v34_hg38/XY/gencode.v34.basic.annotation.XY.scratch.bed",
+segments_XY <- read.table(file="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.XY.scratch.bed",
                     header=FALSE, sep="\t", as.is=TRUE)
 
 female <- read.table(file="female_list.txt", header=FALSE, sep=" ", as.is=TRUE)
