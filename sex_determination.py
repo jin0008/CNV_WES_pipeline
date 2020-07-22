@@ -8,7 +8,7 @@ import pysam
 
 sample_l = []
 sex_d = {}
-bams = glob.glob(".CNV.bam$")
+bams = glob.glob(".CNV.bam")
 
 print("\nSex determination script openning.\n")
 
