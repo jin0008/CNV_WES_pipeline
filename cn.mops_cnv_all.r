@@ -5,6 +5,9 @@ library(cn.mops)
 segments_auto <- read.table(file="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.autosome.bed",
                     header=FALSE, sep=" ", as.is=TRUE)
 
+
+setwd("/media/hanjinu/raid0/CNV")
+
 all <- list.files(path=".", pattern=".CNV.bam$")
 
 
