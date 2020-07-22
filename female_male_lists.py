@@ -15,7 +15,7 @@ else:
         with open ('samples.txt', 'r') as file:
             for line in file:
                 line = line.split(sep='\n')
-                info = line[0].split(sep='\t')          
+                info = line[0].split(sep='\t')
                 if info[1]=='M':
                     males.append(info[0])
                 if info[1]=='F':
