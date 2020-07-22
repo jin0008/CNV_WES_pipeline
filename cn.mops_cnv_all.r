@@ -6,8 +6,6 @@ segments_auto <- read.table(file="/media/hanjinu/SS200/db/refs/gencode/gencode.v
                     header=FALSE, sep="\t", as.is=TRUE)
 
 
-setwd("/media/hanjinu/raid0/CNV")
-
 all <- list.files(path=".", pattern=".CNV.bam$")
 
 
