@@ -13,13 +13,12 @@ else:
     females=[]
     if os.path.isfile('samples.txt'):
         with open ('samples.txt', 'r') as file:
-            for line in file:
-                line = file.readline()
-                info = line[0].split(sep='\t')
-                if info[1]=='M':
-                    males.append(info[0])
-                if info[1]=='F':
-                    females.append(info[0])
+            line = file.readline()
+            info = line[0].split(sep='\t')
+            if info[1]=='M':
+                males.append(info[0])
+            if info[1]=='F':
+                females.append(info[0])
         with open ('female_list.txt', 'w') as female_file:
             for female in females:
                 female_file.write(female + '\n')
