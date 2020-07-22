@@ -30,7 +30,7 @@ echo ""
 FEMALE=""
 while read line
 do
-FEMALE+="$line.dedup.bam "
+FEMALE+="$line.CNV.bam "
 done < female_list.txt
 
 echo "Liste des femmes:"
@@ -67,7 +67,7 @@ echo ""
 MALE=""
 while read line
 do
-MALE+="$line.dedup.bam "
+MALE+="$line.CNV.bam "
 done < male_list.txt
 
 echo "Liste des hommes:"
@@ -101,7 +101,7 @@ echo ""
 echo "Working on all..."
 echo ""
 
-SAMPLES=$(ls *.dedup.bam)
+SAMPLES=$(ls *.CNV.bam)
 
 #create a pooled reference by running batch command specifying only normal samples
 ~/cnvkit/cnvkit.py batch -n $SAMPLES \
