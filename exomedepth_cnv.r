@@ -21,7 +21,7 @@ for (i in (1:length(male[,1]))){
 }
 male_vec <-  unlist(male, recursive = TRUE, use.names = TRUE)
 
-bams_list <- list.files(path=".", pattern=".dedup.bam$")
+bams_list <- list.files(path=".", pattern=".CNV.bam$")
 bams_vec <-  unlist(bams_list, recursive = TRUE, use.names = TRUE)
 
 
@@ -49,7 +49,7 @@ ExomeCount.dafr$chromosome <- gsub(as.character(ExomeCount.dafr$chromosome), pat
 ExomeCount.dafr$names <- rep('CDS', length(ExomeCount.dafr$chromosome))
 
 ### Prepare the main matrix of read count data
-sample_names = grep(names(ExomeCount.dafr), pattern = '*.dedup.bam')
+sample_names = grep(names(ExomeCount.dafr), pattern = '*.CNV.bam')
 ExomeCount.mat <- as.matrix(ExomeCount.dafr[, sample_names])
 
 nsamples <- ncol(ExomeCount.mat)
@@ -112,7 +112,7 @@ ExomeCount.dafr$chromosome <- gsub(as.character(ExomeCount.dafr$chromosome), pat
 ExomeCount.dafr$names <- rep('CDS', length(ExomeCount.dafr$chromosome))
 
 ### Prepare the main matrix of read count data
-sample_names = grep(names(ExomeCount.dafr), pattern = '*.dedup.bam')
+sample_names = grep(names(ExomeCount.dafr), pattern = '*.CNV.bam')
 ExomeCount.mat <- as.matrix(ExomeCount.dafr[, sample_names])
 
 ### start looping over each sample
@@ -143,7 +143,7 @@ for (i in 1:nsamples) {
 
 	# Creating CSV files
     col_names <- colnames(ExomeCount.mat)
-	col_names <- sub("dedup.bam", "", col_names, fixed=TRUE)
+	col_names <- sub("CNV.bam", "", col_names, fixed=TRUE)
 	sample_name <-  col_names[i]
 	output.file <- paste(sample_name, 'csv', sep = '')
 	write.csv(file = output.file, x = all.exons@CNV.calls, row.names = FALSE)
@@ -178,7 +178,7 @@ ExomeCount.dafr$chromosome <- gsub(as.character(ExomeCount.dafr$chromosome), pat
 ExomeCount.dafr$names <- rep('CDS', length(ExomeCount.dafr$chromosome))
 
 ### Prepare the main matrix of read count data
-sample_names = grep(names(ExomeCount.dafr), pattern = '*.dedup.bam')
+sample_names = grep(names(ExomeCount.dafr), pattern = '*.CNV.bam')
 ExomeCount.mat <- as.matrix(ExomeCount.dafr[, sample_names])
 
 nsamples <- ncol(ExomeCount.mat)
@@ -234,7 +234,7 @@ for (i in 1:nsamples) {
 
 	# Creating CSV files
     col_names <- colnames(ExomeCount.mat)
-	col_names <- sub("dedup.bam", "", col_names, fixed=TRUE)
+	col_names <- sub("CNV.bam", "", col_names, fixed=TRUE)
 	sample_name <-  col_names[i]
 	output.file <- paste(sample_name, 'csv', sep = '')
 	write.csv(file = output.file, x = all.exons@CNV.calls, row.names = FALSE)
@@ -271,7 +271,7 @@ ExomeCount.dafr$names <- rep('CDS', length(ExomeCount.dafr$chromosome))
 print(head(ExomeCount.dafr))
 
 ### Prepare the main matrix of read count data
-sample_names = grep(names(ExomeCount.dafr), pattern = '*.dedup.bam')
+sample_names = grep(names(ExomeCount.dafr), pattern = '*.CNV.bam')
 ExomeCount.mat <- as.matrix(ExomeCount.dafr[, sample_names])
 
 nsamples <- ncol(ExomeCount.mat)
@@ -301,7 +301,7 @@ for (i in 1:nsamples) {
 
 	# Creating CSV files
     col_names <- colnames(ExomeCount.mat)
-	col_names <- sub("dedup.bam", "", col_names, fixed=TRUE)
+	col_names <- sub("CNV.bam", "", col_names, fixed=TRUE)
 	sample_name <-  col_names[i]
 	output.file <- paste(sample_name, 'csv', sep = '')
 	write.csv(file = output.file, x = all.exons@CNV.calls, row.names = FALSE)
