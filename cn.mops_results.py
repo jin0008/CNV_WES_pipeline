@@ -1,9 +1,14 @@
 # Author: Julie BOGOIN
+# Modified by: Jinu Han
 
 import os
 import pandas
 
 print("\ncn.mops CNV results program openning.\n")
+
+if os.path.isfile('cn.mops_results.csv'):
+    os.remove('cn.mops_results.csv')
+    print('Previous results file removed.')
 
 li = []
 
@@ -41,12 +46,12 @@ concat.rename(columns={'mean': 'log2copy_ratio'}, inplace=True)
 total = concat.shape[0]
 
 concat['log2copy_ratio'] = concat['log2copy_ratio'].astype('str').astype('float')
-concat.query('log2copy_ratio>1 or log2copy_ratio<-1', inplace=True)
+concat.query('log2copy_ratio>0.585 or log2copy_ratio<-1', inplace=True)
 concat['cnv_ratio'] = concat['log2copy_ratio']**2
 
 concat['effect'] = 'i'
 
-concat.loc[concat.log2copy_ratio>1, 'effect'] = "duplication"
+concat.loc[concat.log2copy_ratio>0.585, 'effect'] = "duplication"
 concat.loc[concat.log2copy_ratio<-1, 'effect'] = "deletion"
 
 df_sex = pandas.read_csv('../samples.txt', header = [0], sep="\t", index_col=None)
@@ -60,10 +65,6 @@ frame = frame[cols]
 frame.sort_values(by=['sample','contig'])
 
 print('{0} CNV lines filtred among {1} lines found by cn.mops.'.format(frame.shape[0], total))
-
-if os.path.isfile('cn.mops_results.csv'):
-    os.remove('cn.mops_results.csv')
-    print('Previous results file removed.')
 
 frame.to_csv('cn.mops_results.csv', index=False)                                                                                           
 print("cn.mops_results.csv generated.\n")
