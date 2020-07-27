@@ -1,4 +1,5 @@
 # Author: Julie BOGOIN
+# Modified by: Jinu Han
 
 import os
 import pandas as pd
@@ -84,7 +85,7 @@ for folder in folders:
 
 concat = pd.concat(li, axis=0, ignore_index=True)
 
-df_sex = pd.read_csv('../samples.txt', header = [0], sep="\t", index_col=None)
+df_sex = pd.read_csv('../samples.txt', dtype = object, header = [0], sep="\t", index_col=None)
 
 frame = pd.merge(concat, df_sex, left_on='sample', right_on='sample')
 
