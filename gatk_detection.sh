@@ -39,7 +39,7 @@ do
 FEMALE+="$line.CNV.bam ";
 done < female_list.txt
 
-echo "Liste des femmes:"
+echo "Lisf of women:"
 echo $FEMALE
 echo ""
 
@@ -160,7 +160,7 @@ do
 MALE+="$line.CNV.bam "
 done < male_list.txt
 
-echo "Liste des hommes:"
+echo "List of men:"
 echo $MALE
 echo ""
 
