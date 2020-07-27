@@ -1,7 +1,7 @@
 # Author: Julie BOGOIN
 
 source ~/miniconda3/etc/profile.d/conda.sh
-conda activate cnvkit_env
+
 
 REF="/media/hanjinu/SS200/db/refs/hg38/resources_broad_hg38_v0_Homo_sapiens_assembly38.fasta"
 
