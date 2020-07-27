@@ -1,4 +1,5 @@
 # Author: Julie BOGOIN
+# Modified by: Jinu Han
 
 source ~/miniconda2/etc/profile.d/conda.sh
 conda activate gatk
@@ -6,14 +7,14 @@ conda activate gatk
 REF="/media/hanjinu/SS200/db/refs/hg38/resources_broad_hg38_v0_Homo_sapiens_assembly38.fasta"
 DIC="/media/hanjinu/SS200/db/refs/hg38/resources_broad_hg38_v0_Homo_sapiens_assembly38.dict"
 
-CENTROMETIC_AUTO="/media/Data1/jbogoin/ref/fa_hg38/hg38_centromeric/centromeric_regions_autosomes.bed"
-CENTROMETIC_XY="/media/Data1/jbogoin/ref/fa_hg38/hg38_centromeric/centromeric_regions_XY.bed"
+CENTROMETIC_AUTO="/media/hanjinu/SS200/db/refs/gencode/centromeric/centromeric_regions_autosomes.bed"
+CENTROMETIC_XY="/media/hanjinu/SS200/db/refs/gencode/centromeric/centromeric_regions_XY.bed"
 
-TARGET_AUTO="/media/Data1/jbogoin/ref/gencode/v34_hg38/autosomes/gencode.v34.basic.annotation.autosome.interval_list"
-TARGET_XY="/media/Data1/jbogoin/ref/gencode/v34_hg38/XY/gencode.v34.basic.annotation.XY.interval_list"
+TARGET_AUTO="/media/hanjinu/SS200/db/refs/gencode/autosomes/gencode.v34.basic.annotation.autosome.interval_list"
+TARGET_XY="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.XY.scratch.interval_list"
 
-PLOIDY_AUTO="/media/Data1/jbogoin/ref/contig_ploidy_priors/ploidy_priors_table_autosome.tsv"
-PLOIDY_XY="/media/Data1/jbogoin/ref/contig_ploidy_priors/ploidy_priors_table_XY.tsv"
+PLOIDY_AUTO="/media/hanjinu/SS200/db/refs/contig_ploidy_priors/ploidy_priors_table_autosome.tsv"
+PLOIDY_XY="/media/hanjinu/SS200/db/refs/contig_ploidy_priors/ploidy_priors_table_XY.tsv"
 
 echo ""
 echo "GATK4 CNV DETECTION start"
