@@ -35,7 +35,7 @@ echo ""
 FEMALE=""
 while read line
 do
-FEMALE+="$line.dedup.bam ";
+FEMALE+="$line.CNV.bam ";
 done < female_list.txt
 
 echo "Liste des femmes:"
@@ -54,7 +54,7 @@ gatk PreprocessIntervals \
     --verbosity ERROR
 
 for sample_id in $FEMALE;
-do SAMPLE=${sample_id%%.dedup.bam}; \
+do SAMPLE=${sample_id%%.CNV.bam}; \
 
 # Collect raw integer counts data
 gatk CollectReadCounts \
@@ -62,7 +62,7 @@ gatk CollectReadCounts \
         -XL $CENTROMETIC_XY \
         -R $REF \
         --interval-merging-rule OVERLAPPING_ONLY \
-        -I $SAMPLE.dedup.bam \
+        -I $SAMPLE.CNV.bam \
         --format TSV \
         -O gatkcnv_output/female/$SAMPLE.tsv \
         --verbosity ERROR;
@@ -129,7 +129,7 @@ cd ..
 index=0
 
 for sample_id in $FEMALE;
-do SAMPLE=${sample_id%%.dedup.bam};
+do SAMPLE=${sample_id%%.CNV.bam};
 
 # PostprocessGermlineCNVCalls COHORT MODE
 gatk PostprocessGermlineCNVCalls \
@@ -156,7 +156,7 @@ echo ""
 MALE=""
 while read line
 do
-MALE+="$line.dedup.bam "
+MALE+="$line.CNV.bam "
 done < male_list.txt
 
 echo "Liste des hommes:"
@@ -175,7 +175,7 @@ gatk PreprocessIntervals \
     --verbosity ERROR
 
 for sample_id in $MALE;
-do SAMPLE=${sample_id%%.dedup.bam}; \
+do SAMPLE=${sample_id%%.CNV.bam}; \
 
 # Collect raw integer counts data
 gatk CollectReadCounts \
@@ -183,7 +183,7 @@ gatk CollectReadCounts \
         -XL $CENTROMETIC_XY \
         -R $REF \
         --interval-merging-rule OVERLAPPING_ONLY \
-        -I $SAMPLE.dedup.bam \
+        -I $SAMPLE.CNV.bam \
         --format TSV \
         -O gatkcnv_output/male/$SAMPLE.tsv \
         --verbosity ERROR;
@@ -250,7 +250,7 @@ cd ..
 index=0
 
 for sample_id in $MALE;
-do SAMPLE=${sample_id%%.dedup.bam};
+do SAMPLE=${sample_id%%.CNV.bam};
 
 # PostprocessGermlineCNVCalls COHORT MODE
 gatk PostprocessGermlineCNVCalls \
@@ -285,8 +285,8 @@ gatk PreprocessIntervals \
     -O gatkcnv_output/all/targets.preprocessed.interval_list \
     --verbosity ERROR
 
-for sample_id in *.dedup.bam;
-do SAMPLE=${sample_id%%.dedup.bam}; \
+for sample_id in *.CNV.bam;
+do SAMPLE=${sample_id%%.CNV.bam}; \
 
 # Collect raw integer counts data
 gatk CollectReadCounts \
@@ -294,7 +294,7 @@ gatk CollectReadCounts \
     -XL $CENTROMETIC_AUTO \
     -R $REF \
     --interval-merging-rule OVERLAPPING_ONLY \
-    -I $SAMPLE.dedup.bam \
+    -I $SAMPLE.CNV.bam \
     --format TSV \
     -O gatkcnv_output/all/$SAMPLE.tsv \
     --verbosity ERROR;
@@ -360,8 +360,8 @@ cd ..
 
 index=0
 
-for sample_id in *.dedup.bam;
-do SAMPLE=${sample_id%%.dedup.bam};
+for sample_id in *.CNV.bam;
+do SAMPLE=${sample_id%%.CNV.bam};
 
 # PostprocessGermlineCNVCalls COHORT MODE
 gatk PostprocessGermlineCNVCalls \
