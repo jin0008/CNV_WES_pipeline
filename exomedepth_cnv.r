@@ -4,7 +4,7 @@ library(ExomeDepth)
 library(seqinr)
 
 targets_auto <- read.table(file="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.autosome.bed",
-                    header=FALSE, sep=" ", as.is=TRUE)
+                    header=FALSE, sep="\t", as.is=TRUE)
 
 targets_XY <- read.table(file="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.XY.scratch.bed",
                     header=FALSE, sep="\t", as.is=TRUE)
