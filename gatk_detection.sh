@@ -7,8 +7,8 @@ conda activate gatk
 REF="/media/hanjinu/SS200/db/refs/hg38/resources_broad_hg38_v0_Homo_sapiens_assembly38.fasta"
 DIC="/media/hanjinu/SS200/db/refs/hg38/resources_broad_hg38_v0_Homo_sapiens_assembly38.dict"
 
-CENTROMETIC_AUTO="/media/hanjinu/SS200/db/refs/gencode/centromeric/centromeric_regions_autosomes.bed"
-CENTROMETIC_XY="/media/hanjinu/SS200/db/refs/gencode/centromeric/centromeric_regions_XY.bed"
+CENTROMETIC_AUTO="/media/hanjinu/SS200/db/refs/gencode/centromeric_regions_autosomes.bed"
+CENTROMETIC_XY="/media/hanjinu/SS200/db/refs/gencode/centromeric_regions_XY.bed"
 
 TARGET_AUTO="/media/hanjinu/SS200/db/refs/gencode/autosomes/gencode.v34.basic.annotation.autosome.interval_list"
 TARGET_XY="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.XY.scratch.interval_list"
