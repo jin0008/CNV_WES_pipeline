@@ -3,9 +3,9 @@
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate excavator2_env
 
-TARGETS_AUTO="/media/jbogoin/Data1/jbogoin/ref/gencode/v34_hg38/autosomes/gencode.v34.basic.annotation_auto.bed"
-TARGETS_XY="/media/Data1/jbogoin/ref/gencode/v34_hg38/XY/gencode.v34.basic.annotation.XY.bed"
-TARGETS_ALL="/media/jbogoin/Data1/jbogoin/ref/gencode/v34_hg38/all/gencode.v34.basic.annotation.CDS.merged.bed"
+TARGETS_AUTO="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.autosome.bed"
+TARGETS_XY="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.XY.scratch.bed"
+TARGETS_ALL="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.CDS.merged.bed"
 
 DATA=$PWD
 
@@ -22,13 +22,13 @@ mkdir male
 cd ..
 
 # BAM list file
-ls *.dedup.bam > $DATA/excavator2_output/all/bam_list.txt
+ls *.CNV.bam > $DATA/excavator2_output/all/bam_list.txt
 
 # female list file
 FEMALE=""
 while read line
 do
-FEMALE+="$line.dedup.bam "
+FEMALE+="$line.CNV.bam "
 done < female_list.txt
 
 echo -e $FEMALE > $DATA/excavator2_output/female/bam_list.txt
@@ -37,7 +37,7 @@ echo -e $FEMALE > $DATA/excavator2_output/female/bam_list.txt
 MALE=""
 while read line
 do
-MALE+="$line.dedup.bam "
+MALE+="$line.CNV.bam "
 done < male_list.txt
 
 echo -e $MALE > $DATA/excavator2_output/male/bam_list.txt
@@ -55,6 +55,7 @@ echo -e $MALE > $DATA/excavator2_output/male/bam_list.txt
 
 
 ##################################################################################
+
 echo ""
 echo "Working on female..."
 echo ""
@@ -63,9 +64,9 @@ echo ""
 cd $DATA
 
 for sample_id in $FEMALE; \
-do SAMPLE=${sample_id%%.dedup.bam}
+do SAMPLE=${sample_id%%.CNV.bam}
 
-echo $DATA/$SAMPLE.dedup.bam $DATA/excavator2_output/female/$SAMPLE $SAMPLE >> $DATA/excavator2_output/female/ExperimentalFilePrepare.w10K.txt;
+echo $DATA/$SAMPLE.CNV.bam $DATA/excavator2_output/female/$SAMPLE $SAMPLE >> $DATA/excavator2_output/female/ExperimentalFilePrepare.w10K.txt;
 
 done
 
@@ -81,15 +82,15 @@ rm $DATA/excavator2_output/female/ExperimentalFileAnalysis.w10K.*
 cd $DATA
 
 for sample_id in $FEMALE; do 
-	SAMPLE=${sample_id%%.dedup.bam};	
+	SAMPLE=${sample_id%%.CNV.bam};	
 	
 	echo 'T1' $DATA/excavator2_output/female/$SAMPLE $SAMPLE > $DATA/excavator2_output/female/ExperimentalFileAnalysis.w10K.$SAMPLE.txt;
 	
-	others=$(ls *.dedup.bam | grep -v $SAMPLE);
+	others=$(ls *.CNV.bam | grep -v $SAMPLE);
 	
 	# TRansformer la liste others en tableau indicable table
 	table=( ${others// / } )
-	table_clean=${table[@]/.dedup.bam/}
+	table_clean=${table[@]/.CNV.bam/}
 	NORMAL=( ${table_clean// / } )
 
 	for i in `seq 0 10`; do
@@ -122,9 +123,9 @@ echo ""
 cd $DATA
 
 for sample_id in $MALE; \
-do SAMPLE=${sample_id%%.dedup.bam}
+do SAMPLE=${sample_id%%.CNV.bam}
 
-echo $DATA/$SAMPLE.dedup.bam $DATA/excavator2_output/male/$SAMPLE $SAMPLE >> $DATA/excavator2_output/male/ExperimentalFilePrepare.w10K.txt;
+echo $DATA/$SAMPLE.CNV.bam $DATA/excavator2_output/male/$SAMPLE $SAMPLE >> $DATA/excavator2_output/male/ExperimentalFilePrepare.w10K.txt;
 
 done
 
@@ -140,15 +141,15 @@ rm $DATA/excavator2_output/male/ExperimentalFileAnalysis.w10K.*
 cd $DATA
 
 for sample_id in $FEMALE; do 
-	SAMPLE=${sample_id%%.dedup.bam};	
+	SAMPLE=${sample_id%%.CNV.bam};	
 	
 	echo 'T1' $DATA/excavator2_output/male/$SAMPLE $SAMPLE > $DATA/excavator2_output/male/ExperimentalFileAnalysis.w10K.$SAMPLE.txt;
 	
-	others=$(ls *.dedup.bam | grep -v $SAMPLE);
+	others=$(ls *.CNV.bam | grep -v $SAMPLE);
 	
 	# TRansformer la liste others en tableau indicable table
 	table=( ${others// / } )
-	table_clean=${table[@]/.dedup.bam/}
+	table_clean=${table[@]/.CNV.bam/}
 	NORMAL=( ${table_clean// / } )
 
 	for i in `seq 0 10`; do
@@ -180,10 +181,10 @@ echo ""
 # Data Prepare Module
 cd $DATA
 
-for sample_id in *.dedup.bam; \
-do SAMPLE=${sample_id%%.dedup.bam}
+for sample_id in *.CNV.bam; \
+do SAMPLE=${sample_id%%.CNV.bam}
 
-echo $DATA/$SAMPLE.dedup.bam $DATA/excavator2_output/all/$SAMPLE $SAMPLE >> $DATA/excavator2_output/all/ExperimentalFilePrepare.w10K.txt;
+echo $DATA/$SAMPLE.CNV.bam $DATA/excavator2_output/all/$SAMPLE $SAMPLE >> $DATA/excavator2_output/all/ExperimentalFilePrepare.w10K.txt;
 
 done
 
@@ -198,16 +199,16 @@ rm $DATA/excavator2_output/all/ExperimentalFileAnalysis.w10K.*
 
 cd $DATA
 
-for sample_id in *.dedup.bam; do 
-	SAMPLE=${sample_id%%.dedup.bam};	
+for sample_id in *.CNV.bam; do 
+	SAMPLE=${sample_id%%.CNV.bam};	
 	
 	echo 'T1' $DATA/excavator2_output/all/$SAMPLE $SAMPLE > $DATA/excavator2_output/all/ExperimentalFileAnalysis.w10K.$SAMPLE.txt;
 	
-	others=$(ls *.dedup.bam | grep -v $SAMPLE);
+	others=$(ls *.CNV.bam | grep -v $SAMPLE);
 	
 	# TRansformer la liste others en tableau indicable table
 	table=( ${others// / } )
-	table_clean=${table[@]/.dedup.bam/}
+	table_clean=${table[@]/.CNV.bam/}
 	NORMAL=( ${table_clean// / } )
 
 	for i in `seq 0 10`; do
