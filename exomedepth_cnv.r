@@ -21,7 +21,7 @@ for (i in (1:length(male[,1]))){
 }
 male_vec <-  unlist(male, recursive = TRUE, use.names = TRUE)
 
-bams_list <- list.files(path=".", pattern=".CNV.bam$")
+bams_list <- list.files(path=".", pattern=".CNV.bam")
 bams_vec <-  unlist(bams_list, recursive = TRUE, use.names = TRUE)
 
 
