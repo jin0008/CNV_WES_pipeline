@@ -56,7 +56,7 @@ concat.loc[concat.log2copy_ratio<-1, 'effect'] = "deletion"
 
 df_sex = pandas.read_csv('../samples.txt', header = [0], sep="\t", index_col=None)
 
-frame = pandas.concat(concat, df_sex, left_on='sample', right_on='sample')
+frame = pandas.concat(concat, df_sex)
 
 cols = ['sample', 'sex', 'contig', 'start', 'end', 'cnv_ratio','log2copy_ratio', 'CN', 'effect']
 frame = frame[cols]
