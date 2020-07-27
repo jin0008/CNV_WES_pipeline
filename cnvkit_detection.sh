@@ -3,10 +3,10 @@
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate cnvkit_env
 
-REF="/media/Data1/jbogoin/ref/fa_hg38/hg38_GenDev/hg38_GenDev.fa"
+REF="/media/hanjinu/SS200/db/refs/hg38/resources_broad_hg38_v0_Homo_sapiens_assembly38.fasta"
 
-TARGET_AUTO="/media/Data1/jbogoin/ref/gencode/v34_hg38/autosomes/gencode.v34.basic.annotation.autosome.interval_list"
-TARGET_XY="/media/Data1/jbogoin/ref/gencode/v34_hg38/XY/gencode.v34.basic.annotation.XY.interval_list"
+TARGET_AUTO="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.autosome.interval_list"
+TARGET_XY="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.XY.interval_list"
 
 DATA=$PWD
 
@@ -38,9 +38,9 @@ echo $FEMALE
 echo ""
 
 #create a pooled reference by running batch command specifying only normal samples
-~/cnvkit/cnvkit.py batch -n $FEMALE \
+cnvkit.py batch -n $FEMALE \
 	-m hybrid \
-    -f $REF \
+	-f $REF \
 	--targets $TARGET_XY \
 	--output-reference $DATA/cnvkit_output/female/pooled-reference.cnn \
 	--short-names \
@@ -48,7 +48,7 @@ echo ""
 	-p 12
 
 # Run WGS batch pipeline using the pooled reference file
-~/cnvkit/cnvkit.py batch $FEMALE \
+cnvkit.py batch $FEMALE \
 	-m hybrid \
 	-r $DATA/cnvkit_output/female/pooled-reference.cnn \
 	-d $DATA/cnvkit_output/female \
@@ -75,9 +75,9 @@ echo $MALE
 echo ""
 
 #create a pooled reference by running batch command specifying only normal samples
-~/cnvkit/cnvkit.py batch -n $MALE \
+cnvkit.py batch -n $MALE \
 	-m hybrid \
-    -f $REF \
+	-f $REF \
 	--targets $TARGET_XY \
 	--output-reference $DATA/cnvkit_output/male/pooled-reference.cnn \
 	--short-names \
@@ -85,7 +85,7 @@ echo ""
 	-p 12
 
 # Run WGS batch pipeline using the pooled reference file
-~/cnvkit/cnvkit.py batch $MALE \
+cnvkit.py batch $MALE \
 	-m hybrid \
 	-r $DATA/cnvkit_output/male/pooled-reference.cnn \
 	-d $DATA/cnvkit_output/male \
@@ -104,9 +104,9 @@ echo ""
 SAMPLES=$(ls *.CNV.bam)
 
 #create a pooled reference by running batch command specifying only normal samples
-~/cnvkit/cnvkit.py batch -n $SAMPLES \
+cnvkit.py batch -n $SAMPLES \
 	-m hybrid \
-    -f $REF \
+	-f $REF \
 	--targets $TARGET_AUTO \
 	--output-reference $DATA/cnvkit_output/all/pooled-reference.cnn \
 	--short-names \
@@ -114,7 +114,7 @@ SAMPLES=$(ls *.CNV.bam)
 	-p 12
 
 # Run WGS batch pipeline using the pooled reference file
-~/cnvkit/cnvkit.py batch $SAMPLES \
+cnvkit.py batch $SAMPLES \
 	-m hybrid \
 	-r $DATA/cnvkit_output/all/pooled-reference.cnn \
 	-d $DATA/cnvkit_output/all \
