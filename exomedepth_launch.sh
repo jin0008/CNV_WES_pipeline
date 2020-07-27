@@ -1,7 +1,7 @@
 # Author: Julie BOGOIN
 
 source ~/miniconda3/etc/profile.d/conda.sh
-conda activate exomedepth_env
+conda activate
 
 echo ""
 echo "ExomeDepth CNV DETECTION start"
