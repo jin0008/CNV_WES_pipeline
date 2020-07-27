@@ -17,7 +17,7 @@ for folder in folders:
 
     for name in files:
         
-        if ".dedup.call.cns" in name:
+        if ".CNV.call.cns" in name:
             df = pandas.read_csv((folder + '/' + name), sep='\t',index_col=None, header=[0])
             df.dropna(how='all')
             sample_name = name.split('.')
