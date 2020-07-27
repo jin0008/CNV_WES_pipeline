@@ -11,13 +11,13 @@ targets_XY <- read.table(file="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.
 
 female <- read.table(file="female_list.txt", header=FALSE, sep=" ", as.is=TRUE)
 for (i in (1:length(female[,1]))){
-    female[,1][i] = paste(female[,1][i],'.dedup.bam',sep='')
+    female[,1][i] = paste(female[,1][i],'.CNV.bam',sep='')
 }
 female_vec <-  unlist(female, recursive = TRUE, use.names = TRUE)
 
 male <- read.table(file="male_list.txt", header=FALSE, sep=" ", as.is=TRUE)
 for (i in (1:length(male[,1]))){
-    male[,1][i] = paste(male[,1][i],'.dedup.bam',sep='')
+    male[,1][i] = paste(male[,1][i],'.CNV.bam',sep='')
 }
 male_vec <-  unlist(male, recursive = TRUE, use.names = TRUE)
 
@@ -79,7 +79,7 @@ for (i in 1:nsamples) {
 
 	# Creating CSV files
     col_names <- colnames(ExomeCount.mat)
-	col_names <- sub("dedup.bam", "", col_names, fixed=TRUE)
+	col_names <- sub("CNV.bam", "", col_names, fixed=TRUE)
 	sample_name <-  col_names[i]
 	output.file <- paste(sample_name, 'csv', sep = '')
 	write.csv(file = output.file, x = all.exons@CNV.calls, row.names = FALSE)
@@ -208,7 +208,7 @@ for (i in 1:nsamples) {
 
 	# Creating CSV files
     col_names <- colnames(ExomeCount.mat)
-	col_names <- sub("dedup.bam", "", col_names, fixed=TRUE)
+	col_names <- sub("CNV.bam", "", col_names, fixed=TRUE)
 	sample_name <-  col_names[i]
 	output.file <- paste(sample_name, 'csv', sep = '')
 	write.csv(file = output.file, x = all.exons@CNV.calls, row.names = FALSE)
