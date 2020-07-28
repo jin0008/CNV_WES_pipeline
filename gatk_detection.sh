@@ -61,6 +61,7 @@ gatk CollectReadCounts \
         -L gatkcnv_output/female/targets.preprocessed.interval_list \
         -XL $CENTROMETIC_XY \
         -R $REF \
+        --format TSV \
         --interval-merging-rule OVERLAPPING_ONLY \
         -I $SAMPLE.CNV.bam \
         -O gatkcnv_output/female/$SAMPLE.tsv ;
