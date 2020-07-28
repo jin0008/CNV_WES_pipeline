@@ -17,7 +17,7 @@ def _count_comments(filename):
     fn_open = gzip.open if filename.endswith('.gz') else open
     with fn_open(filename) as fh:
         for line in fh:
-            if line.startswith(str, '#'):
+            if str.startswith('#'):
                 comments += 1
             else:
                 break
