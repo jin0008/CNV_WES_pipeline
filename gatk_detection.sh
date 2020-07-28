@@ -51,8 +51,7 @@ gatk PreprocessIntervals \
     --bin-length 0 \
     --padding 50 \
     --interval-merging-rule OVERLAPPING_ONLY \
-    -O gatkcnv_output/female/targets.preprocessed.interval_list \
-    --verbosity ERROR
+    -O gatkcnv_output/female/targets.preprocessed.interval_list 
 
 for sample_id in $FEMALE;
 do SAMPLE=${sample_id%%.CNV.bam}; \
@@ -64,9 +63,7 @@ gatk CollectReadCounts \
         -R $REF \
         --interval-merging-rule OVERLAPPING_ONLY \
         -I $SAMPLE.CNV.bam \
-        --format TSV \
-        -O gatkcnv_output/female/$SAMPLE.tsv \
-        --verbosity ERROR;
+        -O gatkcnv_output/female/$SAMPLE.tsv ;
 
 done
 
@@ -74,10 +71,10 @@ done
 gatk AnnotateIntervals \
     -L gatkcnv_output/female/targets.preprocessed.interval_list \
     -XL $CENTROMETIC_XY \
+    --mappability-track /media/hanjinu/SS200/db/refs/hg38/k100.umap.bed \
     -R $REF \
     -imr OVERLAPPING_ONLY \
-    -O gatkcnv_output/female/targets.annotated.tsv \
-    --verbosity ERROR
+    -O gatkcnv_output/female/targets.annotated.tsv 
 
 
 cd gatkcnv_output/female
@@ -94,12 +91,11 @@ done
 gatk FilterIntervals \
         -L targets.preprocessed.interval_list \
         -XL $CENTROMETIC_XY \
+        --interval-set-rule UNION \
         --annotated-intervals targets.annotated.tsv \
         $COUNTS_LIST \
         -imr OVERLAPPING_ONLY \
-        -O targets.cohort.gc.filtered.interval_list \
-        --verbosity ERROR
-
+        -O targets.cohort.gc.filtered.interval_list 
 
 # DetermineGermlineContigPloidy in COHORT MODE
 gatk DetermineGermlineContigPloidy \
@@ -109,7 +105,7 @@ gatk DetermineGermlineContigPloidy \
         --contig-ploidy-priors $PLOIDY_XY \
         --output . \
         --output-prefix ploidy \
-        --verbosity ERROR
+        --verbosity DEBUG
 
 
 # GermlineCNVCaller in COHORT MODE
@@ -122,7 +118,7 @@ gatk GermlineCNVCaller \
         --interval-merging-rule OVERLAPPING_ONLY \
         --output . \
         --output-prefix cohort \
-        --verbosity ERROR
+        --verbosity DEBUG
 
 cd ..
 cd ..
