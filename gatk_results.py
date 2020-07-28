@@ -9,7 +9,7 @@ import gzip
 ###########
 #FUNCTIONS#
 ###########
-start=('#', '##')
+start = ('#', '##')
 VCF_HEADER = ['contig', 'start', 'ID', 'REF', 'ALT', 'QUAL', 'FILTER', 'end', 'FORMAT', 'CN']
 
 def _count_comments(filename):
