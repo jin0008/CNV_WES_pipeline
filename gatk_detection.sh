@@ -106,7 +106,7 @@ gatk DetermineGermlineContigPloidy \
         --contig-ploidy-priors $PLOIDY_XY \
         --output . \
         --output-prefix ploidy \
-        --verbosity DEBUG
+        --verbosity ERROR
 
 
 # GermlineCNVCaller in COHORT MODE
@@ -119,7 +119,7 @@ gatk GermlineCNVCaller \
         --interval-merging-rule OVERLAPPING_ONLY \
         --output . \
         --output-prefix cohort \
-        --verbosity DEBUG
+        --verbosity ERROR
 
 cd ..
 cd ..
@@ -192,6 +192,7 @@ done
 gatk AnnotateIntervals \
     -L gatkcnv_output/male/targets.preprocessed.interval_list \
     -XL $CENTROMETIC_XY \
+    --mappability-track /media/hanjinu/SS200/db/refs/hg38/k100.umap.bed \
     -R $REF \
     -imr OVERLAPPING_ONLY \
     -O gatkcnv_output/male/targets.annotated.tsv \
@@ -303,6 +304,7 @@ done
 gatk AnnotateIntervals \
     -L gatkcnv_output/all/targets.preprocessed.interval_list \
     -XL $CENTROMETIC_AUTO \
+    --mappability-track /media/hanjinu/SS200/db/refs/hg38/k100.umap.bed \
     -R $REF \
     -imr OVERLAPPING_ONLY \
     -O gatkcnv_output/all/targets.annotated.tsv \
