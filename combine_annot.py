@@ -20,7 +20,7 @@ DGV = "/media/hanjinu/SS200/db/refs/dgv/DGV_hg38_variants_2020-02-25_light.bed"
 # CLINVAR #
 ###########
 
-#os.system('cd /media/Data1/jbogoin/ref/clinvar')
+#os.system('cd /media/hanjinu/SS200/db/refs/clinvar')
 #os.system('wget https://ftp.ncbi.nlm.nih.gov/pub/clinvar/gene_condition_source_id')
 
 clinvar = pandas.read_csv('/media/Data1/jbogoin/ref/clinvar/gene_condition_source_id', sep= '\t', index_col=None, header=[0])
@@ -50,7 +50,7 @@ del clinvar['AssociatedGenes']
 # IN GENE #
 ###########
 
-uniq = pandas.read_csv("/media/Data1/jbogoin/ref/fa_hg38/genes_uniq/hg38_genes_uniq.bed.gz", \
+uniq = pandas.read_csv("/media/hanjinu/SS200/db/refs/genes_uniq/hg38_Gencode_V24.bed.gz", \
 	index_col=None, header=None, compression='gzip', sep='\t')
 
 uniq.columns = ['contig', 'start', 'stop','gene']
