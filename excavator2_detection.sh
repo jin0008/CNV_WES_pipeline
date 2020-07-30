@@ -45,10 +45,10 @@ echo -e $MALE > $DATA/excavator2_output/male/bam_list.txt
 # echo ""
 # echo "Targets initialization..."
 
-# rm -Rf ~/EXCAVATOR2_Package_v1.1.2/data/targets/hg38/all_w10K
-# rm -Rf ~/EXCAVATOR2_Package_v1.1.2/data/targets/hg38/autosomes_w10K
-# rm -Rf ~/EXCAVATOR2_Package_v1.1.2/data/targets/hg38/XY_w10K
-# cd ~/EXCAVATOR2_Package_v1.1.2
+# rm -Rf ~/src/EXCAVATOR2_Package_v1.1.2/data/targets/hg38/all_w10K
+# rm -Rf ~/src/EXCAVATOR2_Package_v1.1.2/data/targets/hg38/autosomes_w10K
+# rm -Rf ~/src/EXCAVATOR2_Package_v1.1.2/data/targets/hg38/XY_w10K
+# cd ~/src/EXCAVATOR2_Package_v1.1.2
 # perl TargetPerla.pl SourceTarget.txt $TARGETS_ALL all_w10K 10000 hg38
 # perl TargetPerla.pl SourceTarget.txt $TARGETS_AUTO autosomes_w10K 10000 hg38
 # perl TargetPerla.pl SourceTarget.txt $TARGETS_XY XY_w10K 10000 hg38
@@ -71,8 +71,8 @@ echo $DATA/$SAMPLE.CNV.bam $DATA/excavator2_output/female/$SAMPLE $SAMPLE >> $DA
 done
 
 # RC calculations
-cd ~/EXCAVATOR2_Package_v1.1.2
-perl EXCAVATORDataPrepare.pl $DATA/excavator2_output/female/ExperimentalFilePrepare.w10K.txt --processors 12 --target XY_w10K --assembly hg38
+cd ~/src/EXCAVATOR2_Package_v1.1.2
+perl ~/src/EXCAVATORDataPrepare.pl $DATA/excavator2_output/female/ExperimentalFilePrepare.w10K.txt --processors 12 --target XY_w10K --assembly hg38
 
 # Experimental analysis file
 labels=("C1" "C2" "C3" "C4" "C5" "C6" "C7" "C8" "C9" "C10" "C11")
@@ -101,9 +101,9 @@ for sample_id in $FEMALE; do
 	done
 
 	# Segmentation of the WMRC
-	cd ~/EXCAVATOR2_Package_v1.1.2;
+	cd ~/src/EXCAVATOR2_Package_v1.1.2;
 	
-	perl EXCAVATORDataAnalysis.pl $DATA/excavator2_output/female/ExperimentalFileAnalysis.w10K.$SAMPLE.txt\
+	perl ~/src/EXCAVATORDataAnalysis.pl $DATA/excavator2_output/female/ExperimentalFileAnalysis.w10K.$SAMPLE.txt\
 		--processors 12 --target XY_w10K\
 	    --assembly hg38\
 		--output $DATA/excavator2_output/female/w10K_results.$SAMPLE\
@@ -130,8 +130,8 @@ echo $DATA/$SAMPLE.CNV.bam $DATA/excavator2_output/male/$SAMPLE $SAMPLE >> $DATA
 done
 
 # RC calculations
-cd ~/EXCAVATOR2_Package_v1.1.2
-perl EXCAVATORDataPrepare.pl $DATA/excavator2_output/male/ExperimentalFilePrepare.w10K.txt --processors 12 --target XY_w10K --assembly hg38
+cd ~/src/EXCAVATOR2_Package_v1.1.2
+perl ~/src/EXCAVATORDataPrepare.pl $DATA/excavator2_output/male/ExperimentalFilePrepare.w10K.txt --processors 12 --target XY_w10K --assembly hg38
 
 # Experimental analysis file
 labels=("C1" "C2" "C3" "C4" "C5" "C6" "C7" "C8" "C9" "C10" "C11")
@@ -160,9 +160,9 @@ for sample_id in $FEMALE; do
 	done
 
 	# Segmentation of the WMRC
-	cd ~/EXCAVATOR2_Package_v1.1.2;
+	cd ~/src/EXCAVATOR2_Package_v1.1.2;
 	
-	perl EXCAVATORDataAnalysis.pl $DATA/excavator2_output/male/ExperimentalFileAnalysis.w10K.$SAMPLE.txt\
+	perl ~/src/EXCAVATORDataAnalysis.pl $DATA/excavator2_output/male/ExperimentalFileAnalysis.w10K.$SAMPLE.txt\
 		--processors 12 --target XY_w10K\
 	    --assembly hg38\
 		--output $DATA/excavator2_output/male/w10K_results.$SAMPLE\
@@ -189,8 +189,8 @@ echo $DATA/$SAMPLE.CNV.bam $DATA/excavator2_output/all/$SAMPLE $SAMPLE >> $DATA/
 done
 
 # RC calculations
-cd ~/EXCAVATOR2_Package_v1.1.2
-perl EXCAVATORDataPrepare.pl $DATA/excavator2_output/all/ExperimentalFilePrepare.w10K.txt --processors 12 --target autosomes_w10K --assembly hg38
+cd ~/src/EXCAVATOR2_Package_v1.1.2
+perl ~/src/EXCAVATORDataPrepare.pl $DATA/excavator2_output/all/ExperimentalFilePrepare.w10K.txt --processors 12 --target autosomes_w10K --assembly hg38
 
 # Experimental analysis file
 labels=("C1" "C2" "C3" "C4" "C5" "C6" "C7" "C8" "C9" "C10" "C11")
@@ -219,9 +219,9 @@ for sample_id in *.CNV.bam; do
 	done
 
 	# Segmentation of the WMRC
-	cd ~/EXCAVATOR2_Package_v1.1.2;
+	cd ~/src/EXCAVATOR2_Package_v1.1.2;
 	
-	perl EXCAVATORDataAnalysis.pl $DATA/excavator2_output/all/ExperimentalFileAnalysis.w10K.$SAMPLE.txt\
+	perl ~/src/EXCAVATORDataAnalysis.pl $DATA/excavator2_output/all/ExperimentalFileAnalysis.w10K.$SAMPLE.txt\
 		--processors 12 --target autosomes_w10K\
 	    --assembly hg38\
 		--output $DATA/excavator2_output/all/w10K_results.$SAMPLE\
