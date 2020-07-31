@@ -1,4 +1,4 @@
-# Author: Jinu Han
+# Author: Julie BOGOIN
 
 ###### IMPORT ######
 
