@@ -23,7 +23,7 @@ for folder in folders:
         if "w10K_results." in subfolder:
             subfolder_name = subfolder.split('.')
             sample_name = subfolder_name[1]
-            result_path = folder + '/' + subfolder + '/' + 'Results/' + sample_name 
+            result_path = folder + '/' + subfolder + '/' + 'Results/' + sample_name + '.sorted' 
                 
             files =  os.listdir(result_path)
                     
@@ -50,10 +50,10 @@ frame.rename(columns={'End': 'end'}, inplace=True)
 frame.rename(columns={'Segment': 'log2copy_ratio'}, inplace=True)
 frame.rename(columns={'CNF': 'cnv_ratio'}, inplace=True)
 
-frame.query('log2copy_ratio>1 or log2copy_ratio<-1', inplace=True)
+frame.query('log2copy_ratio>0.585 or log2copy_ratio<-1', inplace=True)
 
 frame['effect']='i'
-frame.loc[frame.log2copy_ratio>1, 'effect'] = "duplication"
+frame.loc[frame.log2copy_ratio>0.585, 'effect'] = "duplication"
 frame.loc[frame.log2copy_ratio<-1, 'effect'] = "deletion"
 
 del frame['Call']
