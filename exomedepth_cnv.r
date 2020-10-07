@@ -4,24 +4,24 @@ library(ExomeDepth)
 library(seqinr)
 
 targets_auto <- read.table(file="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.autosome.bed",
-                    header=FALSE, sep="\t", as.is=TRUE)
+                    header=FALSE, sep=" ", as.is=TRUE)
 
 targets_XY <- read.table(file="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.XY.scratch.bed",
-                    header=FALSE, sep="\t", as.is=TRUE)
+                    header=FALSE, sep=" ", as.is=TRUE)
 
 female <- read.table(file="female_list.txt", header=FALSE, sep=" ", as.is=TRUE)
 for (i in (1:length(female[,1]))){
-    female[,1][i] = paste(female[,1][i],'.CNV.bam',sep='')
+    female[,1][i] = paste(female[,1][i],'.dedup.bam',sep='')
 }
 female_vec <-  unlist(female, recursive = TRUE, use.names = TRUE)
 
 male <- read.table(file="male_list.txt", header=FALSE, sep=" ", as.is=TRUE)
 for (i in (1:length(male[,1]))){
-    male[,1][i] = paste(male[,1][i],'.CNV.bam',sep='')
+    male[,1][i] = paste(male[,1][i],'.dedup.bam',sep='')
 }
 male_vec <-  unlist(male, recursive = TRUE, use.names = TRUE)
 
-bams_list <- list.files(path=".", pattern=".CNV.bam$")
+bams_list <- list.files(path=".", pattern=".dedup.bam$")
 bams_vec <-  unlist(bams_list, recursive = TRUE, use.names = TRUE)
 
 
