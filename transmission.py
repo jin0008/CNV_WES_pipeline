@@ -1,3 +1,5 @@
+# coding: utf-8
+
 # Author: Julie BOGOIN
 
 import os
@@ -101,7 +103,11 @@ def final (concat):
 
 #### MAIN ####
 ##############
-print("\nTransmission program openning.\n")
+
+print("\n************************************")
+print("Transmission program openning.")
+print("************************************\n")
+
 
 path = "."
 dirs = os.listdir(path)
@@ -276,6 +282,6 @@ if os.path.isfile('pedigree.txt'):
     print("hm_transmission.csv generated.\n")
     
 else:
-    print('Le fichier pedigree.txt est absent. Calcul impossible.\n')
+    print('The pedigree.txt file is missing. Calculation impossible.\n')
 
 print("Transmission program job done!\n")
