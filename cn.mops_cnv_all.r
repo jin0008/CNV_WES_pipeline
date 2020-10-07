@@ -4,10 +4,10 @@
 library(cn.mops)
 
 segments_auto <- read.table(file="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.autosome.bed",
-                    header=FALSE, sep="\t", as.is=TRUE)
+                    header=FALSE, sep=" ", as.is=TRUE)
 
 
-all <- list.files(path=".", pattern=".CNV.bam$")
+all <- list.files(path=".", pattern=".dedup.bam$")
 
 
 #######################################################################################
