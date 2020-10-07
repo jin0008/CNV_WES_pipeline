@@ -3,12 +3,12 @@
 
 library(cn.mops)
 
-segments_XY <- read.table(file="/media/hanjinu/SS200/db/refs/bed/whole.exome.exon.XY.hg38.bed",
-                    header=FALSE, sep="\t", as.is=TRUE)
+segments_XY <- read.table(file="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.XY.scratch.bed",
+                    header=FALSE, sep=" ", as.is=TRUE)
 
 female <- read.table(file="female_list.txt", header=FALSE, sep=" ", as.is=TRUE)
 for (i in (1:length(female[,1]))){
-    female[,1][i] = paste(female[,1][i],'.CNV.bam',sep='')
+    female[,1][i] = paste(female[,1][i],'.dedup.bam',sep='')
 }
 
 
