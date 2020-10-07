@@ -38,3 +38,5 @@ write.csv(CNVs, file="cnvs_female.csv")
 
 CNVRegions <- as.data.frame(cnvr(resCNMOPS))
 write.csv(CNVRegions, file="cnvr_female.csv")
+
+setwd(dir="../")
