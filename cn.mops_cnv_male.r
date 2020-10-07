@@ -3,13 +3,13 @@
 
 library(cn.mops)
 
-segments_XY <- read.table(file="//media/hanjinu/SS200/db/refs/bed/whole.exome.exon.XY.hg38.bed",
-                    header=FALSE, sep="\t", as.is=TRUE)
+segments_XY <- read.table(file="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.XY.scratch.bed",
+                    header=FALSE, sep=" ", as.is=TRUE)
 
 
 male <- read.table(file="male_list.txt", header=FALSE, sep=" ", as.is=TRUE)
 for (i in (1:length(male[,1]))){
-    male[,1][i] = paste(male[,1][i],'.CNV.bam',sep='')
+    male[,1][i] = paste(male[,1][i],'.dedup.bam',sep='')
 }
 
 
@@ -34,7 +34,7 @@ segm <- as.data.frame(segmentation(resCNMOPS))
 write.csv(segm, file="segmentation_male.csv")
 
 CNVs <- as.data.frame(cnvs(resCNMOPS))
-write.csv(CNVs, file="cnvs_male.csv")
+write.csv(CNVs, file="cnvs_female.csv")
 
 CNVRegions <- as.data.frame(cnvr(resCNMOPS))
 write.csv(CNVRegions, file="cnvr_male.csv")
