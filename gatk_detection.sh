@@ -16,8 +16,11 @@ TARGET_XY="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.XY.
 PLOIDY_AUTO="/media/hanjinu/SS200/db/refs/contig_ploidy_priors/ploidy_priors_table_autosome.tsv"
 PLOIDY_XY="/media/hanjinu/SS200/db/refs/contig_ploidy_priors/ploidy_priors_table_XY.tsv"
 
+
 echo ""
+echo "*************************"
 echo "GATK4 CNV DETECTION start"
+echo "*************************"
 echo ""
 
 rm -rf gatkcnv_output
@@ -36,10 +39,10 @@ echo ""
 FEMALE=""
 while read line
 do
-FEMALE+="$line.CNV.bam ";
+FEMALE+="$line.dedup.bam ";
 done < female_list.txt
 
-echo "Lisf of women:"
+echo "Liste des femmes:"
 echo $FEMALE
 echo ""
 
@@ -51,20 +54,22 @@ gatk PreprocessIntervals \
     --bin-length 0 \
     --padding 50 \
     --interval-merging-rule OVERLAPPING_ONLY \
-    -O gatkcnv_output/female/targets.preprocessed.interval_list 
+    -O gatkcnv_output/female/targets.preprocessed.interval_list \
+    --verbosity ERROR
 
 for sample_id in $FEMALE;
-do SAMPLE=${sample_id%%.CNV.bam}; \
+do SAMPLE=${sample_id%%.dedup.bam}; \
 
 # Collect raw integer counts data
 gatk CollectReadCounts \
         -L gatkcnv_output/female/targets.preprocessed.interval_list \
         -XL $CENTROMETIC_XY \
         -R $REF \
-        --format TSV \
         --interval-merging-rule OVERLAPPING_ONLY \
-        -I $SAMPLE.CNV.bam \
-        -O gatkcnv_output/female/$SAMPLE.tsv ;
+        -I $SAMPLE.dedup.bam \
+        --format TSV \
+        -O gatkcnv_output/female/$SAMPLE.tsv \
+        --verbosity ERROR;
 
 done
 
@@ -72,10 +77,10 @@ done
 gatk AnnotateIntervals \
     -L gatkcnv_output/female/targets.preprocessed.interval_list \
     -XL $CENTROMETIC_XY \
-    --mappability-track /media/hanjinu/SS200/db/refs/hg38/k100.umap.bed \
     -R $REF \
     -imr OVERLAPPING_ONLY \
-    -O gatkcnv_output/female/targets.annotated.tsv 
+    -O gatkcnv_output/female/targets.annotated.tsv \
+    --verbosity ERROR
 
 
 cd gatkcnv_output/female
@@ -92,11 +97,12 @@ done
 gatk FilterIntervals \
         -L targets.preprocessed.interval_list \
         -XL $CENTROMETIC_XY \
-        --interval-set-rule UNION \
         --annotated-intervals targets.annotated.tsv \
         $COUNTS_LIST \
         -imr OVERLAPPING_ONLY \
-        -O targets.cohort.gc.filtered.interval_list 
+        -O targets.cohort.gc.filtered.interval_list \
+        --verbosity ERROR
+
 
 # DetermineGermlineContigPloidy in COHORT MODE
 gatk DetermineGermlineContigPloidy \
@@ -127,7 +133,7 @@ cd ..
 index=0
 
 for sample_id in $FEMALE;
-do SAMPLE=${sample_id%%.CNV.bam};
+do SAMPLE=${sample_id%%.dedup.bam};
 
 # PostprocessGermlineCNVCalls COHORT MODE
 gatk PostprocessGermlineCNVCalls \
@@ -154,10 +160,10 @@ echo ""
 MALE=""
 while read line
 do
-MALE+="$line.CNV.bam "
+MALE+="$line.dedup.bam "
 done < male_list.txt
 
-echo "List of men:"
+echo "Liste des hommes:"
 echo $MALE
 echo ""
 
@@ -173,7 +179,7 @@ gatk PreprocessIntervals \
     --verbosity ERROR
 
 for sample_id in $MALE;
-do SAMPLE=${sample_id%%.CNV.bam}; \
+do SAMPLE=${sample_id%%.dedup.bam}; \
 
 # Collect raw integer counts data
 gatk CollectReadCounts \
@@ -181,7 +187,7 @@ gatk CollectReadCounts \
         -XL $CENTROMETIC_XY \
         -R $REF \
         --interval-merging-rule OVERLAPPING_ONLY \
-        -I $SAMPLE.CNV.bam \
+        -I $SAMPLE.dedup.bam \
         --format TSV \
         -O gatkcnv_output/male/$SAMPLE.tsv \
         --verbosity ERROR;
@@ -192,7 +198,6 @@ done
 gatk AnnotateIntervals \
     -L gatkcnv_output/male/targets.preprocessed.interval_list \
     -XL $CENTROMETIC_XY \
-    --mappability-track /media/hanjinu/SS200/db/refs/hg38/k100.umap.bed \
     -R $REF \
     -imr OVERLAPPING_ONLY \
     -O gatkcnv_output/male/targets.annotated.tsv \
@@ -249,7 +254,7 @@ cd ..
 index=0
 
 for sample_id in $MALE;
-do SAMPLE=${sample_id%%.CNV.bam};
+do SAMPLE=${sample_id%%.dedup.bam};
 
 # PostprocessGermlineCNVCalls COHORT MODE
 gatk PostprocessGermlineCNVCalls \
@@ -284,8 +289,8 @@ gatk PreprocessIntervals \
     -O gatkcnv_output/all/targets.preprocessed.interval_list \
     --verbosity ERROR
 
-for sample_id in *.CNV.bam;
-do SAMPLE=${sample_id%%.CNV.bam}; \
+for sample_id in *.dedup.bam;
+do SAMPLE=${sample_id%%.dedup.bam}; \
 
 # Collect raw integer counts data
 gatk CollectReadCounts \
@@ -293,7 +298,7 @@ gatk CollectReadCounts \
     -XL $CENTROMETIC_AUTO \
     -R $REF \
     --interval-merging-rule OVERLAPPING_ONLY \
-    -I $SAMPLE.CNV.bam \
+    -I $SAMPLE.dedup.bam \
     --format TSV \
     -O gatkcnv_output/all/$SAMPLE.tsv \
     --verbosity ERROR;
@@ -304,7 +309,6 @@ done
 gatk AnnotateIntervals \
     -L gatkcnv_output/all/targets.preprocessed.interval_list \
     -XL $CENTROMETIC_AUTO \
-    --mappability-track /media/hanjinu/SS200/db/refs/hg38/k100.umap.bed \
     -R $REF \
     -imr OVERLAPPING_ONLY \
     -O gatkcnv_output/all/targets.annotated.tsv \
@@ -360,8 +364,8 @@ cd ..
 
 index=0
 
-for sample_id in *.CNV.bam;
-do SAMPLE=${sample_id%%.CNV.bam};
+for sample_id in *.dedup.bam;
+do SAMPLE=${sample_id%%.dedup.bam};
 
 # PostprocessGermlineCNVCalls COHORT MODE
 gatk PostprocessGermlineCNVCalls \
