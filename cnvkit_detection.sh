@@ -40,7 +40,7 @@ echo $FEMALE
 echo ""
 
 #create a pooled reference by running batch command specifying only normal samples
-~/cnvkit/cnvkit.py batch -n $FEMALE \
+cnvkit.py batch -n $FEMALE \
 	-m hybrid \
     -f $REF \
 	--targets $TARGET_XY \
@@ -50,7 +50,7 @@ echo ""
 	-p 12
 
 # Run WGS batch pipeline using the pooled reference file
-~/cnvkit/cnvkit.py batch $FEMALE \
+cnvkit.py batch $FEMALE \
 	-m hybrid \
 	-r $DATA/cnvkit_output/female/pooled-reference.cnn \
 	-d $DATA/cnvkit_output/female \
@@ -77,7 +77,7 @@ echo $MALE
 echo ""
 
 #create a pooled reference by running batch command specifying only normal samples
-~/cnvkit/cnvkit.py batch -n $MALE \
+cnvkit.py batch -n $MALE \
 	-m hybrid \
     -f $REF \
 	--targets $TARGET_XY \
@@ -87,7 +87,7 @@ echo ""
 	-p 12
 
 # Run WGS batch pipeline using the pooled reference file
-~/cnvkit/cnvkit.py batch $MALE \
+cnvkit.py batch $MALE \
 	-m hybrid \
 	-r $DATA/cnvkit_output/male/pooled-reference.cnn \
 	-d $DATA/cnvkit_output/male \
@@ -106,7 +106,7 @@ echo ""
 SAMPLES=$(ls *.dedup.bam)
 
 #create a pooled reference by running batch command specifying only normal samples
-~/cnvkit/cnvkit.py batch -n $SAMPLES \
+cnvkit.py batch -n $SAMPLES \
 	-m hybrid \
     -f $REF \
 	--targets $TARGET_AUTO \
@@ -116,7 +116,7 @@ SAMPLES=$(ls *.dedup.bam)
 	-p 12
 
 # Run WGS batch pipeline using the pooled reference file
-~/cnvkit/cnvkit.py batch $SAMPLES \
+cnvkit.py batch $SAMPLES \
 	-m hybrid \
 	-r $DATA/cnvkit_output/all/pooled-reference.cnn \
 	-d $DATA/cnvkit_output/all \
