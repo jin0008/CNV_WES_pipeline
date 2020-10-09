@@ -278,7 +278,7 @@ echo ""
 echo "Working on all..."
 echo ""
 
-Define the resolution of the analysis with a genomic intervals list
+#Define the resolution of the analysis with a genomic intervals list
 gatk PreprocessIntervals \
     -R  $REF \
     -L  $TARGET_AUTO \
