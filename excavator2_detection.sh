@@ -3,14 +3,16 @@
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate excavator2_env
 
-TARGETS_AUTO="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.autosome.bed"
+TARGETS_AUTO="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.CDS.autosome.bed"
 TARGETS_XY="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.XY.scratch.bed"
 TARGETS_ALL="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.CDS.merged.bed"
 
 DATA=$PWD
 
 echo ""
+echo "******************************"
 echo "EXCAVATOR2 CNV DETECTION start"
+echo "******************************"
 echo ""
 
 rm -Rf excavator2_output/
@@ -22,13 +24,13 @@ mkdir male
 cd ..
 
 # BAM list file
-ls *.CNV.bam > $DATA/excavator2_output/all/bam_list.txt
+ls *.dedup.bam > $DATA/excavator2_output/all/bam_list.txt
 
 # female list file
 FEMALE=""
 while read line
 do
-FEMALE+="$line.CNV.bam "
+FEMALE+="$line.dedup.bam "
 done < female_list.txt
 
 echo -e $FEMALE > $DATA/excavator2_output/female/bam_list.txt
@@ -37,7 +39,7 @@ echo -e $FEMALE > $DATA/excavator2_output/female/bam_list.txt
 MALE=""
 while read line
 do
-MALE+="$line.CNV.bam "
+MALE+="$line.dedup.bam "
 done < male_list.txt
 
 echo -e $MALE > $DATA/excavator2_output/male/bam_list.txt
@@ -53,9 +55,7 @@ echo -e $MALE > $DATA/excavator2_output/male/bam_list.txt
 # perl TargetPerla.pl SourceTarget.txt $TARGETS_AUTO autosomes_w10K 10000 hg38
 # perl TargetPerla.pl SourceTarget.txt $TARGETS_XY XY_w10K 10000 hg38
 
-
 ##################################################################################
-
 echo ""
 echo "Working on female..."
 echo ""
@@ -64,15 +64,15 @@ echo ""
 cd $DATA
 
 for sample_id in $FEMALE; \
-do SAMPLE=${sample_id%%.CNV.bam}
+do SAMPLE=${sample_id%%.dedup.bam}
 
-echo $DATA/$SAMPLE.CNV.bam $DATA/excavator2_output/female/$SAMPLE $SAMPLE >> $DATA/excavator2_output/female/ExperimentalFilePrepare.w10K.txt;
+echo $DATA/$SAMPLE.dedup.bam $DATA/excavator2_output/female/$SAMPLE $SAMPLE >> $DATA/excavator2_output/female/ExperimentalFilePrepare.w10K.txt;
 
 done
 
 # RC calculations
-cd ~/src/EXCAVATOR2_Package_v1.1.2
-perl ~/src/EXCAVATORDataPrepare.pl $DATA/excavator2_output/female/ExperimentalFilePrepare.w10K.txt --processors 12 --target XY_w10K --assembly hg38
+cd ~/EXCAVATOR2_Package_v1.1.2
+perl EXCAVATORDataPrepare.pl $DATA/excavator2_output/female/ExperimentalFilePrepare.w10K.txt --processors 12 --target XY_w10K --assembly hg38
 
 # Experimental analysis file
 labels=("C1" "C2" "C3" "C4" "C5" "C6" "C7" "C8" "C9" "C10" "C11")
@@ -82,15 +82,15 @@ rm $DATA/excavator2_output/female/ExperimentalFileAnalysis.w10K.*
 cd $DATA
 
 for sample_id in $FEMALE; do 
-	SAMPLE=${sample_id%%.CNV.bam};	
+	SAMPLE=${sample_id%%.dedup.bam};	
 	
 	echo 'T1' $DATA/excavator2_output/female/$SAMPLE $SAMPLE > $DATA/excavator2_output/female/ExperimentalFileAnalysis.w10K.$SAMPLE.txt;
 	
-	others=$(ls *.CNV.bam | grep -v $SAMPLE);
+	others=$(ls *.dedup.bam | grep -v $SAMPLE);
 	
 	# TRansformer la liste others en tableau indicable table
 	table=( ${others// / } )
-	table_clean=${table[@]/.CNV.bam/}
+	table_clean=${table[@]/.dedup.bam/}
 	NORMAL=( ${table_clean// / } )
 
 	for i in `seq 0 10`; do
@@ -101,9 +101,9 @@ for sample_id in $FEMALE; do
 	done
 
 	# Segmentation of the WMRC
-	cd ~/src/EXCAVATOR2_Package_v1.1.2;
+	cd ~/EXCAVATOR2_Package_v1.1.2;
 	
-	perl ~/src/EXCAVATORDataAnalysis.pl $DATA/excavator2_output/female/ExperimentalFileAnalysis.w10K.$SAMPLE.txt\
+	perl EXCAVATORDataAnalysis.pl $DATA/excavator2_output/female/ExperimentalFileAnalysis.w10K.$SAMPLE.txt\
 		--processors 12 --target XY_w10K\
 	    --assembly hg38\
 		--output $DATA/excavator2_output/female/w10K_results.$SAMPLE\
@@ -123,15 +123,15 @@ echo ""
 cd $DATA
 
 for sample_id in $MALE; \
-do SAMPLE=${sample_id%%.CNV.bam}
+do SAMPLE=${sample_id%%.dedup.bam}
 
-echo $DATA/$SAMPLE.CNV.bam $DATA/excavator2_output/male/$SAMPLE $SAMPLE >> $DATA/excavator2_output/male/ExperimentalFilePrepare.w10K.txt;
+echo $DATA/$SAMPLE.dedup.bam $DATA/excavator2_output/male/$SAMPLE $SAMPLE >> $DATA/excavator2_output/male/ExperimentalFilePrepare.w10K.txt;
 
 done
 
 # RC calculations
-cd ~/src/EXCAVATOR2_Package_v1.1.2
-perl ~/src/EXCAVATORDataPrepare.pl $DATA/excavator2_output/male/ExperimentalFilePrepare.w10K.txt --processors 12 --target XY_w10K --assembly hg38
+cd ~/EXCAVATOR2_Package_v1.1.2
+perl EXCAVATORDataPrepare.pl $DATA/excavator2_output/male/ExperimentalFilePrepare.w10K.txt --processors 12 --target XY_w10K --assembly hg38
 
 # Experimental analysis file
 labels=("C1" "C2" "C3" "C4" "C5" "C6" "C7" "C8" "C9" "C10" "C11")
@@ -141,15 +141,15 @@ rm $DATA/excavator2_output/male/ExperimentalFileAnalysis.w10K.*
 cd $DATA
 
 for sample_id in $FEMALE; do 
-	SAMPLE=${sample_id%%.CNV.bam};	
+	SAMPLE=${sample_id%%.dedup.bam};	
 	
 	echo 'T1' $DATA/excavator2_output/male/$SAMPLE $SAMPLE > $DATA/excavator2_output/male/ExperimentalFileAnalysis.w10K.$SAMPLE.txt;
 	
-	others=$(ls *.CNV.bam | grep -v $SAMPLE);
+	others=$(ls *.dedup.bam | grep -v $SAMPLE);
 	
 	# TRansformer la liste others en tableau indicable table
 	table=( ${others// / } )
-	table_clean=${table[@]/.CNV.bam/}
+	table_clean=${table[@]/.dedup.bam/}
 	NORMAL=( ${table_clean// / } )
 
 	for i in `seq 0 10`; do
@@ -160,9 +160,9 @@ for sample_id in $FEMALE; do
 	done
 
 	# Segmentation of the WMRC
-	cd ~/src/EXCAVATOR2_Package_v1.1.2;
+	cd ~/EXCAVATOR2_Package_v1.1.2;
 	
-	perl ~/src/EXCAVATORDataAnalysis.pl $DATA/excavator2_output/male/ExperimentalFileAnalysis.w10K.$SAMPLE.txt\
+	perl EXCAVATORDataAnalysis.pl $DATA/excavator2_output/male/ExperimentalFileAnalysis.w10K.$SAMPLE.txt\
 		--processors 12 --target XY_w10K\
 	    --assembly hg38\
 		--output $DATA/excavator2_output/male/w10K_results.$SAMPLE\
@@ -181,16 +181,16 @@ echo ""
 # Data Prepare Module
 cd $DATA
 
-for sample_id in *.CNV.bam; \
-do SAMPLE=${sample_id%%.CNV.bam}
+for sample_id in *.dedup.bam; \
+do SAMPLE=${sample_id%%.dedup.bam}
 
-echo $DATA/$SAMPLE.CNV.bam $DATA/excavator2_output/all/$SAMPLE $SAMPLE >> $DATA/excavator2_output/all/ExperimentalFilePrepare.w10K.txt;
+echo $DATA/$SAMPLE.dedup.bam $DATA/excavator2_output/all/$SAMPLE $SAMPLE >> $DATA/excavator2_output/all/ExperimentalFilePrepare.w10K.txt;
 
 done
 
 # RC calculations
-cd ~/src/EXCAVATOR2_Package_v1.1.2
-perl ~/src/EXCAVATORDataPrepare.pl $DATA/excavator2_output/all/ExperimentalFilePrepare.w10K.txt --processors 12 --target autosomes_w10K --assembly hg38
+cd ~/EXCAVATOR2_Package_v1.1.2
+perl EXCAVATORDataPrepare.pl $DATA/excavator2_output/all/ExperimentalFilePrepare.w10K.txt --processors 12 --target autosomes_w10K --assembly hg38
 
 # Experimental analysis file
 labels=("C1" "C2" "C3" "C4" "C5" "C6" "C7" "C8" "C9" "C10" "C11")
@@ -199,16 +199,16 @@ rm $DATA/excavator2_output/all/ExperimentalFileAnalysis.w10K.*
 
 cd $DATA
 
-for sample_id in *.CNV.bam; do 
-	SAMPLE=${sample_id%%.CNV.bam};	
+for sample_id in *.dedup.bam; do 
+	SAMPLE=${sample_id%%.dedup.bam};	
 	
 	echo 'T1' $DATA/excavator2_output/all/$SAMPLE $SAMPLE > $DATA/excavator2_output/all/ExperimentalFileAnalysis.w10K.$SAMPLE.txt;
 	
-	others=$(ls *.CNV.bam | grep -v $SAMPLE);
+	others=$(ls *.dedup.bam | grep -v $SAMPLE);
 	
 	# TRansformer la liste others en tableau indicable table
 	table=( ${others// / } )
-	table_clean=${table[@]/.CNV.bam/}
+	table_clean=${table[@]/.dedup.bam/}
 	NORMAL=( ${table_clean// / } )
 
 	for i in `seq 0 10`; do
@@ -219,9 +219,9 @@ for sample_id in *.CNV.bam; do
 	done
 
 	# Segmentation of the WMRC
-	cd ~/src/EXCAVATOR2_Package_v1.1.2;
+	cd ~/EXCAVATOR2_Package_v1.1.2;
 	
-	perl ~/src/EXCAVATORDataAnalysis.pl $DATA/excavator2_output/all/ExperimentalFileAnalysis.w10K.$SAMPLE.txt\
+	perl EXCAVATORDataAnalysis.pl $DATA/excavator2_output/all/ExperimentalFileAnalysis.w10K.$SAMPLE.txt\
 		--processors 12 --target autosomes_w10K\
 	    --assembly hg38\
 		--output $DATA/excavator2_output/all/w10K_results.$SAMPLE\
