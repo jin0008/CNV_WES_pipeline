@@ -56,7 +56,7 @@ concat['effect'] = 'i'
 concat.loc[concat.log2copy_ratio>0.4, 'effect'] = "duplication"
 concat.loc[concat.log2copy_ratio<-0.7, 'effect'] = "deletion"
 
-df_sex = pandas.read_csv('../samples.txt', header = [0], sep="\t", index_col=None)
+df_sex = pandas.read_csv('../samples.txt', header = [0], sep="\t", index_col=None, dtype={'sample':object})
 
 frame = pandas.merge(concat, df_sex, left_on='sample', right_on='sample')
 
