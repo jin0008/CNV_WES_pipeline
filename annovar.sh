@@ -4,7 +4,9 @@ source ~/miniconda3/etc/profile.d/conda.sh
 conda activate annot_env
 
 echo ""
+echo "*******************"
 echo "annotation.sh start"
+echo "*******************"
 echo ""
 
 rm -Rf annovar_output
@@ -15,15 +17,15 @@ mkdir -p annovar_output
 #perl annotate_variation.pl -downdb -buildver hg38 -webfrom annovar refGene humandb
 
 ## Retirer les noms de colonnes au fichier interval_results.txt > /annovar_output/ex1.avinput
-sed '1d' interval_run_results.txt > ex1.avinput
+sed '1d' cnv_with_frequences.txt > ex1.avinput
 
 ## Remplacer XF par X et XM par X
 sed -i -e "s/XF/X/g" ex1.avinput
 sed -i -e "s/XM/X/g" ex1.avinput
 
-sudo perl ~/annovar/table_annovar.pl \
+sudo perl /media/hanjinu/SS200/annovar/table_annovar.pl \
 ex1.avinput \
-~/annovar/humandb \
+/media/hanjinu/SS200/annovar/humandb \
 --buildver hg38 \
 --out annotation \
 --remove \
