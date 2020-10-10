@@ -50,7 +50,7 @@ del clinvar['AssociatedGenes']
 # IN GENE #
 ###########
 
-uniq = pandas.read_csv("/media/hanjinu/SS200/db/refs/genes_uniq/hg38_Gencode_V24.bed.gz", \
+uniq = pandas.read_csv("/media/hanjinu/SS200/db/refs/genes_uniq/hg38_Gencode_V24.bed", \
 	index_col=None, header=None, compression='gzip', sep='\t')
 
 uniq.columns = ['contig', 'start', 'stop','gene']
