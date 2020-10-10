@@ -51,11 +51,11 @@ del clinvar['AssociatedGenes']
 ###########
 
 uniq = pandas.read_csv("/media/hanjinu/SS200/db/refs/genes_uniq/hg38_Gencode_V24.bed", \
-	index_col=None, header=None, compression='gzip', sep='\t')
+	index_col=None, header=None, compression='gzip, 'sep='\t')
 
 uniq.columns = ['contig', 'start', 'stop','gene']
 
-# Supprimer le 'chr' de la colonne contig
+# Remove the 'chr' from the contig column
 uniq['contig'] = uniq['contig'].str[3:]
 
 uniq.rename(columns={'gene': 'hg38_gene'}, inplace=True)
@@ -71,7 +71,7 @@ annovar['genes'] = annovar['genes'].str.split(pat=';', expand=False)
 annovar.rename(columns={'genes': 'annovar_genes'}, inplace=True)
 
 
-# Parcourir le df annovar
+# Browse the df annovar
 clinvar_all = []
 ingene_list = []
 dgv_details_s = []
