@@ -70,7 +70,8 @@ class Cnv:
         df.drop_duplicates(keep='first', inplace=True)
 
         # Trier par effect, sample, contig et position start.
-        df.sort_values(by=['effect','sample', 'contig', 'start'], inplace=True)
+        df.sort_values(by=['effect','sample', 'contig', 'start', 'end'], inplace=True, \
+            ascending = [True, True, True, True, False], kind = 'mergesort')
 
         # Ajouter une colonne 'size'.
         df['size'] = df['end'] - df['start']
@@ -91,14 +92,17 @@ Functions
 def chevauchement_sample(sorted_sample_cnv):
     
     sample_cnv_list = []
+
+    prev_cnv = sorted_sample_cnv[0]
+    curr_cnv = sorted_sample_cnv[1]
     
-    for i in range(1,len(sorted_sample_cnv)):
-        prev_cnv = sorted_sample_cnv[i-1]
-        curr_cnv = sorted_sample_cnv[i]
+    for i in range(1,len(sorted_sample_cnv)-1):
 
         if (curr_cnv.contig == prev_cnv.contig)\
             and (curr_cnv.effect == prev_cnv.effect)\
-            and (int(curr_cnv.start) < int(prev_cnv.end)) and (int(curr_cnv.end) > int(prev_cnv.start)):
+            and (curr_cnv.sample == prev_cnv.sample)\
+            and (int(curr_cnv.start) < int(prev_cnv.end)) \
+            and (int(curr_cnv.end) > int(prev_cnv.start)):
 
             min_start = min(int(prev_cnv.start), int(curr_cnv.start))
             max_end = max(int(prev_cnv.end), int(curr_cnv.end)) 
@@ -115,18 +119,24 @@ def chevauchement_sample(sorted_sample_cnv):
             log2copy_ratio = "/".join([str(prev_cnv.log2copy_ratio), str(curr_cnv.log2copy_ratio)])
             targets = "/".join([str(prev_cnv.targets), str(curr_cnv.targets)])
 
-            sample_cnv = Cnv(sample, sex, contig, start, end, size, log2copy_ratio, copynumber, effect,  cnv_tool, targets)
-            sample_cnv_list.append(sample_cnv)
+            sample_cnv = Cnv(sample, sex, contig, start, end, size, \
+                log2copy_ratio, copynumber, effect,  cnv_tool, targets)
+            prev_cnv = sample_cnv
+            curr_cnv = sorted_sample_cnv[i+1]
                     
         else:
             sample_cnv_list.append(prev_cnv)
+            prev_cnv = sorted_sample_cnv[i]
+            curr_cnv = sorted_sample_cnv[i+1]
 
     return sample_cnv_list
 
 
 ###### PROGRAMME PRINCIPAL ######
 
-print("\nSample intervals checking program openning.\n")
+print("\n************************************")
+print("Sample intervals checking program openning.")
+print("************************************\n")
 
 print('-START Generation des cnv...')
 cnv = Cnv.read_results('cnv_results.csv')
@@ -135,12 +145,12 @@ print('-END Generation des cnv: {} cnv generes'.format(cnv_count))
 
 sample_cnv_list = chevauchement_sample(cnv)
 
-print('{} interval(s) found.'.format(len(sample_cnv_list) - len(cnv)))
+print('{} chevauchement(s) trouves.'.format(len(sample_cnv_list) - len(cnv)))
+print('-{} cnv(s) au final.'.format(len(sample_cnv_list)))
 
 if os.path.isfile('interval_sample_results.txt'):
     os.remove('interval_sample_results.txt')
-    print('Previous results file removed.')
-
+    print('\nPrevious results file removed.')
 
 with open('interval_sample_results.txt', 'w') as results_file:
     
