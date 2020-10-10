@@ -5,12 +5,9 @@ import pandas
 
 print('\nAnnotation results program openning.\n')
 
-df = pandas.read_csv('annotation.hg38_multianno.txt', sep='\t', index_col=None)
+df = pandas.read_csv('annotation.hg38_multianno.txt', sep='\t', index_col=None, skiprows=2)
 
-df.columns = ['contig', 'start', 'end', 'ref', 'alt',\
-        'function', 'genes', 'gene_details', 'exonic_function', 'aa_change', \
-        'sample', 'sex', 'size', 'effect', 'log2copy_ratio', 'CN', 'cnv_tool', \
-        'targets_number', 'empty']
+df.columns = ['contig', 'start', 'end', 'ref', 'alt', 'function', 'genes', 'gene_details', 'exonic_function', 'aa_change', 'sample', 'sex', 'size', 'effect', 'log2copy_ratio', 'CN', 'cnv_tool', 'targets_number', 'empty']
 
 if os.path.isfile('annotation_results.csv'):
     os.remove('annotation_results.csv')
