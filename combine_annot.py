@@ -133,11 +133,11 @@ for index, row in annovar.iterrows():
 			obsL_r = int(record[5].decode("utf-8"))
 			size_r = int(end_r) - int(start_r)
 
-			# identité cnv - dgv OU cnv inclus dans dgv
+			# identity cnv - dgv OR cnv included in dgv
 			if (row['start'] >= start_r) and (row['end'] <= end_r):
 				pct = 100.0
 
-				# dgv inclus dans cnv
+				# dgv included in cnv
 			elif (row['start'] < start_r) and (row['end'] > end_r):
 				pct = (float(size_r) / float(row['size'])) * 100.0
 
