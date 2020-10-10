@@ -7,7 +7,9 @@ path = "."
 dirs = os.listdir(path)
 li = []
 
-print("\nMerged CNV results program openning.\n")
+print("\n************************************")
+print("Merged CNV results program openning.")
+print("************************************\n")
 
 for directory in dirs:
     
@@ -44,16 +46,18 @@ for directory in dirs:
             print('cn.mops results added.')
     
     if directory == 'excavator2_output':
-        file_path = './' + directory + '/excavator2_results.csv'
+        file_path = './' + directory + 'EXCAVATOR2'
         if os.path.isfile(file_path):
-            df_excavator2 = pandas.read_csv(file_path,index_col=None)
-            df_excavator2['cnv_tool'] = 'EXCAVATOR2'
+            df_cnmops = pandas.read_csv(file_path,index_col=None)
+            df_cnmops['cnv_tool'] = 'cn.mops'
             li.append(df_excavator2)
             print('Excavator2 results added.')
 
 frame = pandas.concat(li, axis=0, ignore_index=True)
 cols = ['sample', 'sex', 'contig', 'start', 'end', 'cnv_ratio','log2copy_ratio', 'CN', 'effect', 'cnv_tool','targets_number']
 frame = frame[cols]
+
+frame.sort_values(by=['effect','sample', 'contig', 'start'], inplace=True)
 
 print('{} CNV lines found.'.format(frame.shape[0]))
 
@@ -62,7 +66,6 @@ if os.path.isfile('cnv_results.csv'):
     print('Previous results file removed.')
 
 frame.to_csv('cnv_results.csv', index=False)                                                                                           
-print("cnv_results.csv generated.\n")
-print("Merged CNV results job done!\n")
+print("cnv_results.csv generated.")
 
-    
+print("\nMerged CNV results job done!\n")
