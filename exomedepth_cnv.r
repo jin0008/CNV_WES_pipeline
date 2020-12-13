@@ -32,7 +32,7 @@ print('Working on female...')
 # Generate read count data
 ExomeCount <- getBamCounts(bed.frame = targets_XY,
                 bam.files = female_vec,
-                include.chr = TRUE,
+                include.chr = FALSE,
                 referenceFasta = NULL) #format de sortie: GRanges class
 
 ## Remove the annoying X
