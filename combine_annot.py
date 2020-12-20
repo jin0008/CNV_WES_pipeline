@@ -14,7 +14,7 @@ def tabix_query(filename, chrom, start, end):
 
 print("\nAnnots program openning.\n")
 
-DGV = "/media/hanjinu/SS200/db/refs/dgv/DGV_hg38_variants.bed.gz"
+DGV = "/media/hanjinu/SS200/db/refs/dgv/DGV_hg38_variant.bed.gz"
 
 ###########
 # CLINVAR #
