@@ -10,8 +10,8 @@ DIC="/media/hanjinu/SS200/db/refs/hg38/resources_broad_hg38_v0_Homo_sapiens_asse
 CENTROMETIC_AUTO="/media/hanjinu/SS200/db/refs/gencode/centromeric_regions_autosomes.bed"
 CENTROMETIC_XY="/media/hanjinu/SS200/db/refs/gencode/centromeric_regions_XY.bed"
 
-TARGET_AUTO="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.autosome.interval_list"
-TARGET_XY="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.XY.scratch.interval_list"
+TARGET_AUTO="/media/hanjinu/SS200/db/refs/bed/Twist_ComprehensiveExome_targets_autosome_hg38.bed"
+TARGET_XY="/media/hanjinu/SS200/db/refs/bed/Twist_ComprehensiveExome_targets_XY_hg38.bed"
 
 PLOIDY_AUTO="/media/hanjinu/SS200/db/refs/contig_ploidy_priors/ploidy_priors_table_autosome.tsv"
 PLOIDY_XY="/media/hanjinu/SS200/db/refs/contig_ploidy_priors/ploidy_priors_table_XY.tsv"
