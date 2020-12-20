@@ -1,7 +1,7 @@
 # Author: Julie BOGOIN
 # Modified by: Jinu Han
 
-source ~/miniconda2/etc/profile.d/conda.sh
+source ~/miniconda3/etc/profile.d/conda.sh
 conda activate gatk
 
 REF="/media/hanjinu/SS200/db/refs/hg38/resources_broad_hg38_v0_Homo_sapiens_assembly38.fasta"
