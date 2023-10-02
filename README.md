@@ -1,6 +1,6 @@
 # CNV_WES_pipeline
 
 
-#Requirement\n
-install.packages("ExomeDepth")\n
+#Requirement
+install.packages("ExomeDepth")
 install.packages("seqinr")
