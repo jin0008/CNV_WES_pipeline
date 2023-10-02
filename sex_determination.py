@@ -27,7 +27,7 @@ for i in bams:
 
     if sry_count >= 50:
         sex = "M"
-    elif sry_count <= 30:
+    elif sry_count <= 35:
         sex = "F"
     else:
         sex = "?"
