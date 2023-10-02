@@ -35,7 +35,7 @@ gatk BedToIntervalList \
 
 # Faire un fichier cible par chromosome
 for i in {1..22} X Y; do ;
-grep "^chr${i}" gencode.v44.basic.annotation.CDS.merged.bed > gencode.v44.basic.annotation.CDS.chr${i}.bed; 
+grep "^chr${i}" gencode.v44.basic.annotation.CDS.merged.bed > gencode.v44.basic.annotation.CDS.chr${i}.bed &
 done
 
 echo ""
