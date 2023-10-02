@@ -14,16 +14,16 @@ def tabix_query(filename, chrom, start, end):
 
 print("\nAnnots program openning.\n")
 
-DGV = "/media/hanjinu/SS200/db/refs/dgv/DGV_hg38_variant.bed.gz"
+DGV = "/media/hanjinu/PM883/db/refs/dgv/DGV_hg38_variant.bed.gz"
 
 ###########
 # CLINVAR #
 ###########
 
-#os.system('cd /media/hanjinu/SS200/db/refs/clinvar')
+#os.system('cd /media/hanjinu/PM883/db/refs/clinvar')
 #os.system('wget https://ftp.ncbi.nlm.nih.gov/pub/clinvar/gene_condition_source_id')
 
-clinvar = pandas.read_csv('/media/hanjinu/SS200/db/refs/clinvar/gene_condition_source_id', sep= '\t', index_col=None, header=[0])
+clinvar = pandas.read_csv('/media/hanjinu/PM883/db/refs/clinvar/gene_condition_source_id', sep= '\t', index_col=None, header=[0])
 
 del clinvar['ConceptID']
 del clinvar['SourceID']
@@ -50,7 +50,7 @@ del clinvar['AssociatedGenes']
 # IN GENE #
 ###########
 
-uniq = pandas.read_csv('/media/hanjinu/SS200/db/refs/genes_uniq/hg38_genes_uniq.bed', index_col=None, header=None, sep='\t')
+uniq = pandas.read_csv('/media/hanjinu/PM883/db/refs/genes_uniq/hg38_genes_uniq.bed', index_col=None, header=None, sep='\t')
 
 uniq.columns = ['contig', 'start', 'stop','gene']
 
