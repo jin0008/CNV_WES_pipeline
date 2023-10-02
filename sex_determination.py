@@ -6,6 +6,7 @@
 import os
 import glob
 import pysam
+import sys
 
 sample_l = []
 sex_d = {}
