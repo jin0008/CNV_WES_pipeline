@@ -18,7 +18,6 @@ TARGET_XY="/media/hanjinu/SS200/db/refs/bed/Twist_ComprehensiveExome_targets_XY_
 PLOIDY_AUTO="/media/hanjinu/SS200/db/refs/contig_ploidy_priors/ploidy_priors_table_autosome.tsv"
 PLOIDY_XY="/media/hanjinu/SS200/db/refs/contig_ploidy_priors/ploidy_priors_table_XY.tsv"
 
-
 echo ""
 echo "*************************"
 echo "GATK4 CNV DETECTION start"
