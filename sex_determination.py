@@ -31,7 +31,6 @@ for i in bams:
         sex = "F"
     else:
         sex = "?"
-        sys.exit("/!\\ Ambigous Sex Determination, please check!")
     
     sex_d[sample] = sex
 
