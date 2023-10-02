@@ -9,7 +9,7 @@ echo ""
 
 #### Préparation fichiers bed
 
-DIC="/media/hanjinu/SS200/db/refs/hg38/resources_broad_hg38_v0_Homo_sapiens_assembly38.dict"
+DIC="/media/hanjinu/PM883/db/refs/hg38_broad/Homo_sapiens_assembly38.dict"
 
 # Télécharger le fichier gencode.v34.basic.annotation.gff3 sur le site de GENECODE
 #wget ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_34/gencode.v34.basic.annotation.gff3.gz
