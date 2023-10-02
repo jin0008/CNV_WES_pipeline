@@ -1,6 +1,8 @@
 # Author: Julie BOGOIN
 # Modified by: Jinu Han
 
+exec &> gatk_sortie.log
+
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate gatk
 
@@ -152,7 +154,7 @@ let "index+=1";
 
 done
 
-#######################################################################################
+# ######################################################################################
 echo ""
 echo "Working on male..."
 echo ""
@@ -273,46 +275,46 @@ let "index+=1";
 
 done
 
-########################################################################################
+# ########################################################################################
 echo ""
 echo "Working on all..."
 echo ""
 
-#Define the resolution of the analysis with a genomic intervals list
+Define the resolution of the analysis with a genomic intervals list
 gatk PreprocessIntervals \
-    -R  $REF \
-    -L  $TARGET_AUTO \
-    -XL $CENTROMETIC_AUTO \
-    --bin-length 0 \
-    --padding 50 \
-    --interval-merging-rule OVERLAPPING_ONLY \
-    -O gatkcnv_output/all/targets.preprocessed.interval_list \
-    --verbosity ERROR
+   -R  $REF \
+   -L  $TARGET_AUTO \
+   -XL $CENTROMETIC_AUTO \
+   --bin-length 0 \
+   --padding 50 \
+   --interval-merging-rule OVERLAPPING_ONLY \
+   -O gatkcnv_output/all/targets.preprocessed.interval_list \
+   --verbosity ERROR
 
 for sample_id in *.dedup.bam;
 do SAMPLE=${sample_id%%.dedup.bam}; \
 
-# Collect raw integer counts data
+Collect raw integer counts data
 gatk CollectReadCounts \
--L gatkcnv_output/all/targets.preprocessed.interval_list \
-    -XL $CENTROMETIC_AUTO \
-    -R $REF \
-    --interval-merging-rule OVERLAPPING_ONLY \
-    -I $SAMPLE.dedup.bam \
-    --format TSV \
-    -O gatkcnv_output/all/$SAMPLE.tsv \
-    --verbosity ERROR;
+   -L gatkcnv_output/all/targets.preprocessed.interval_list \
+   -XL $CENTROMETIC_AUTO \
+   -R $REF \
+   --interval-merging-rule OVERLAPPING_ONLY \
+   -I $SAMPLE.dedup.bam \
+   --format TSV \
+   -O gatkcnv_output/all/$SAMPLE.tsv \
+   --verbosity ERROR;
 
 done
 
-# AnnotateIntervals with GC content
+AnnotateIntervals with GC content
 gatk AnnotateIntervals \
-    -L gatkcnv_output/all/targets.preprocessed.interval_list \
-    -XL $CENTROMETIC_AUTO \
-    -R $REF \
-    -imr OVERLAPPING_ONLY \
-    -O gatkcnv_output/all/targets.annotated.tsv \
-    --verbosity ERROR
+   -L gatkcnv_output/all/targets.preprocessed.interval_list \
+   -XL $CENTROMETIC_AUTO \
+   -R $REF \
+   -imr OVERLAPPING_ONLY \
+   -O gatkcnv_output/all/targets.annotated.tsv \
+   --verbosity ERROR
 
 
 cd gatkcnv_output/all
@@ -325,15 +327,15 @@ for counts_file in *.tsv; do
         fi
 done
 
-# FilterIntervals based on GC-content and cohort extreme counts
+FilterIntervals based on GC-content and cohort extreme counts
 gatk FilterIntervals \
-        -L targets.preprocessed.interval_list \
-        -XL $CENTROMETIC_AUTO \
-        --annotated-intervals targets.annotated.tsv \
-        $COUNTS_LIST \
-        -imr OVERLAPPING_ONLY \
-        -O targets.cohort.gc.filtered.interval_list \
-        --verbosity ERROR
+       -L targets.preprocessed.interval_list \
+       -XL $CENTROMETIC_AUTO \
+       --annotated-intervals targets.annotated.tsv \
+       $COUNTS_LIST \
+       -imr OVERLAPPING_ONLY \
+       -O targets.cohort.gc.filtered.interval_list \
+       --verbosity ERROR
 
 
 # DetermineGermlineContigPloidy in COHORT MODE
@@ -351,7 +353,7 @@ gatk DetermineGermlineContigPloidy \
 gatk GermlineCNVCaller \
         --run-mode COHORT \
         -L targets.cohort.gc.filtered.interval_list\
-        $COUNTS_LIST \
+	$COUNTS_LIST \
         --contig-ploidy-calls ploidy-calls \
         --annotated-intervals targets.annotated.tsv \
         --interval-merging-rule OVERLAPPING_ONLY \
@@ -370,13 +372,13 @@ do SAMPLE=${sample_id%%.dedup.bam};
 # PostprocessGermlineCNVCalls COHORT MODE
 gatk PostprocessGermlineCNVCalls \
         --model-shard-path gatkcnv_output/all/cohort-model \
-        --calls-shard-path gatkcnv_output/all/cohort-calls \
+	--calls-shard-path gatkcnv_output/all/cohort-calls \
         --allosomal-contig chrX --allosomal-contig chrY \
         --contig-ploidy-calls gatkcnv_output/all/ploidy-calls \
         --sample-index $index \
         --output-genotyped-intervals gatkcnv_output/all/genotyped-intervals.$SAMPLE.vcf.gz \
         --output-genotyped-segments gatkcnv_output/all/genotyped-segments.$SAMPLE.vcf.gz \
-        --output-denoised-copy-ratios gatkcnv_output/all/denoised-copy-ratios.$SAMPLE.tsv \
+	--output-denoised-copy-ratios gatkcnv_output/all/denoised-copy-ratios.$SAMPLE.tsv \
         --sequence-dictionary $DIC \
         --verbosity ERROR;
 
