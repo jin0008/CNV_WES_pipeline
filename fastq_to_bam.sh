@@ -33,7 +33,7 @@ for R1 in *_R1.fastq.gz;
     
     MAPPING_CMD=$(echo "dragen-os -r /media/hanjinu/PM883/db/refs/hg38_broad/ \
     --num-threads $1 --RGID $RG --RGSM ${SAMPLE} -1 $R1 -2 $R2 | \
-    samtools view -@ $1 -Sb | samtools sort -n -@ $1 -o -o ${SAMPLE}.mapped.bam -");
+    samtools view -@ $1 -Sb | samtools sort -n -@ $1 -o ${SAMPLE}.mapped.bam -");
     eval $MAPPING_CMD;
 
  done;
