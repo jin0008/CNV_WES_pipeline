@@ -1,6 +1,7 @@
 # coding: utf-8
 
 # Author: Julien Buratti
+#!/usr/bin/env python3
 
 import os
 import glob
