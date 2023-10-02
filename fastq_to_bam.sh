@@ -52,6 +52,8 @@ for i in *.bam;
     --optical-duplicate-pixel-distance 2500 \
     --tmp-dir $PWD \
     --verbosity ERROR;
+
+    rm -rf ${SAMPLE}.mapped.bam
     
 done
 
