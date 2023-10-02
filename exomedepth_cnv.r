@@ -4,10 +4,10 @@
 library(ExomeDepth)
 library(seqinr)
 
-targets_auto <- read.table(file="/media/hanjinu/PM883/db/refs/gencode/v44/autosomes/gencode.v36.basic.annotation.autosomes.bed",
+targets_auto <- read.table(file="/media/hanjinu/PM883/db/refs/gencode/v44/autosomes/gencode.v44.basic.annotation.autosomes.bed",
                     header=FALSE, sep=" ", as.is=TRUE)
 
-targets_XY <- read.table(file="/media/hanjinu/PM883/db/refs/gencode/v44/XY/gencode.v36.basic.annotation.XY.bed",
+targets_XY <- read.table(file="/media/hanjinu/PM883/db/refs/gencode/v44/XY/gencode.v44.basic.annotation.XY.bed",
                     header=FALSE, sep=" ", as.is=TRUE)
 
 female <- read.table(file="female_list.txt", header=FALSE, sep=" ", as.is=TRUE)
