@@ -4,7 +4,7 @@ source ~/miniconda3/etc/profile.d/conda.sh
 conda activate fastq_bam_env
 
 # hg38
-REF="/media/hanjinu/SS200/db/refs/hg38/resources_broad_hg38_v0_Homo_sapiens_assembly38.fasta"
+REF="/media/hanjinu/PM883/db/refs/hg38_broad/Homo_sapiens_assembly38.fasta"
 
 # hg19
 #REF=/media/hanjinu/SS200/db/refs/b37/human_g1k_v37_decoy.fasta
@@ -31,9 +31,9 @@ for R1 in *_R1.fastq.gz;
 
     RG=$(echo "\"@RG\tID:${DEVICE}.${FLOWCELL}.${SAMPLE}\tPU:${FLOWCELL}\tSM:${SAMPLE}\tPL:ILLUMINA\tLB:${SAMPLE}-${BARCODE}\"")
     
-    MAPPING_CMD=$(echo "bwa mem -M -t 12 -R $RG $REF $R1 $R2 \
-    | samtools sort -@ 6 -o ${SAMPLE}.bam -");
-
+    MAPPING_CMD=$(echo "dragen-os -r /media/hanjinu/PM883/db/refs/hg38_broad/ \
+    --num-threads $1 --RGID $RG --RGSM ${SAMPLE} -1 $R1 -2 $R2 | \
+    samtools view -@ $1 -Sb | samtools sort -n -@ $1 -o -o ${SAMPLE}.mapped.bam -");
     eval $MAPPING_CMD;
 
  done;
@@ -44,7 +44,14 @@ for i in *.bam;
     do 
     SAMPLE=${i%.*};
     
-    sambamba markdup -t 12 ${SAMPLE}.bam ${SAMPLE}.dedup.bam;
+    gatk --java-options "${java_opt}" MarkDuplicatesSpark \
+    -I ${SAMPLE}.mapped.bam \
+    -O ${SAMPLE}.dedup.bam \
+    -M ${SAMPLE}.mark_dup_metrics.txt \
+    --spark-master local[$1] \
+    --optical-duplicate-pixel-distance 2500 \
+    --tmp-dir $PWD \
+    --verbosity ERROR;
     
 done
 
