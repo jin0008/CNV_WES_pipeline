@@ -4,7 +4,7 @@
 library(cn.mops)
 
 segments_auto <- read.table(file="/media/hanjinu/PM883/db/refs/gencode/v44/autosomes/gencode.v44.basic.annotation.autosomes.bed",
-                    header=FALSE, sep=" ", as.is=TRUE)
+                    header=FALSE, sep="\t", as.is=TRUE)
 
 
 all <- list.files(path=".", pattern=".dedup.bam$")
