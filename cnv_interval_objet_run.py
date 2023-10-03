@@ -66,13 +66,13 @@ class Cnv:
 
         df = pandas.read_csv(cnv_file, sep='\t', index_col=False)
 
-        #Supprimer les lignes identiques
+        # Delete identical rows
         df.drop_duplicates(keep='first', inplace=True)
 
         df['start'].astype('str').astype('int')
         df['end'].astype('str').astype('int')
 
-        # Trier 
+        # Sort
         df.sort_values(by=['effect', 'contig','start', 'end'], \
             ascending = [True, True, True, False], inplace=True, kind = 'mergesort')
 
