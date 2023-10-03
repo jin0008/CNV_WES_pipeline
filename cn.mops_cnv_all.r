@@ -3,7 +3,7 @@
 
 library(cn.mops)
 
-segments_auto <- read.table(file="/media/hanjinu/SS200/db/refs/gencode/gencode.v34.basic.annotation.autosome.bed",
+segments_auto <- read.table(file="/media/hanjinu/PM883/db/refs/gencode/v44/autosomes/gencode.v44.basic.annotation.autosomes.bed",
                     header=FALSE, sep=" ", as.is=TRUE)
 
 
