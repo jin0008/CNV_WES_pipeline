@@ -5,7 +5,7 @@ echo "REFERENCE INDEXATION start"
 echo ""
 
 echo ""
-echo "Merci d'indiquer le nom de l'archive .fa.gz à traiter (sans extension):"
+echo "Please indicate the name of the .fa.gz archive to process (without extension):"
 read reference 
 
 gunzip $reference.fa.gz
