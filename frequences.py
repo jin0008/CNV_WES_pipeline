@@ -19,10 +19,10 @@ df_prev['sample'].astype('str')
 df_prev['start'].astype('str').astype('int')
 df_prev['end'].astype('str').astype('int')
 
-# Creation d'un df decalle d'une ligne vers le bas
+# Creating a df shifts one line down
 df_curr = df_prev.shift(periods=1)
 
-# Attribution d'un TF en fonction de l'egalite ou non des positions start
+# Allocation of a TF based on whether the start positions are equal or not
 df_prev['TF'] = (df_prev['effect'] == df_curr['effect'])\
         & (df_prev['contig'] == df_curr['contig'])\
         & (df_prev['start'] == df_curr['start']) \
