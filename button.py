@@ -24,19 +24,19 @@ def pipeline():
 def resultats():
     os.system('sudo bash ~/CNV_WES_pipeline/pipeline_results.sh')
 
-# Zone  dans  la  fenêtre  principale  où  on  écrit  un  texte
-pathlabel = tk.Label(racine, text='\nQuel est le run a analyser?\n')
+# Area in the main window where you write text
+pathlabel = tk.Label(racine, text='\nWhat is the run to analyze?\n')
 pathlabel.pack()
 
-# Bouton parcourir
+# Browse button
 folder_path = tk.StringVar()
 lbl1 = tk.Label(racine, textvariable = folder_path)
 lbl1.pack()
 button2 = tk.Button(text="Parcourir", command=browse_button)
 button2.pack()
 
-# Zone  dans  la  fenêtre  principale  où  on  écrit  un  texte
-label = tk.Label(racine , text="\nQue souhaitez-vous faire?\n")
+# Area in the main window where you write text
+label = tk.Label(racine , text="\nWhat do you want to do?\n")
 label.pack()
 
 # Bouton pipeline
@@ -44,17 +44,17 @@ bouton_pipeline = tk.Button(racine , text="Pipeline CVN", command=pipeline)
 bouton_pipeline["fg"] = "blue"
 bouton_pipeline.pack()
 
-# Bouton resultats
+# Results button
 bouton_resultats = tk.Button(racine , text="Resultats CNV", command=resultats)
 bouton_resultats["fg"] = "green"
 bouton_resultats.pack()
 
-# Zone  dans  la  fenêtre  principale  où  on  écrit  un  texte
+# Area in the main window where you write text
 quitlabel = tk.Label(racine)
 quitlabel.pack()
 
-# Bouton Quitter
-bouton_quit = tk.Button(racine , text=" Quitter", command=racine.quit)
+# Exit button
+bouton_quit = tk.Button(racine , text=" Exit", command=racine.quit)
 bouton_quit["fg"] = "red"
 bouton_quit.pack()
 
