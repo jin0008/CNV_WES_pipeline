@@ -66,17 +66,17 @@ class Cnv:
 
         df = pandas.read_csv(cnv_file, header=[0])
 
-        # Supprimer les lignes identiques
+        # Delete identical rows
         df.drop_duplicates(keep='first', inplace=True)
 
-        # Trier par effect, sample, contig et position start.
+        # Sort by effect, sample, contig and start position.
         df.sort_values(by=['effect','sample', 'contig', 'start', 'end'], inplace=True, \
             ascending = [True, True, True, True, False], kind = 'mergesort')
 
-        # Ajouter une colonne 'size'.
+        # Add a 'size' column.
         df['size'] = df['end'] - df['start']
         
-        # Supprimer le 'chr' de la colonne contig
+        # Remove 'chr' from contig column
         df['contig'] = df['contig'].str[3:]
 
         cnv_list = []
