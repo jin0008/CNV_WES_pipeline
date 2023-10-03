@@ -20,7 +20,7 @@ python3 /home/hanjinu/src/CNV_WES_pipeline/sex_determination.py
 
 conda deactivate
 
-# generation des listes hommes et femmes
+# generation of men’s and women’s lists
 conda activate results_cnv
 
 python /home/hanjinu/src/CNV_WES_pipeline/female_male_lists.py
