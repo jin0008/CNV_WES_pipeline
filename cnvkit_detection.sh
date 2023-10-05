@@ -42,7 +42,7 @@ echo ""
 #create a pooled reference by running batch command specifying only normal samples
 cnvkit.py batch -n $FEMALE \
 	-m hybrid \
-    -f $REF \
+	-f $REF \
 	--targets $TARGET_XY \
 	--output-reference $DATA/cnvkit_output/female/pooled-reference.cnn \
 	--short-names \
