@@ -4,7 +4,7 @@
 exec &> gatk_sortie.log
 
 source ~/miniconda3/etc/profile.d/conda.sh
-conda activate gatk
+#conda activate gatk
 
 REF="/media/hanjinu/PM883/db/refs/hg38_broad/Homo_sapiens_assembly38.fasta"
 DIC="/media/hanjinu/PM883/db/refs/hg38_broad/Homo_sapiens_assembly38.dict"
