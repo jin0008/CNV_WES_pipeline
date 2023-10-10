@@ -3,14 +3,14 @@
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate gatk_env
 
-REF="/media/Data1/jbogoin/ref/fa_hg38/hg38_GenDev/hg38_GenDev.fa"
-DIC="/media/Data1/jbogoin/ref/fa_hg38/hg38_GenDev/hg38_GenDev.dict"
+REF="/media/hanjinu/PM883/db/refs/hg38_broad/Homo_sapiens_assembly38.fasta"
+DIC="/media/hanjinu/PM883/db/refs/hg38_broad/Homo_sapiens_assembly38.dict"
 
-CENTROMETIC_AUTO="/media/Data1/jbogoin/ref/fa_hg38/hg38_centromeric/centromeric_regions_autosomes.bed"
-CENTROMETIC_XY="/media/Data1/jbogoin/ref/fa_hg38/hg38_centromeric/centromeric_regions_XY.bed"
+CENTROMETIC_AUTO="/media/hanjinu/PM883/db/refs/hg38_centromeric/centromeric_regions_autosomes.bed"
+CENTROMETIC_XY="/media/hanjinu/PM883/db/refs/hg38_centromeric/centromeric_regions_XY.bed"
 
-TARGET_AUTO="/media/Data1/jbogoin/ref/gencode/v36_hg38/autosomes/gencode.v36.basic.annotation.autosomes.interval_list"
-TARGET_XY="/media/Data1/jbogoin/ref/gencode/v36_hg38/XY/gencode.v36.basic.annotation.XY.interval_list"
+TARGET_AUTO="/media/hanjinu/PM883/db/refs/gencode/v44/autosomes/gencode.v44.basic.annotation.autosomes.interval_list"
+TARGET_XY="/media/hanjinu/PM883/db/refs/gencode/v44/XY/gencode.v44.basic.annotation.XY.interval_list"
 
 PLOIDY_AUTO="/media/Data1/jbogoin/ref/contig_ploidy_priors/ploidy_priors_table_autosome_acM.tsv"
 PLOIDY_XY="/media/Data1/jbogoin/ref/contig_ploidy_priors/ploidy_priors_table_XY.tsv"
