@@ -12,8 +12,8 @@ CENTROMETIC_XY="/media/hanjinu/PM883/db/refs/hg38_centromeric/centromeric_region
 TARGET_AUTO="/media/hanjinu/PM883/db/refs/gencode/v44/autosomes/gencode.v44.basic.annotation.autosomes.interval_list"
 TARGET_XY="/media/hanjinu/PM883/db/refs/gencode/v44/XY/gencode.v44.basic.annotation.XY.interval_list"
 
-PLOIDY_AUTO="/media/Data1/jbogoin/ref/contig_ploidy_priors/ploidy_priors_table_autosome_acM.tsv"
-PLOIDY_XY="/media/Data1/jbogoin/ref/contig_ploidy_priors/ploidy_priors_table_XY.tsv"
+PLOIDY_AUTO="/media/hanjinu/PM883/db/refs/contig_ploidy_priors/ploidy_priors_table_autosome.tsv"
+PLOIDY_XY="/media/hanjinu/PM883/db/refs/contig_ploidy_priors/ploidy_priors_table_XY.tsv"
 
 
 echo ""
