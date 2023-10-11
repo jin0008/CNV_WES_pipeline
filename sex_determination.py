@@ -3,8 +3,6 @@
 # Author: Julien Buratti
 #!/usr/bin/env python3
 
-conda activate
-
 import os
 import glob
 import pysam
@@ -50,4 +48,3 @@ else:
 
 print("\nSex determination script job done!\n")
 
-conda deactivate
