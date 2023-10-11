@@ -14,7 +14,7 @@ DATA=$PWD
 source ~/miniconda3/etc/profile.d/conda.sh
 
 # sex determination
-conda activate sex_env
+conda activate
 
 python3 /home/hanjinu/src/CNV_WES_pipeline/sex_determination.py
 
