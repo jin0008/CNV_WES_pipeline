@@ -23,7 +23,7 @@ sed '1d' cnv_with_frequences.txt > ex1.avinput
 sed -i -e "s/XF/X/g" ex1.avinput
 sed -i -e "s/XM/X/g" ex1.avinput
 
-perl /home/hanjinu/arc/annovar/table_annovar.pl \
+perl /home/hanjinu/src/annovar/table_annovar.pl \
 ex1.avinput \
 /media/hanjinu/PM883/AnnovarDB/humandb/hg38 \
 --buildver hg38 \
