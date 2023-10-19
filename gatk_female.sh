@@ -1,7 +1,5 @@
 # Author: Jinu Han
 
-exec &> gatk_sortie.log
-
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate gatk_env
 
