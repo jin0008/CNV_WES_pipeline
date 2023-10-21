@@ -111,7 +111,8 @@ gatk GermlineCNVCaller \
         --interval-merging-rule OVERLAPPING_ONLY \
         --output . \
         --output-prefix cohort \
-        --verbosity ERROR
+        --verbosity ERROR \
+	--tmp-dir $PWD
 
 cd ..
 cd ..
@@ -132,6 +133,7 @@ gatk PostprocessGermlineCNVCalls \
         --output-genotyped-segments gatkcnv_output/all/genotyped-segments.$SAMPLE.vcf.gz \
 	--output-denoised-copy-ratios gatkcnv_output/all/denoised-copy-ratios.$SAMPLE.tsv \
         --sequence-dictionary $DIC \
+	--tmp-dir $PWD \
         --verbosity ERROR;
 
 let "index+=1";
