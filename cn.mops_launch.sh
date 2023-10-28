@@ -1,7 +1,5 @@
 # Author: Julie BOGOIN
 
-source ~/miniconda3/etc/profile.d/conda.sh
-conda activate cn.mops_env
 
 echo ""
 echo "cn.mops CNV DETECTION start"
