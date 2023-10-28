@@ -19,7 +19,7 @@ setwd(dir=".")
 
 gr <- GRanges(segments_XY[,1], IRanges(segments_XY[,2],segments_XY[,3]))
 
-X <- getSegmentReadCountsFromBAM(female[,1], GR=gr, parallel=32)
+X <- getSegmentReadCountsFromBAM(female[,1], GR=gr, parallel=64)
 
 resCNMOPS <- exomecn.mops(X, lowerThreshold = -0.9)
 
