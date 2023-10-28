@@ -34,7 +34,7 @@ segm <- as.data.frame(segmentation(resCNMOPS))
 write.csv(segm, file="segmentation_male.csv")
 
 CNVs <- as.data.frame(cnvs(resCNMOPS))
-write.csv(CNVs, file="cnvs_female.csv")
+write.csv(CNVs, file="cnvs_male.csv")
 
 CNVRegions <- as.data.frame(cnvr(resCNMOPS))
 write.csv(CNVRegions, file="cnvr_male.csv")
