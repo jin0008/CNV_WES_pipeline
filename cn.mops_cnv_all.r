@@ -17,7 +17,7 @@ setwd(dir=".")
 
 gr <- GRanges(segments_auto[,1], IRanges(segments_auto[,2],segments_auto[,3]))
 
-X <- getSegmentReadCountsFromBAM(all, GR=gr, parallel = 32)
+X <- getSegmentReadCountsFromBAM(all, GR=gr, parallel = 64)
 
 resCNMOPS <- exomecn.mops(X)
 resCNMOPS <- calcIntegerCopyNumbers(resCNMOPS)
