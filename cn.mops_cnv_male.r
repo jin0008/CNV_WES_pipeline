@@ -3,7 +3,7 @@
 
 library(cn.mops)
 
-segments_XY <- read.table(file="/media/hanjinu/PM883/db/refs/gencode/v44/XY/gencode.v44.basic.annotation.XY.bed",
+segments_XY <- read.table(file="/media/hanjinu/PM883/db/refs/interval_list/IDT_exome/XY.bed",
                     header=FALSE, sep="\t", as.is=TRUE)
 
 
