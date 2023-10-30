@@ -9,6 +9,7 @@ echo ""
 # # # results summary
 python /home/hanjinu/src/CNV_WES_pipeline/cnv_results.py
 python /home/hanjinu/src/CNV_WES_pipeline/cnv_interval_objet_sample.py
+bash /home/hanjinu/src/CNV_WES_pipeline/cnv_interval_sample_conversion.sh
 python /home/hanjinu/src/CNV_WES_pipeline/cnv_interval_objet_run.py
 
 python /home/hanjinu/src/CNV_WES_pipeline/frequences.py
