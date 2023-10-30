@@ -163,8 +163,8 @@ with open('interval_sample_results.txt', 'w') as results_file:
 
         results_file.write(str(run_cnv.sample) + '\t'
                            + str(run_cnv.contig) + '\t'
-                           + int(run_cnv.start) + '\t'
-                           + int(run_cnv.end) + '\t'
+                           + str(run_cnv.start) + '\t'
+                           + str(run_cnv.end) + '\t'
                            + str(run_cnv.sex) + '\t'
                            + str(run_cnv.size) + '\t'
                            + str(run_cnv.effect) + '\t'
