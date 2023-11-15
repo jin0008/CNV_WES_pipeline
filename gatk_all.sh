@@ -9,8 +9,8 @@ DIC="/media/hanjinu/PM883/db/refs/hg38_broad/Homo_sapiens_assembly38.dict"
 CENTROMETIC_AUTO="/media/hanjinu/PM883/db/refs/hg38_centromeric/centromeric_regions_autosomes.bed"
 CENTROMETIC_XY="/media/hanjinu/PM883/db/refs/hg38_centromeric/centromeric_regions_XY.bed"
 
-TARGET_AUTO="/media/hanjinu/PM883/db/refs/interval_list/IDT_exome/autosomes.interval_list"
-TARGET_XY="/media/hanjinu/PM883/db/refs/interval_list/IDT_exome/XY.interval_list"
+TARGET_AUTO="/media/hanjinu/PM883/db/refs/interval_list/UKBB/autosomes.interval_list"
+TARGET_XY="/media/hanjinu/PM883/db/refs/interval_list/UKBB/XY.interval_list"
 
 PLOIDY_AUTO="/media/hanjinu/PM883/db/refs/contig_ploidy_priors/contig_ploidy_prior_autosomes.tsv"
 PLOIDY_XY="/media/hanjinu/PM883/db/refs/contig_ploidy_priors/contig_ploidy_prior_XY.tsv"
