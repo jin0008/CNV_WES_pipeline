@@ -3,7 +3,7 @@
 
 library(cn.mops)
 
-segments_XY <- read.table(file="/media/hanjinu/PM883/db/refs/interval_list/IDT_exome/XY.bed",
+segments_XY <- read.table(file="/media/hanjinu/PM883/db/refs/interval_list/UKBB/XY.bed",
                     header=FALSE, sep="\t", as.is=TRUE)
 
 female <- read.table(file="female_list.txt", header=FALSE, sep=" ", as.is=TRUE)
