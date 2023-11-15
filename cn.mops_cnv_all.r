@@ -3,7 +3,7 @@
 
 library(cn.mops)
 
-segments_auto <- read.table(file="/media/hanjinu/PM883/db/refs/interval_list/IDT_exome/autosomes.bed",
+segments_auto <- read.table(file="/media/hanjinu/PM883/db/refs/interval_list/UKBB/autosomes.bed",
                     header=FALSE, sep="\t", as.is=TRUE)
 
 
