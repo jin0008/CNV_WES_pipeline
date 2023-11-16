@@ -3,9 +3,9 @@
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate excavator2_env
 
-TARGETS_AUTO="/media/hanjinu/PM883/db/refs/gencode/v44/autosomes/gencode.v44.basic.annotation.autosomes.bed"
-TARGETS_XY="/media/hanjinu/PM883/db/refs/gencode/v44/XY/gencode.v44.basic.annotation.XY.bed"
-TARGETS_ALL="/media/hanjinu/PM883/db/refs/gencode/v44/gencode.v44.basic.annotation.CDS.merged.bed"
+TARGETS_AUTO="/media/hanjinu/PM883/db/refs/interval_list/UKBB/autosomes.bed"
+TARGETS_XY="/media/hanjinu/PM883/db/refs/interval_list/UKBB/XY.bed"
+TARGETS_ALL="/media/hanjinu/PM883/db/refs/interval_list/UKBB/xgen_plus_spikein.GRCh38.bed"
 
 DATA=$PWD
 
