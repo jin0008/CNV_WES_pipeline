@@ -50,7 +50,7 @@ echo -e $MALE > $DATA/excavator2_output/male/bam_list.txt
 # rm -Rf ~/src/EXCAVATOR2_Package_v1.1.2/data/targets/hg38/all_w10K
 # rm -Rf ~/src/EXCAVATOR2_Package_v1.1.2/data/targets/hg38/autosomes_w10K
 # rm -Rf ~/src/EXCAVATOR2_Package_v1.1.2/data/targets/hg38/XY_w10K
-# cd ~/src/Excavator2/
+# cd ~/src/EXCAVATOR2_Package_v1.1.2/
 # perl TargetPerla.pl SourceTarget.txt $TARGETS_ALL all_w10K 10000 hg38
 # perl TargetPerla.pl SourceTarget.txt $TARGETS_AUTO autosomes_w10K 10000 hg38
 # perl TargetPerla.pl SourceTarget.txt $TARGETS_XY XY_w10K 10000 hg38
