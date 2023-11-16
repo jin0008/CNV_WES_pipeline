@@ -71,7 +71,7 @@ echo $DATA/$SAMPLE.dedup.bam $DATA/excavator2_output/female/$SAMPLE $SAMPLE >> $
 done
 
 # RC calculations
-cd ~/EXCAVATOR2_Package_v1.1.2
+cd ~/src/EXCAVATOR2_Package_v1.1.2
 perl EXCAVATORDataPrepare.pl $DATA/excavator2_output/female/ExperimentalFilePrepare.w10K.txt --processors 12 --target XY_w10K --assembly hg38
 
 # Experimental analysis file
@@ -101,7 +101,7 @@ for sample_id in $FEMALE; do
 	done
 
 	# Segmentation of the WMRC
-	cd ~/EXCAVATOR2_Package_v1.1.2;
+	cd ~/src/EXCAVATOR2_Package_v1.1.2;
 	
 	perl EXCAVATORDataAnalysis.pl $DATA/excavator2_output/female/ExperimentalFileAnalysis.w10K.$SAMPLE.txt\
 		--processors 12 --target XY_w10K\
@@ -130,7 +130,7 @@ echo $DATA/$SAMPLE.dedup.bam $DATA/excavator2_output/male/$SAMPLE $SAMPLE >> $DA
 done
 
 # RC calculations
-cd ~/EXCAVATOR2_Package_v1.1.2
+cd ~/src/EXCAVATOR2_Package_v1.1.2
 perl EXCAVATORDataPrepare.pl $DATA/excavator2_output/male/ExperimentalFilePrepare.w10K.txt --processors 12 --target XY_w10K --assembly hg38
 
 # Experimental analysis file
@@ -160,7 +160,7 @@ for sample_id in $FEMALE; do
 	done
 
 	# Segmentation of the WMRC
-	cd ~/EXCAVATOR2_Package_v1.1.2;
+	cd ~/src/EXCAVATOR2_Package_v1.1.2;
 	
 	perl EXCAVATORDataAnalysis.pl $DATA/excavator2_output/male/ExperimentalFileAnalysis.w10K.$SAMPLE.txt\
 		--processors 12 --target XY_w10K\
@@ -189,7 +189,7 @@ echo $DATA/$SAMPLE.dedup.bam $DATA/excavator2_output/all/$SAMPLE $SAMPLE >> $DAT
 done
 
 # RC calculations
-cd ~/EXCAVATOR2_Package_v1.1.2
+cd ~/src/EXCAVATOR2_Package_v1.1.2
 perl EXCAVATORDataPrepare.pl $DATA/excavator2_output/all/ExperimentalFilePrepare.w10K.txt --processors 12 --target autosomes_w10K --assembly hg38
 
 # Experimental analysis file
@@ -219,7 +219,7 @@ for sample_id in *.dedup.bam; do
 	done
 
 	# Segmentation of the WMRC
-	cd ~/EXCAVATOR2_Package_v1.1.2;
+	cd ~/src/EXCAVATOR2_Package_v1.1.2;
 	
 	perl EXCAVATORDataAnalysis.pl $DATA/excavator2_output/all/ExperimentalFileAnalysis.w10K.$SAMPLE.txt\
 		--processors 12 --target autosomes_w10K\
