@@ -16,6 +16,9 @@ TARGET_XY="/media/hanjinu/PM883/db/refs/interval_list/UKBB/XY.interval_list"
 PLOIDY_AUTO="/media/hanjinu/PM883/db/refs/contig_ploidy_priors/contig_ploidy_prior_autosomes.tsv"
 PLOIDY_XY="/media/hanjinu/PM883/db/refs/contig_ploidy_priors/contig_ploidy_prior_XY.tsv"
 
+MAPPABILITY="/media/hanjinu/PM883/db/refs/mappability/k100.umap.bed.gz"
+SEGMENTAL_DUPLICATE="/media/hanjinu/PM883/db/refs/segmental_duplicate/segmental_duplicate.bed.gz"
+
 echo ""
 echo "*************************"
 echo "GATK4 CNV DETECTION start"
@@ -79,6 +82,8 @@ gatk AnnotateIntervals \
     -R $REF \
     -imr OVERLAPPING_ONLY \
     -O gatkcnv_output/female/targets.annotated.tsv \
+    --mappability-track $MAPPABILITY \
+    --segmental-duplication-track $SEGMENTAL_DUPLICATE \
     --verbosity ERROR
 
 
@@ -201,6 +206,8 @@ gatk AnnotateIntervals \
     -XL $CENTROMETIC_XY \
     -R $REF \
     -imr OVERLAPPING_ONLY \
+    --mappability-track $MAPPABILITY \
+    --segmental-duplication-track $SEGMENTAL_DUPLICATE \
     -O gatkcnv_output/male/targets.annotated.tsv \
     --verbosity ERROR
 
@@ -313,6 +320,8 @@ gatk AnnotateIntervals \
    -L gatkcnv_output/all/targets.preprocessed.interval_list \
    -XL $CENTROMETIC_AUTO \
    -R $REF \
+   --mappability-track $MAPPABILITY \
+   --segmental-duplication-track $SEGMENTAL_DUPLICATE \
    -imr OVERLAPPING_ONLY \
    -O gatkcnv_output/all/targets.annotated.tsv \
    --verbosity ERROR
