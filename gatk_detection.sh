@@ -19,6 +19,9 @@ PLOIDY_XY="/media/hanjinu/PM883/db/refs/contig_ploidy_priors/contig_ploidy_prior
 MAPPABILITY="/media/hanjinu/PM883/db/refs/mappability/k100.umap.bed.gz"
 SEGMENTAL_DUPLICATE="/media/hanjinu/PM883/db/refs/segmental_duplicate/segmental_duplicate.bed.gz"
 
+XY_Preprocessed_Interval="/media/hanjinu/PM883/db/refs/interval_list/UKBB/targets.XY.preprocessed.interval_list"
+AUTOSOME_Preprocessed_Interval="/media/hanjinu/PM883/db/refs/interval_list/UKBB/targets.autosomes.preprocessed.interval_list"
+
 echo ""
 echo "*************************"
 echo "GATK4 CNV DETECTION start"
@@ -49,22 +52,22 @@ echo $FEMALE
 echo ""
 
 # Define the resolution of the analysis with a genomic intervals list
-gatk PreprocessIntervals \
-    -R $REF \
-    -L $TARGET_XY \
-    -XL $CENTROMETIC_XY \
-    --bin-length 0 \
-    --padding 50 \
-    --interval-merging-rule OVERLAPPING_ONLY \
-    -O gatkcnv_output/female/targets.preprocessed.interval_list \
-    --verbosity ERROR
+#gatk PreprocessIntervals \
+#    -R $REF \
+#    -L $TARGET_XY \
+#    -XL $CENTROMETIC_XY \
+#    --bin-length 0 \
+#    --padding 50 \
+#    --interval-merging-rule OVERLAPPING_ONLY \
+#    -O gatkcnv_output/female/targets.preprocessed.interval_list \
+#    --verbosity ERROR
 
 for sample_id in $FEMALE;
 do SAMPLE=${sample_id%%.dedup.bam}; \
 
 # Collect raw integer counts data
 gatk CollectReadCounts \
-        -L gatkcnv_output/female/targets.preprocessed.interval_list \
+        -L $XY_Preprocessed_Interval \
         -XL $CENTROMETIC_XY \
         -R $REF \
         --interval-merging-rule OVERLAPPING_ONLY \
@@ -77,7 +80,7 @@ done
 
 # AnnotateIntervals with GC content
 gatk AnnotateIntervals \
-    -L gatkcnv_output/female/targets.preprocessed.interval_list \
+    -L $XY_Preprocessed_Interval \
     -XL $CENTROMETIC_XY \
     -R $REF \
     -imr OVERLAPPING_ONLY \
@@ -99,7 +102,7 @@ done
 
 # FilterIntervals based on GC-content and cohort extreme counts
 gatk FilterIntervals \
-        -L targets.preprocessed.interval_list \
+        -L $XY_Preprocessed_Interval \
         -XL $CENTROMETIC_XY \
         --annotated-intervals targets.annotated.tsv \
         $COUNTS_LIST \
@@ -174,22 +177,22 @@ echo $MALE
 echo ""
 
 # Define the resolution of the analysis with a genomic intervals list
-gatk PreprocessIntervals \
-    -R  $REF \
-    -L  $TARGET_XY \
-    -XL $CENTROMETIC_XY \
-    --bin-length 0 \
-    --padding 50 \
-    --interval-merging-rule OVERLAPPING_ONLY \
-    -O gatkcnv_output/male/targets.preprocessed.interval_list \
-    --verbosity ERROR
+#gatk PreprocessIntervals \
+#    -R  $REF \
+#    -L  $TARGET_XY \
+#    -XL $CENTROMETIC_XY \
+#    --bin-length 0 \
+#    --padding 50 \
+#    --interval-merging-rule OVERLAPPING_ONLY \
+#    -O gatkcnv_output/male/targets.preprocessed.interval_list \
+#    --verbosity ERROR
 
 for sample_id in $MALE;
 do SAMPLE=${sample_id%%.dedup.bam}; \
 
 # Collect raw integer counts data
 gatk CollectReadCounts \
-        -L gatkcnv_output/male/targets.preprocessed.interval_list \
+        -L $XY_Preprocessed_Interval \
         -XL $CENTROMETIC_XY \
         -R $REF \
         --interval-merging-rule OVERLAPPING_ONLY \
@@ -202,7 +205,7 @@ done
 
 # AnnotateIntervals with GC content
 gatk AnnotateIntervals \
-    -L gatkcnv_output/male/targets.preprocessed.interval_list \
+    -L $XY_Preprocessed_Interval \
     -XL $CENTROMETIC_XY \
     -R $REF \
     -imr OVERLAPPING_ONLY \
@@ -224,7 +227,7 @@ done
 
 # FilterIntervals based on GC-content and cohort extreme counts
 gatk FilterIntervals \
-        -L targets.preprocessed.interval_list \
+        -L $XY_Preprocessed_Interval \
         -XL $CENTROMETIC_XY \
         --annotated-intervals targets.annotated.tsv \
         $COUNTS_LIST \
@@ -289,22 +292,22 @@ echo "Working on all..."
 echo ""
 
 Define the resolution of the analysis with a genomic intervals list
-gatk PreprocessIntervals \
-   -R  $REF \
-   -L  $TARGET_AUTO \
-   -XL $CENTROMETIC_AUTO \
-   --bin-length 0 \
-   --padding 50 \
-   --interval-merging-rule OVERLAPPING_ONLY \
-   -O gatkcnv_output/all/targets.preprocessed.interval_list \
-   --verbosity ERROR
+#gatk PreprocessIntervals \
+#   -R $REF \
+#   -L $TARGET_AUTO \
+#   -XL $CENTROMETIC_AUTO \
+#   --bin-length 0 \
+#   --padding 50 \
+#   --interval-merging-rule OVERLAPPING_ONLY \
+#   -O gatkcnv_output/all/targets.preprocessed.interval_list \
+#   --verbosity ERROR
 
 for sample_id in *.dedup.bam;
 do SAMPLE=${sample_id%%.dedup.bam}; \
 
 Collect raw integer counts data
 gatk CollectReadCounts \
-   -L gatkcnv_output/all/targets.preprocessed.interval_list \
+   -L $AUTOSOME_Preprocessed_Interval \
    -XL $CENTROMETIC_AUTO \
    -R $REF \
    --interval-merging-rule OVERLAPPING_ONLY \
@@ -317,7 +320,7 @@ done
 
 AnnotateIntervals with GC content
 gatk AnnotateIntervals \
-   -L gatkcnv_output/all/targets.preprocessed.interval_list \
+   -L $AUTOSOME_Preprocessed_Interval \
    -XL $CENTROMETIC_AUTO \
    -R $REF \
    --mappability-track $MAPPABILITY \
@@ -339,7 +342,7 @@ done
 
 FilterIntervals based on GC-content and cohort extreme counts
 gatk FilterIntervals \
-       -L targets.preprocessed.interval_list \
+       -L $AUTOSOME_Preprocessed_Interval \
        -XL $CENTROMETIC_AUTO \
        --annotated-intervals targets.annotated.tsv \
        $COUNTS_LIST \
