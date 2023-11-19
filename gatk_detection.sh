@@ -47,7 +47,7 @@ do
 FEMALE+="$line.dedup.bam ";
 done < female_list.txt
 
-echo "Liste des femmes:"
+echo "list female:"
 echo $FEMALE
 echo ""
 
