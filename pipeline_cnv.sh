@@ -54,34 +54,6 @@ python /home/hanjinu/src/CNV_WES_pipeline/gatk_results.py
 
 cd $DATA
 
-# results summary
-python /home/hanjinu/src/CNV_WES_pipeline/cnv_results.py
-python /home/hanjinu/src/CNV_WES_pipeline/cnv_interval_objet_sample.py
-python /home/hanjinu/src/CNV_WES_pipeline/cnv_interval_objet_run.py
-
-conda deactivate
-
-# annotations
-
-# annovar
-conda activate annot_env
-
-bash /home/hanjinu/src/CNV_WES_pipeline/annovar.sh
-
-conda deactivate
-
-conda activate results_cnv
-
-cd annovar_output
-python /home/hanjinu/src/CNV_WES_pipeline/annovar_results.py
-
-# ClinVar
-# In_gene
-# DGV_count
-
-cd $DATA
-python /home/hanjinu/src/CNV_WES_pipeline/combine_annot.py
-
 conda deactivate
 
 echo ""
