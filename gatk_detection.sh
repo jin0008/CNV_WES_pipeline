@@ -119,6 +119,7 @@ gatk DetermineGermlineContigPloidy \
         -L targets.cohort.gc.filtered.interval_list \
         --interval-merging-rule OVERLAPPING_ONLY \
         $COUNTS_LIST \
+	--tmp-dir $PWD \
         --contig-ploidy-priors $PLOIDY_XY \
         --output . \
         --output-prefix ploidy \
@@ -247,6 +248,7 @@ gatk DetermineGermlineContigPloidy \
         -L targets.cohort.gc.filtered.interval_list \
         --interval-merging-rule OVERLAPPING_ONLY \
         $COUNTS_LIST \
+	--tmp-dir $PWD \
         --contig-ploidy-priors $PLOIDY_XY \
         --output . \
         --output-prefix ploidy \
@@ -365,6 +367,7 @@ gatk DetermineGermlineContigPloidy \
         -L targets.cohort.gc.filtered.interval_list \
         --interval-merging-rule OVERLAPPING_ONLY \
         $COUNTS_LIST \
+	--tmp-dir $PWD \
         --contig-ploidy-priors $PLOIDY_AUTO \
         --output . \
         --output-prefix ploidy \
