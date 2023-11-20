@@ -104,6 +104,7 @@ done
 gatk FilterIntervals \
         -L $XY_Preprocessed_Interval \
         -XL $CENTROMETIC_XY \
+	--tmp-dir $PWD \
         --annotated-intervals targets.annotated.tsv \
         $COUNTS_LIST \
         -imr OVERLAPPING_ONLY \
@@ -229,6 +230,7 @@ done
 gatk FilterIntervals \
         -L $XY_Preprocessed_Interval \
         -XL $CENTROMETIC_XY \
+	--tmp-dir $PWD \
         --annotated-intervals targets.annotated.tsv \
         $COUNTS_LIST \
         -imr OVERLAPPING_ONLY \
@@ -344,6 +346,7 @@ FilterIntervals based on GC-content and cohort extreme counts
 gatk FilterIntervals \
        -L $AUTOSOME_Preprocessed_Interval \
        -XL $CENTROMETIC_AUTO \
+       --tmp-dir $PWD \
        --annotated-intervals targets.annotated.tsv \
        $COUNTS_LIST \
        -imr OVERLAPPING_ONLY \
