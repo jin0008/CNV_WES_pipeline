@@ -373,15 +373,16 @@ gatk DetermineGermlineContigPloidy \
         --output-prefix ploidy \
         --verbosity ERROR
 
-#scatter interval
+#making directory for scatter interval
 mkdir -p scatter
 
+#scatter interval
 gatk --java-options "-Xmx8G" IntervalListTools \
 --INPUT targets.cohort.gc.filtered.interval_list \
 --SUBDIVISION_MODE INTERVAL_COUNT \
 --SCATTER_CONTENT 5000 \
 --OUTPUT scatter
-
+ 	
 # GermlineCNVCaller in COHORT MODE
 gatk GermlineCNVCaller \
         --run-mode COHORT \
