@@ -70,6 +70,7 @@ gatk CollectReadCounts \
         -L $XY_Preprocessed_Interval \
         -XL $CENTROMETIC_XY \
         -R $REF \
+	--tmp-dir $PWD \
         --interval-merging-rule OVERLAPPING_ONLY \
         -I $SAMPLE.dedup.bam \
         --format TSV \
@@ -196,6 +197,7 @@ gatk CollectReadCounts \
         -L $XY_Preprocessed_Interval \
         -XL $CENTROMETIC_XY \
         -R $REF \
+	--tmp-dir $PWD \
         --interval-merging-rule OVERLAPPING_ONLY \
         -I $SAMPLE.dedup.bam \
         --format TSV \
@@ -312,6 +314,7 @@ gatk CollectReadCounts \
    -L $AUTOSOME_Preprocessed_Interval \
    -XL $CENTROMETIC_AUTO \
    -R $REF \
+   --tmp-dir $PWD \
    --interval-merging-rule OVERLAPPING_ONLY \
    -I $SAMPLE.dedup.bam \
    --format TSV \
