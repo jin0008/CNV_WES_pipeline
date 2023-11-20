@@ -129,7 +129,7 @@ gatk DetermineGermlineContigPloidy \
 # GermlineCNVCaller in COHORT MODE
 gatk GermlineCNVCaller \
         --run-mode COHORT \
-        -L targets.cohort.gc.filtered.interval_list\
+        -L targets.cohort.gc.filtered.interval_list \
         $COUNTS_LIST \
         --contig-ploidy-calls ploidy-calls \
         --annotated-intervals targets.annotated.tsv \
@@ -373,11 +373,19 @@ gatk DetermineGermlineContigPloidy \
         --output-prefix ploidy \
         --verbosity ERROR
 
+#scatter interval
+mkdir -p scatter
+
+gatk --java-options "-Xmx8G" IntervalListTools \
+--INPUT targets.cohort.gc.filtered.interval_list \
+--SUBDIVISION_MODE INTERVAL_COUNT \
+--SCATTER_CONTENT 5000 \
+--OUTPUT scatter
 
 # GermlineCNVCaller in COHORT MODE
 gatk GermlineCNVCaller \
         --run-mode COHORT \
-        -L targets.cohort.gc.filtered.interval_list\
+        -L targets.cohort.gc.filtered.interval_list \
 	$COUNTS_LIST \
         --contig-ploidy-calls ploidy-calls \
         --annotated-intervals targets.annotated.tsv \
