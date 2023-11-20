@@ -84,6 +84,7 @@ gatk AnnotateIntervals \
     -L $XY_Preprocessed_Interval \
     -XL $CENTROMETIC_XY \
     -R $REF \
+    --tmp-dir $PWD \
     -imr OVERLAPPING_ONLY \
     -O gatkcnv_output/female/targets.annotated.tsv \
     --mappability-track $MAPPABILITY \
@@ -211,6 +212,7 @@ gatk AnnotateIntervals \
     -L $XY_Preprocessed_Interval \
     -XL $CENTROMETIC_XY \
     -R $REF \
+    --tmp-dir $PWD \
     -imr OVERLAPPING_ONLY \
     --mappability-track $MAPPABILITY \
     --segmental-duplication-track $SEGMENTAL_DUPLICATE \
@@ -328,6 +330,7 @@ gatk AnnotateIntervals \
    -L $AUTOSOME_Preprocessed_Interval \
    -XL $CENTROMETIC_AUTO \
    -R $REF \
+   --tmp-dir $PWD \
    --mappability-track $MAPPABILITY \
    --segmental-duplication-track $SEGMENTAL_DUPLICATE \
    -imr OVERLAPPING_ONLY \
