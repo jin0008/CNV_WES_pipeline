@@ -313,7 +313,7 @@ Define the resolution of the analysis with a genomic intervals list
 for sample_id in *.dedup.bam;
 do SAMPLE=${sample_id%%.dedup.bam}; \
 
-Collect raw integer counts data
+#Collect raw integer counts data
 gatk CollectReadCounts \
    -L $AUTOSOME_Preprocessed_Interval \
    -XL $CENTROMETIC_AUTO \
@@ -327,7 +327,7 @@ gatk CollectReadCounts \
 
 done
 
-AnnotateIntervals with GC content
+#AnnotateIntervals with GC content
 gatk AnnotateIntervals \
    -L $AUTOSOME_Preprocessed_Interval \
    -XL $CENTROMETIC_AUTO \
@@ -350,7 +350,7 @@ for counts_file in *.tsv; do
         fi
 done
 
-FilterIntervals based on GC-content and cohort extreme counts
+#FilterIntervals based on GC-content and cohort extreme counts
 gatk FilterIntervals \
        -L $AUTOSOME_Preprocessed_Interval \
        -XL $CENTROMETIC_AUTO \
