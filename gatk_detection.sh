@@ -17,7 +17,7 @@ PLOIDY_AUTO="/media/hanjinu/PM883/db/refs/contig_ploidy_priors/contig_ploidy_pri
 PLOIDY_XY="/media/hanjinu/PM883/db/refs/contig_ploidy_priors/contig_ploidy_prior_XY.tsv"
 
 MAPPABILITY="/media/hanjinu/PM883/db/refs/mappability/k100.umap.bed.gz"
-SEGMENTAL_DUPLICATE="/media/hanjinu/PM883/db/refs/segmental_duplicate/segmental_duplicate.bed.gz"
+SEGMENTAL_DUPLICATE="/media/hanjinu/PM883/db/refs/segmental_duplicate/cnv_germline_pipeline_hg38_segmental_duplication_track.bed"
 
 XY_Preprocessed_Interval="/media/hanjinu/PM883/db/refs/interval_list/UKBB/targets.XY.preprocessed.interval_list"
 AUTOSOME_Preprocessed_Interval="/media/hanjinu/PM883/db/refs/interval_list/UKBB/targets.autosomes.preprocessed.interval_list"
