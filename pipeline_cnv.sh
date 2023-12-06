@@ -29,8 +29,6 @@ conda deactivate
 
 # tools cnv detection
 bash /home/hanjinu/src/CNV_WES_pipeline/cn.mops_launch.sh
-bash /home/hanjinu/src/CNV_WES_pipeline/cnvkit_detection.sh
-bash /home/hanjinu/src/CNV_WES_pipeline/excavator2_detection.sh
 bash /home/hanjinu/src/CNV_WES_pipeline/exomedepth_launch.sh
 bash /home/hanjinu/src/CNV_WES_pipeline/gatk_detection.sh
 
@@ -39,12 +37,6 @@ conda activate results_cnv
 
 cd cn.mops_output
 python /home/hanjinu/src/CNV_WES_pipeline/cn.mops_results.py
-
-cd ../cnvkit_output
-python /home/hanjinu/src/CNV_WES_pipeline/cnvkit_results.py
-
-cd ../excavator2_output
-python /home/hanjinu/src/CNV_WES_pipeline/excavator2_results.py
 
 cd ../exomedepth_output
 python /home/hanjinu/src/CNV_WES_pipeline/exomedepth_results.py
