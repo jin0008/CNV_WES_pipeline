@@ -21,11 +21,8 @@ python3 /home/hanjinu/src/CNV_WES_pipeline/sex_determination.py
 conda deactivate
 
 # generation of men’s and women’s lists
-conda activate results_cnv
-
 python /home/hanjinu/src/CNV_WES_pipeline/female_male_lists.py
 
-conda deactivate
 
 # tools cnv detection
 bash /home/hanjinu/src/CNV_WES_pipeline/cn.mops_launch.sh
