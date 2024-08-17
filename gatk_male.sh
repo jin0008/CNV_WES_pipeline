@@ -49,7 +49,7 @@ gatk PreprocessIntervals \
     -L  $TARGET_XY \
     -XL $CENTROMETIC_XY \
     --bin-length 0 \
-    --padding 50 \
+    --padding 250 \
     --interval-merging-rule OVERLAPPING_ONLY \
     -O gatkcnv_output/male/targets.preprocessed.interval_list \
     --verbosity ERROR
