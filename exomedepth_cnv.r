@@ -68,7 +68,7 @@ for (i in 1:nsamples) {
 	#### Create the aggregate reference set for this sample
 	my.choice <- select.reference.set (test.counts = ExomeCount.mat[,i],
 					   reference.counts = ExomeCount.mat[,-i],
-					   bin.length = (ExomeCount.dafr$end - ExomeCount.dafr$start)/1000,
+					   bin.length = (ExomeCount.dafr$end - ExomeCount.dafr$start, 1)/1000,
 					   n.bins.reduced = 10000)
 
 	my.reference.selected <- apply(X = ExomeCount.mat[, my.choice$reference.choice, drop = FALSE], MAR = 1, FUN = sum)
@@ -132,7 +132,7 @@ for (i in 1:nsamples) {
 	#### Create the aggregate reference set for this sample
 	my.choice <- select.reference.set (test.counts = ExomeCount.mat[,i],
 					   reference.counts = ExomeCount.mat[,-i],
-					   bin.length = (ExomeCount.dafr$end - ExomeCount.dafr$start)/1000,
+					   bin.length = (ExomeCount.dafr$end - ExomeCount.dafr$start, 1)/1000,
 					   n.bins.reduced = 10000)
 
 	my.reference.selected <- apply(X = ExomeCount.mat[, my.choice$reference.choice, drop = FALSE], MAR = 1, FUN = sum)
@@ -197,7 +197,7 @@ for (i in 1:nsamples) {
 	#### Create the aggregate reference set for this sample
 	my.choice <- select.reference.set (test.counts = ExomeCount.mat[,i],
 					   reference.counts = ExomeCount.mat[,-i],
-					   bin.length = (ExomeCount.dafr$end - ExomeCount.dafr$start)/1000,
+					   bin.length = (ExomeCount.dafr$end - ExomeCount.dafr$start, 1)/1000,
 					   n.bins.reduced = 10000)
 
 	my.reference.selected <- apply(X = ExomeCount.mat[, my.choice$reference.choice, drop = FALSE], MAR = 1, FUN = sum)
