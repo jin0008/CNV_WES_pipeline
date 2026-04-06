@@ -4,10 +4,10 @@
 library(ExomeDepth)
 library(seqinr)
 
-targets_auto <- read.table(file="/media/hanjinu/ultraquad1/capture_kit_beds/Twist_ExomeSpikeIn_v2_autosome.bed",
+targets_auto <- read.table(file="/media/hanjinu/ultraquad1/capture_kit_beds/Twist_Exome_v2_autosome.bed",
                     header=FALSE, sep="\t", as.is=TRUE)
 
-targets_XY <- read.table(file="/media/hanjinu/ultraquad1/capture_kit_beds/Twist_ExomeSpikeIn_v2_XY.bed",
+targets_XY <- read.table(file="/media/hanjinu/ultraquad1/capture_kit_beds/Twist_Exome_v2_XY.bed",
                     header=FALSE, sep="\t", as.is=TRUE)
 
 female <- read.table(file="female_list.txt", header=FALSE, sep=" ", as.is=TRUE)
